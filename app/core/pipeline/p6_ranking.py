@@ -13,7 +13,7 @@ DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 
 
 def load_default_weights() -> dict:
-    with open(DATA_DIR / "default_weights.json") as f:
+    with open(DATA_DIR / "default_weights.json", encoding="utf-8") as f:
         return json.load(f)
 
 

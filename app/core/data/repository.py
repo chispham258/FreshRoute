@@ -68,7 +68,7 @@ class DataRepository:
         """Get ingredient substitute groups (from JSON)."""
         if self._substitute_groups is None:
             path = DATA_DIR / "substitute_groups.json"
-            with open(path) as f:
+            with open(path, encoding="utf-8") as f:
                 self._substitute_groups = json.load(f)
         return self._substitute_groups
 
@@ -76,7 +76,7 @@ class DataRepository:
         """Get Vietnamese ingredient name aliases (from JSON)."""
         if self._ingredient_aliases is None:
             path = DATA_DIR / "ingredient_aliases.json"
-            with open(path) as f:
+            with open(path, encoding="utf-8") as f:
                 data = json.load(f)
                 # Flatten nested structure into single flat dict
                 self._ingredient_aliases = {}
@@ -89,7 +89,7 @@ class DataRepository:
         """Get default ranking weights (from JSON)."""
         if self._default_weights is None:
             path = DATA_DIR / "default_weights.json"
-            with open(path) as f:
+            with open(path, encoding="utf-8") as f:
                 self._default_weights = json.load(f)
         return self._default_weights
 
@@ -97,7 +97,7 @@ class DataRepository:
         """Get category profit margins (from JSON)."""
         if self._category_margins is None:
             path = DATA_DIR / "category_margins.json"
-            with open(path) as f:
+            with open(path, encoding="utf-8") as f:
                 self._category_margins = json.load(f)
         return self._category_margins
 

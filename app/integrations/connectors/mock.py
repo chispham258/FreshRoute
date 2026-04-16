@@ -20,12 +20,12 @@ class MockConnector(StoreConnector):
     def _load_fixtures(self):
         if self._batches_cache:
             return
-        with open(FIXTURES_DIR / "batches.json") as f:
+        with open(FIXTURES_DIR / "batches.json", encoding="utf-8") as f:
             all_batches = json.load(f)
         for b in all_batches:
             store = b["store_id"]
             self._batches_cache.setdefault(store, []).append(b)
-        with open(FIXTURES_DIR / "skus.json") as f:
+        with open(FIXTURES_DIR / "skus.json", encoding="utf-8") as f:
             skus = json.load(f)
         for s in skus:
             self._skus_cache[s["sku_id"]] = s

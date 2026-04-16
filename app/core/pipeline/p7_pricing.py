@@ -16,7 +16,7 @@ DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 
 
 def _load_category_margins() -> dict:
-    with open(DATA_DIR / "category_margins.json") as f:
+    with open(DATA_DIR / "category_margins.json", encoding="utf-8") as f:
         return json.load(f)
 
 
