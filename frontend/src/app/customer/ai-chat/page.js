@@ -1,17 +1,18 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaRobot,
   FaPaperPlane,
   FaShoppingCart,
   FaArrowLeft,
   FaCheckCircle,
-  FaSpinner,
 } from "react-icons/fa";
-import { MdOutlineFastfood } from "react-icons/md";
 import { HiOutlineSparkles } from "react-icons/hi";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+import { sendConsumerChat } from "@/lib/customerApi";
 
 const CHIPS = [
   { id: "today", icon: "🎯", label: "Gợi ý món ăn hôm nay" },
@@ -19,48 +20,54 @@ const CHIPS = [
   { id: "preference", icon: "🔎", label: "Tìm món theo sở thích" },
 ];
 
-const MOCK_BUNDLE = {
-  id: 101,
-  type: "bundle",
-  name: "Combo Phở Bò Chóp",
-  price: 139000,
-  inStock: true,
-  ingredients: [
-    { name: "Thịt Bò Bắp 500g", expiry: 2, status: "warning" },
-    { name: "Bánh Phở 300g", expiry: 5, status: "safe" },
-    { name: "Rau Thơm 100g", expiry: 3, status: "warning" },
-    { name: "Hành Tây 200g", expiry: 7, status: "safe" },
-    { name: "Nước Dùng Xương 500ml", expiry: 4, status: "safe" },
-  ],
-  instructions: [
-    "Luộc nước dùng xương ở lửa vừa trong 20 phút",
-    "Thái thịt bò bắp thành lát mỏng",
-    "Trụng bánh phở trong nước sôi 2-3 phút",
-    "Rửa sạch rau thơm và cắt hành lá",
-    "Cho bánh phở vào tô, xếp thịt bò lên trên",
-    "Chan nước dùng nóng, thêm rau thơm và hành",
-  ],
-};
+function MarkdownMessage({ text }) {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={{
+        p: ({ children }) => (
+          <p className="text-sm leading-relaxed text-gray-700 mb-2 last:mb-0">
+            {children}
+          </p>
+        ),
+        ul: ({ children }) => (
+          <ul className="list-disc list-inside text-sm text-gray-700 space-y-1 mb-2">
+            {children}
+          </ul>
+        ),
+        ol: ({ children }) => (
+          <ol className="list-decimal list-inside text-sm text-gray-700 space-y-1 mb-2">
+            {children}
+          </ol>
+        ),
+        li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+        strong: ({ children }) => (
+          <strong className="font-extrabold text-gray-900">{children}</strong>
+        ),
+        em: ({ children }) => <em className="italic">{children}</em>,
+        code: ({ children }) => (
+          <code className="bg-gray-100 border border-gray-200 rounded px-1 py-0.5 text-xs font-semibold text-gray-800">
+            {children}
+          </code>
+        ),
+        a: ({ children, href }) => (
+          <a
+            href={href}
+            className="text-indigo-600 underline underline-offset-2 font-semibold"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {children}
+          </a>
+        ),
+      }}
+    >
+      {text}
+    </ReactMarkdown>
+  );
+}
 
-const MOCK_RECIPE = {
-  id: 201,
-  type: "recipe",
-  name: "Lẩu Bò Nhúng Dấm",
-  price: "Theo nguyên liệu",
-  inStock: false,
-  ingredients: [
-    {
-      name: "Thịt Bò Thăn 500g",
-      inStock: false,
-      price: 150000,
-      selected: true,
-    },
-    { name: "Nước lẩu dấm", inStock: true, price: 30000, selected: false },
-    { name: "Rau cải thảo 500g", inStock: false, price: 20000, selected: true },
-  ],
-};
-
-function BotMessage({ children }) {
+function BotMessage({ text }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 10 }}
@@ -71,8 +78,8 @@ function BotMessage({ children }) {
       <div className="w-10 h-10 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 text-white shrink-0 flex items-center justify-center shadow-md">
         <HiOutlineSparkles className="text-xl" />
       </div>
-      <div className="flex-1 max-w-[85%] bg-white border border-gray-100 shadow-sm rounded-2xl rounded-tl-sm p-4 text-gray-800 relative z-10 w-full overflow-hidden">
-        {children}
+      <div className="flex-1 max-w-[85%] bg-white border border-gray-100 shadow-sm rounded-2xl rounded-tl-sm p-4 relative z-10 w-full overflow-hidden">
+        <MarkdownMessage text={text} />
       </div>
     </motion.div>
   );
@@ -125,364 +132,71 @@ function TypingIndicator() {
   );
 }
 
-// Expandable Bundle Card with Framer Motion Layout animations
-function BundleCard({ item, onAddToCart }) {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <motion.div
-      layout="position"
-      className="bg-white border-2 border-green-100 rounded-xl overflow-hidden mb-4 shadow-sm hover:shadow-md transition-shadow relative"
-    >
-      {item.inStock && (
-        <div className="absolute top-3 right-3 bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1 z-10">
-          <FaCheckCircle /> Sẵn kho
-        </div>
-      )}
-
-      <motion.div
-        layout="position"
-        className="p-4 cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
-      >
-        <motion.h4
-          layout="position"
-          className="font-bold text-gray-900 text-lg pr-20"
-        >
-          {item.name}
-        </motion.h4>
-        <motion.p
-          layout="position"
-          className="text-sm font-semibold text-orange-600 mt-1"
-        >
-          {item.price
-            ? item.price.toLocaleString("vi-VN") + " VNĐ"
-            : "Chưa rõ giá"}
-        </motion.p>
-      </motion.div>
-
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="border-t border-gray-100 bg-gray-50/50"
-          >
-            <div className="p-4 space-y-4">
-              {/* Ingredients */}
-              <div>
-                <h5 className="text-sm font-bold text-gray-700 mb-2">
-                  Thành phần trong Bundle
-                </h5>
-                <div className="space-y-2">
-                  {item.ingredients.map((ing, idx) => (
-                    <div
-                      key={idx}
-                      className="flex justify-between items-center text-sm bg-white p-2.5 rounded-lg border border-gray-200"
-                    >
-                      <span className="flex items-center gap-2 font-medium text-gray-700">
-                        <FaCheckCircle className="text-[#00b14f]" /> {ing.name}
-                      </span>
-                      {ing.status === "warning" && (
-                        <span className="text-[10px] font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full animate-pulse shadow-sm shadow-amber-200">
-                          Date cận
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Price Panel */}
-              <div className="bg-orange-50/80 border border-orange-200 rounded-xl p-3 flex justify-between items-center">
-                <span className="font-bold text-gray-800">
-                  Giá siêu tiết kiệm
-                </span>
-                <span className="text-xl font-extrabold text-orange-600">
-                  {item.price.toLocaleString("vi-VN")} VNĐ
-                </span>
-              </div>
-
-              {/* Instructions */}
-              <div>
-                <h5 className="text-sm font-bold text-gray-700 mb-2 flex items-center gap-1.5">
-                  <MdOutlineFastfood className="text-lg text-blue-500" /> Gợi ý
-                  cách nấu
-                </h5>
-                <ul className="space-y-3 bg-white p-3 border border-gray-200 rounded-xl">
-                  {item.instructions.map((inst, idx) => (
-                    <li key={idx} className="flex gap-3 text-sm text-gray-600">
-                      <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-extrabold shrink-0 mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <span className="leading-snug">{inst}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <motion.button
-                whileTap={{ scale: 0.96 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onAddToCart(item);
-                }}
-                className="w-full bg-[#00b14f] hover:bg-[#009e46] text-white font-bold py-3.5 rounded-xl shadow-lg shadow-green-500/30 flex justify-center items-center gap-2 mt-2"
-              >
-                <FaShoppingCart className="text-lg" /> Thêm Gói Này Vào Giỏ
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
-// Recipe Card with interactive selection
-function RecipeCard({ item, onAddToCart }) {
-  const [expanded, setExpanded] = useState(false);
-  const [selectedIngs, setSelectedIngs] = useState(
-    item.ingredients.map((i) => i.selected),
-  );
-
-  const total = item.ingredients.reduce(
-    (acc, ing, idx) => (selectedIngs[idx] ? acc + ing.price : acc),
-    0,
-  );
-
-  const toggleIng = (idx) => {
-    const newSel = [...selectedIngs];
-    newSel[idx] = !newSel[idx];
-    setSelectedIngs(newSel);
-  };
-
-  return (
-    <motion.div
-      layout="position"
-      className="bg-white border-2 border-indigo-100 rounded-xl overflow-hidden mb-4 shadow-sm hover:shadow-md transition-shadow relative"
-    >
-      {!item.inStock && (
-        <div className="absolute top-3 right-3 bg-rose-100 text-rose-700 border border-rose-200 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1 z-10">
-          Thiếu nguyên liệu
-        </div>
-      )}
-
-      <motion.div
-        layout="position"
-        className="p-4 cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
-      >
-        <motion.h4
-          layout="position"
-          className="font-bold text-gray-900 text-lg pr-24"
-        >
-          {item.name}
-        </motion.h4>
-        <motion.p
-          layout="position"
-          className="text-sm font-medium text-gray-500 mt-1"
-        >
-          Lạc vào công thức: bạn chọn mua gì?
-        </motion.p>
-      </motion.div>
-
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="border-t border-gray-100 bg-gray-50/50"
-          >
-            <div className="p-4 space-y-4">
-              <div>
-                <h5 className="text-sm font-bold text-gray-700 mb-2">
-                  Nguyên Liệu Cần Cho Món Này
-                </h5>
-                <div className="space-y-2">
-                  {item.ingredients.map((ing, idx) => (
-                    <label
-                      key={idx}
-                      className={`flex justify-between items-center text-sm bg-white p-3 rounded-xl border border-gray-200 cursor-pointer transition-colors ${selectedIngs[idx] ? "border-indigo-300 bg-indigo-50/30" : "hover:bg-gray-50"}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedIngs[idx]}
-                          onChange={() => toggleIng(idx)}
-                          className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500 border-gray-300"
-                        />
-                        <span
-                          className={`font-medium ${selectedIngs[idx] ? "text-indigo-900" : "text-gray-600"}`}
-                        >
-                          {ing.name}
-                        </span>
-                        {ing.inStock && (
-                          <span className="text-[10px] text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded font-bold">
-                            Có sẵn ở nhà
-                          </span>
-                        )}
-                      </div>
-                      <span className="font-bold text-gray-700">
-                        {ing.price.toLocaleString("vi-VN")}đ
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-indigo-50/80 border border-indigo-200 rounded-xl p-3 flex justify-between items-center">
-                <span className="font-bold text-gray-800">
-                  Tạm tính phần mua thêm
-                </span>
-                <span className="text-xl font-extrabold text-indigo-600">
-                  {total.toLocaleString("vi-VN")} VNĐ
-                </span>
-              </div>
-
-              <motion.button
-                whileTap={{ scale: 0.96 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onAddToCart({ ...item, price: total });
-                }}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-indigo-500/30 flex justify-center items-center gap-2 mt-2"
-              >
-                <FaShoppingCart className="text-lg" /> Thêm Các Món Này Vào Giỏ
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
 export default function AIChatPage() {
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: "bot",
-      content: (
-        <div className="space-y-2">
-          <p className="text-base leading-relaxed font-medium">
-            👋 Chào bạn! Tôi là FreshRoute AI.
-          </p>
-          <p className="text-sm text-gray-600">
-            Tôi có thể giúp bạn lên thực đơn từ nguyên liệu sẵn có, hoặc săn các
-            Combo thực phẩm siêu rẻ sắp hết hạn. Hôm nay bạn cần gì?
-          </p>
-        </div>
-      ),
+      text: "👋 Chào bạn! Tôi là FreshRoute AI.\n\nTôi có thể gợi ý công thức và cách tận dụng nguyên liệu sẵn có để giảm lãng phí thực phẩm.",
     },
   ]);
   const [inputStr, setInputStr] = useState("");
   const [isThinking, setIsThinking] = useState(false);
+  const [error, setError] = useState("");
+
   const bottomRef = useRef(null);
+  const threadIdRef = useRef(`customer-chat-${Date.now()}`);
 
-  const [cartCount, setCartCount] = useState(0);
-  const [cartAnimating, setCartAnimating] = useState(false);
-
-  // Scroll to bottom
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isThinking]);
 
-  // Install hi-outline-sparkles dynamically? Wait, I used hi react-icons!
-  const handleAddToCart = (item) => {
-    if (typeof navigator !== "undefined" && navigator.vibrate)
-      navigator.vibrate(50);
-
-    setCartCount((prev) => prev + 1);
-    setCartAnimating(true);
-    setTimeout(() => setCartAnimating(false), 600);
-
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        type: "bot",
-        content: (
-          <div className="flex items-center gap-2 text-emerald-700 bg-emerald-50 px-3 py-2 -mx-2 -my-1 rounded-lg">
-            <FaCheckCircle className="text-lg" />
-            <span className="text-sm font-semibold">
-              Đã thêm <strong>{item.name}</strong> vào giỏ hàng!
-            </span>
-          </div>
-        ),
-      },
-    ]);
-  };
-
-  const handleSend = (textOverride = inputStr) => {
+  const handleSend = async (textOverride = inputStr) => {
     const text =
       typeof textOverride === "string" ? textOverride.trim() : inputStr.trim();
-    if (!text) return;
 
+    if (!text || isThinking) {
+      return;
+    }
+
+    setError("");
     setInputStr("");
     setMessages((prev) => [...prev, { id: Date.now(), type: "user", text }]);
     setIsThinking(true);
 
-    setTimeout(() => {
-      setIsThinking(false);
+    try {
+      const response = await sendConsumerChat({
+        message: text,
+        threadId: threadIdRef.current,
+      });
 
-      let botContent;
-      const lower = text.toLowerCase();
-
-      if (
-        lower.includes("nguyên liệu") ||
-        lower.includes("thịt") ||
-        lower.includes("có sẵn")
-      ) {
-        botContent = (
-          <div className="space-y-3 w-full">
-            <p className="text-sm font-medium">
-              Tôi tìm thấy một Bundle hoàn hảo để nấu cùng nguyên liệu của bạn,
-              lại đang được giảm giá cực tốt:
-            </p>
-            <BundleCard item={MOCK_BUNDLE} onAddToCart={handleAddToCart} />
-          </div>
-        );
-      } else if (
-        lower.includes("sở thích") ||
-        lower.includes("lẩu") ||
-        lower.includes("nhúng")
-      ) {
-        botContent = (
-          <div className="space-y-3 w-full">
-            <p className="text-sm font-medium">
-              Bạn muốn ăn lẩu? Đây là công thức kèm danh sách mua sắm những món
-              bạn còn thiếu:
-            </p>
-            <RecipeCard item={MOCK_RECIPE} onAddToCart={handleAddToCart} />
-          </div>
-        );
-      } else {
-        botContent = (
-          <div className="space-y-3 w-full">
-            <p className="text-sm font-medium">
-              Tôi có 1 Combo đang Hot hôm nay, mua ngay để tiết kiệm và giảm
-              lãng phí nhé:
-            </p>
-            <BundleCard
-              item={{
-                ...MOCK_BUNDLE,
-                name: "Combo Đặc Biệt Tối Nay",
-                price: 99000,
-              }}
-              onAddToCart={handleAddToCart}
-            />
-          </div>
-        );
-      }
+      threadIdRef.current = response.threadId || threadIdRef.current;
 
       setMessages((prev) => [
         ...prev,
-        { id: Date.now() + 1, type: "bot", content: botContent },
+        {
+          id: Date.now() + 1,
+          type: "bot",
+          text:
+            response.reply ||
+            "Xin lỗi, tôi chưa có phản hồi phù hợp ở thời điểm này.",
+        },
       ]);
-    }, 1800);
+    } catch (chatError) {
+      const errorMessage =
+        chatError?.message || "Không thể kết nối trợ lý AI ở thời điểm này.";
+      setError(errorMessage);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          type: "bot",
+          text: `Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu.\n\n**Chi tiết:** ${errorMessage}`,
+        },
+      ]);
+    } finally {
+      setIsThinking(false);
+    }
   };
 
   return (
@@ -508,49 +222,34 @@ export default function AIChatPage() {
                 </span>
               </div>
               <p className="text-[10px] text-gray-500 font-semibold flex items-center gap-1 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>{" "}
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 Sẵn sàng gợi ý món ngon
               </p>
             </div>
           </div>
         </div>
 
-        <div className="relative">
-          <Link href="/customer/cart">
-            <motion.button
-              animate={
-                cartAnimating
-                  ? { scale: [1, 1.2, 1], rotate: [0, -10, 10, 0] }
-                  : {}
-              }
-              transition={{ duration: 0.5 }}
-              className="p-3 rounded-full bg-white border border-gray-200 text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1 relative"
-            >
-              <FaShoppingCart className="text-lg" />
-            </motion.button>
-          </Link>
-          <AnimatePresence>
-            {cartCount > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[11px] font-black w-6 h-6 flex items-center justify-center rounded-full border-2 border-white shadow-sm"
-              >
-                {cartCount}
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </div>
+        <Link href="/customer/cart">
+          <button className="p-3 rounded-full bg-white border border-gray-200 text-gray-700 shadow-sm transition-all hover:bg-gray-50">
+            <FaShoppingCart className="text-lg" />
+          </button>
+        </Link>
       </header>
 
       <main className="flex-1 overflow-y-auto px-4 py-8 relative scroll-smooth bg-linear-to-b from-slate-50 to-white">
         <div className="max-w-2xl mx-auto flex flex-col justify-end min-h-full">
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 text-sm font-semibold mb-4">
+              {error}
+            </div>
+          )}
+
           <div className="space-y-2">
             <AnimatePresence>
               {messages.map((msg) => (
                 <div key={msg.id} className="w-full relative">
                   {msg.type === "bot" ? (
-                    <BotMessage>{msg.content}</BotMessage>
+                    <BotMessage text={msg.text} />
                   ) : (
                     <UserMessage text={msg.text} />
                   )}
@@ -565,7 +264,6 @@ export default function AIChatPage() {
 
       <footer className="bg-white border-t border-gray-200 px-4 py-4 pb-6 sm:pb-8 w-full shrink-0 shadow-[0_-4px_20px_-10px_rgba(0,0,0,0.05)] z-20">
         <div className="max-w-3xl mx-auto">
-          {/* Action Chips */}
           <div className="flex gap-2.5 mb-4 overflow-x-auto pb-2 no-scrollbar px-1 -mx-1 snap-x">
             {CHIPS.map((chip) => (
               <button
@@ -591,7 +289,7 @@ export default function AIChatPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleSend()}
-              className={`w-12 h-12 flex items-center justify-center rounded-full text-white transition-all shadow-md ${inputStr.trim() ? "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-500/30" : "bg-gray-300 pointer-events-none"}`}
+              className={`w-12 h-12 flex items-center justify-center rounded-full text-white transition-all shadow-md ${inputStr.trim() && !isThinking ? "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-500/30" : "bg-gray-300 pointer-events-none"}`}
             >
               <FaPaperPlane className="-ml-1 text-lg" />
             </motion.button>

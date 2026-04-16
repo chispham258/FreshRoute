@@ -16,121 +16,54 @@ import {
 import { MdChat, MdOutlineFastfood } from "react-icons/md";
 import { HiOutlineSparkles } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
+import { fetchCustomerCombos } from "@/lib/customerApi";
+
+const DEFAULT_STORE_ID = "BHX-HCM123";
+const COMBO_LIMIT = 12;
 
 export default function CustomerPage() {
-  const [combos, setCombos] = useState([
-    {
-      id: 1,
-      name: "Combo Phở Bò Chóp",
-      description:
-        "Ngon như nhà làm, đủ khẩu phần 2 người ăn. Date sử dụng còn 2 ngày.",
-      discount: 25,
-      originalPrice: 185000,
-      newPrice: 139000,
-      tags: ["Bán chạy", "Sắp hết"],
-      image:
-        "https://images.unsplash.com/photo-1582878826629-29b7ad1cb431?q=80&w=600&auto=format&fit=crop",
-      ingredients: [
-        { name: "Thịt Bò Bắp 500g (HSD: 2 ngày)", status: "warning" },
-        { name: "Bánh Phở 300g (HSD: 5 ngày)", status: "safe" },
-        { name: "Rau Thơm 100g (HSD: 3 ngày)", status: "warning" },
-        { name: "Nước Dùng Xương 500ml", status: "safe" },
-      ],
-      instructions: [
-        "Đun sôi nước dùng xương trong 10 phút.",
-        "Thái mỏng thịt bò bắp.",
-        "Trụng sơ bánh phở qua nước sôi.",
-        "Sắp thịt, rau thơm lên phở và chan nước dùng.",
-      ],
-    },
-    {
-      id: 2,
-      name: "Set Cá Hồi Cao Cấp",
-      description: "Cá hồi tươi nhập khẩu, kèm măng tây và sốt chanh leo.",
-      discount: 30,
-      originalPrice: 320000,
-      newPrice: 224000,
-      tags: ["Organic", "Tươi sống"],
-      image:
-        "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=600&auto=format&fit=crop",
-      ingredients: [
-        { name: "Cá Hồi NaUy 300g", status: "safe" },
-        { name: "Măng tây 200g", status: "safe" },
-        { name: "Sốt chanh leo 100ml", status: "safe" },
-      ],
-      instructions: [
-        "Áp chảo cá hồi mỗi mặt 3-4 phút.",
-        "Xào sơ măng tây với bơ tỏi.",
-        "Rưới sốt chanh leo lên cá và thưởng thức.",
-      ],
-    },
-    {
-      id: 3,
-      name: "Bộ Xào Gà Nấm",
-      description: "Đầy đủ dinh dưỡng, cực dễ nấu cho bữa tối nhanh gọn.",
-      discount: 15,
-      originalPrice: 120000,
-      newPrice: 102000,
-      tags: ["Siêu tiết kiệm"],
-      image:
-        "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=600&auto=format&fit=crop",
-      ingredients: [
-        { name: "Thịt gà Phi-lê 400g", status: "safe" },
-        { name: "Nấm đùi gà 200g", status: "warning" },
-        { name: "Hành tây 1 củ", status: "safe" },
-      ],
-      instructions: [
-        "Thái nhỏ gà và ướp gia vị 15 phút.",
-        "Xào gà cho săn lại.",
-        "Thêm nấm và hành tây vào xào chín.",
-      ],
-    },
-    {
-      id: 4,
-      name: "Tô Rau Salad Cầu Vồng",
-      description: "Mix 7 loại rau củ hữu cơ, sốt mè rang béo ngậy.",
-      discount: 40,
-      originalPrice: 85000,
-      newPrice: 51000,
-      tags: ["Healthy"],
-      image:
-        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop",
-      ingredients: [
-        { name: "Xà lách Lolo 200g", status: "safe" },
-        { name: "Cà chua bi 100g", status: "warning" },
-        { name: "Sốt mè rang 50ml", status: "safe" },
-      ],
-      instructions: [
-        "Rửa sạch và cắt nhỏ các loại rau.",
-        "Trộn đều với nước sốt mè rang.",
-        "Thưởng thức ngay để giữ độ giòn.",
-      ],
-    },
-  ]);
+  const [combos, setCombos] = useState([]);
 
   const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [reloadToken, setReloadToken] = useState(0);
   const [selectedCombo, setSelectedCombo] = useState(null);
 
-  // TODO: FETCH DATA FROM BACKEND API
-  // để chỗ cho backend giúp tôi
-  /*
   useEffect(() => {
+    let cancelled = false;
+
     const fetchCombos = async () => {
       setLoading(true);
+      setError("");
+
       try {
-        const res = await fetch('/api/customer/combos?storeId=1');
-        const data = await res.json();
-        if (data && data.length) setCombos(data);
-      } catch(e) {
-         console.error(e);
+        const comboData = await fetchCustomerCombos({
+          storeId: DEFAULT_STORE_ID,
+          limit: COMBO_LIMIT,
+        });
+
+        if (!cancelled) {
+          setCombos(comboData);
+        }
+      } catch (fetchError) {
+        if (!cancelled) {
+          setCombos([]);
+          setError(fetchError.message || "Không thể tải danh sách combo.");
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     };
+
     fetchCombos();
-  }, []);
-  */
+
+    return () => {
+      cancelled = true;
+    };
+  }, [reloadToken]);
 
   const addToCart = (combo) => {
     setCart((prev) => {
@@ -246,71 +179,87 @@ export default function CustomerPage() {
           <div className="flex justify-center items-center h-64 text-gray-500 font-semibold text-lg animate-pulse">
             Đang tìm kiếm món ngon cho bạn...
           </div>
+        ) : error ? (
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p className="font-semibold">{error}</p>
+            <button
+              onClick={() => setReloadToken((value) => value + 1)}
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm"
+            >
+              Thử lại
+            </button>
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {combos.map((combo) => (
-              <div
-                key={combo.id}
-                onClick={() => setSelectedCombo(combo)}
-                className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ease-out group flex flex-col cursor-pointer"
-              >
-                {/* Image Section */}
-                <div className="relative h-48 overflow-hidden">
-                  <div className="absolute top-3 right-3 z-10 bg-red-500 text-white text-xs font-black px-2 py-1 rounded shadow-md">
-                    -{combo.discount}%
-                  </div>
-                  <img
-                    src={combo.image}
-                    alt={combo.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-
-                {/* Content Section */}
-                <div className="p-4 sm:p-5 flex-1 flex flex-col relative bg-white z-10">
-                  <div className="flex gap-1.5 flex-wrap mb-2">
-                    {combo.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-orange-50 text-orange-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-orange-100"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            {combos.length === 0 ? (
+              <div className="col-span-full text-center text-gray-500 bg-gray-50 border border-gray-200 rounded-xl py-8 px-4 font-medium">
+                Hiện chưa có combo khả dụng cho cửa hàng này.
+              </div>
+            ) : (
+              combos.map((combo) => (
+                <div
+                  key={combo.id}
+                  onClick={() => setSelectedCombo(combo)}
+                  className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ease-out group flex flex-col cursor-pointer"
+                >
+                  {/* Image Section */}
+                  <div className="relative h-48 overflow-hidden">
+                    <div className="absolute top-3 right-3 z-10 bg-red-500 text-white text-xs font-black px-2 py-1 rounded shadow-md">
+                      -{combo.discount}%
+                    </div>
+                    <img
+                      src={combo.image}
+                      alt={combo.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
 
-                  <h3 className="text-lg font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-orange-600 transition-colors">
-                    {combo.name}
-                  </h3>
-
-                  <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed flex-1">
-                    {combo.description}
-                  </p>
-
-                  <div className="flex items-end justify-between mt-auto">
-                    <div>
-                      <div className="text-xs text-gray-400 line-through font-medium mb-0.5">
-                        {combo.originalPrice.toLocaleString("vi-VN")} đ
-                      </div>
-                      <div className="text-lg font-black text-orange-500">
-                        {combo.newPrice.toLocaleString("vi-VN")} đ
-                      </div>
+                  {/* Content Section */}
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col relative bg-white z-10">
+                    <div className="flex gap-1.5 flex-wrap mb-2">
+                      {combo.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="bg-orange-50 text-orange-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-orange-100"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
 
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToCart(combo);
-                      }}
-                      className="bg-orange-500 hover:bg-orange-600 hover:-translate-y-0.5 active:scale-95 text-white rounded-full p-2.5 shadow-md shadow-orange-200/50 hover:shadow-lg transition-all duration-200"
-                      title="Thêm vào giỏ"
-                    >
-                      <FaShoppingCart className="text-[14px]" />
-                    </button>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-orange-600 transition-colors">
+                      {combo.name}
+                    </h3>
+
+                    <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed flex-1">
+                      {combo.description}
+                    </p>
+
+                    <div className="flex items-end justify-between mt-auto">
+                      <div>
+                        <div className="text-xs text-gray-400 line-through font-medium mb-0.5">
+                          {combo.originalPrice.toLocaleString("vi-VN")} đ
+                        </div>
+                        <div className="text-lg font-black text-orange-500">
+                          {combo.newPrice.toLocaleString("vi-VN")} đ
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(combo);
+                        }}
+                        className="bg-orange-500 hover:bg-orange-600 hover:-translate-y-0.5 active:scale-95 text-white rounded-full p-2.5 shadow-md shadow-orange-200/50 hover:shadow-lg transition-all duration-200"
+                        title="Thêm vào giỏ"
+                      >
+                        <FaShoppingCart className="text-[14px]" />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         )}
       </main>
