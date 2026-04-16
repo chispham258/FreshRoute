@@ -1,0 +1,140 @@
+{
+  "user_001": [
+    {
+      "ingredient_id": "nuoc_mam",
+      "quantity_g": 418.1,
+      "expiry_date": "2026-04-15",
+      "expiry_days": 0
+    },
+    {
+      "ingredient_id": "thit_bo",
+      "quantity_g": 268.05,
+      "expiry_date": "2026-04-17",
+      "expiry_days": 2
+    },
+    {
+      "ingredient_id": "thit_heo",
+      "quantity_g": 503.01,
+      "expiry_date": "2026-04-18",
+      "expiry_days": 3
+    },
+    {
+      "ingredient_id": "dau_hu",
+      "quantity_g": 232.8,
+      "expiry_date": "2026-04-18",
+      "expiry_days": 3
+    },
+    {
+      "ingredient_id": "ca_loc",
+      "quantity_g": 451.76,
+      "expiry_date": "2026-04-18",
+      "expiry_days": 3
+    },
+    {
+      "ingredient_id": "trung_ga",
+      "quantity_g": 468.37,
+      "expiry_date": "2026-04-28",
+      "expiry_days": 13
+    },
+    {
+      "ingredient_id": "xi_dau",
+      "quantity_g": 233.07,
+      "expiry_date": "2026-07-17",
+      "expiry_days": 93
+    }
+  ],
+  "user_002": [
+    {
+      "ingredient_id": "cai_thia",
+      "quantity_g": 286.6,
+      "expiry_date": "2026-04-16",
+      "expiry_days": 1
+    },
+    {
+      "ingredient_id": "ca_chua",
+      "quantity_g": 237.45,
+      "expiry_date": "2026-04-18",
+      "expiry_days": 3
+    },
+    {
+      "ingredient_id": "thit_bo",
+      "quantity_g": 310.41,
+      "expiry_date": "2026-04-19",
+      "expiry_days": 4
+    },
+    {
+      "ingredient_id": "dau_hu",
+      "quantity_g": 241.7,
+      "expiry_date": "2026-04-19",
+      "expiry_days": 4
+    },
+    {
+      "ingredient_id": "thit_ga",
+      "quantity_g": 561.43,
+      "expiry_date": "2026-04-20",
+      "expiry_days": 5
+    },
+    {
+      "ingredient_id": "hanh_tim",
+      "quantity_g": 185.53,
+      "expiry_date": "2026-05-01",
+      "expiry_days": 16
+    },
+    {
+      "ingredient_id": "xi_dau",
+      "quantity_g": 299.19,
+      "expiry_date": "2026-08-23",
+      "expiry_days": 130
+    }
+  ],
+  "user_003": [
+    {
+      "ingredient_id": "dau_hu",
+      "quantity_g": 234.36,
+      "expiry_date": "2026-04-17",
+      "expiry_days": 2
+    },
+    {
+      "ingredient_id": "rau_ngo",
+      "quantity_g": 32.03,
+      "expiry_date": "2026-04-17",
+      "expiry_days": 2
+    },
+    {
+      "ingredient_id": "hanh_la",
+      "quantity_g": 48.57,
+      "expiry_date": "2026-04-17",
+      "expiry_days": 2
+    },
+    {
+      "ingredient_id": "cai_thia",
+      "quantity_g": 210.71,
+      "expiry_date": "2026-04-18",
+      "expiry_days": 3
+    },
+    {
+      "ingredient_id": "sua_tuoi",
+      "quantity_g": 864.56,
+      "expiry_date": "2026-04-18",
+      "expiry_days": 3
+    },
+    {
+      "ingredient_id": "muc",
+      "quantity_g": 240.49,
+      "expiry_date": "2026-04-18",
+      "expiry_days": 3
+    },
+    {
+      "ingredient_id": "sa",
+      "quantity_g": 77.85,
+      "expiry_date": "2026-04-20",
+      "expiry_days": 5
+    },
+    {
+      "ingredient_id": "xi_dau",
+      "quantity_g": 231.89,
+      "expiry_date": "2027-03-05",
+      "expiry_days": 324
+    }
+  ]
+}

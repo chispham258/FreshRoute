@@ -1,0 +1,40 @@
+{
+  "user_001": [
+    {"ingredient_id": "thit_heo", "quantity_g": 450, "expiry_date": "2026-04-14", "expiry_days": 1 },
+    {"ingredient_id": "ca_chua", "quantity_g": 350, "expiry_date": "2026-04-15", "expiry_days": 2 },
+    {"ingredient_id": "rau_muong", "quantity_g": 280, "expiry_date": "2026-04-14", "expiry_days": 1 },
+    {"ingredient_id": "trung_ga", "quantity_g": 360, "expiry_date": "2026-04-16", "expiry_days": 3 },
+    {"ingredient_id": "hanh_la", "quantity_g": 80, "expiry_date": "2026-04-15", "expiry_days": 2 },
+    {"ingredient_id": "toi", "quantity_g": 150, "expiry_date": "2026-04-28", "expiry_days": 15 },
+    {"ingredient_id": "nuoc_mam", "quantity_g": 400, "expiry_date": "2026-10-01", "expiry_days": 171 },
+    {"ingredient_id": "hanh_tay", "quantity_g": 300, "expiry_date": "2026-04-25", "expiry_days": 12 },
+    {"ingredient_id": "gung", "quantity_g": 100, "expiry_date": "2026-04-22", "expiry_days": 9 },
+    {"ingredient_id": "xi_dau", "quantity_g": 250, "expiry_date": "2026-12-01", "expiry_days": 232 }
+  ],
+  "user_002": [
+    { "ingredient_id": "tom", "quantity_g": 280,"expiry_date": "2026-04-14", "expiry_days": 1 },
+    { "ingredient_id": "muc", "quantity_g": 250,"expiry_date": "2026-04-15", "expiry_days": 2 },
+    { "ingredient_id": "hanh_tay", "quantity_g": 400,"expiry_date": "2026-04-16", "expiry_days": 3 },
+    { "ingredient_id": "ot_chuong", "quantity_g": 250,"expiry_date": "2026-04-16", "expiry_days": 3 },
+    { "ingredient_id": "sa", "quantity_g": 80,"expiry_date": "2026-04-18", "expiry_days": 5 },
+    { "ingredient_id": "toi", "quantity_g": 180,"expiry_date": "2026-04-30", "expiry_days": 17 },
+    { "ingredient_id": "nuoc_mam", "quantity_g": 350,"expiry_date": "2026-09-15", "expiry_days": 155 },
+    { "ingredient_id": "ca_chua", "quantity_g": 300,"expiry_date": "2026-04-20", "expiry_days": 7 },
+    { "ingredient_id": "rau_ngo", "quantity_g": 40,"expiry_date": "2026-04-15", "expiry_days": 2 },
+    { "ingredient_id": "gung", "quantity_g": 60,"expiry_date": "2026-04-25", "expiry_days": 12 }
+  ],
+  "user_003": [
+    { "ingredient_id": "thit_ga","quantity_g": 500, "expiry_date": "2026-04-15", "expiry_days": 2 },
+    { "ingredient_id": "dau_hu","quantity_g": 280,"expiry_date": "2026-04-14", "expiry_days": 1 },
+    { "ingredient_id": "cai_xanh","quantity_g": 300,"expiry_date": "2026-04-14", "expiry_days": 1 },
+    { "ingredient_id": "ca_chua","quantity_g": 400,"expiry_date": "2026-04-16", "expiry_days": 3 },
+    { "ingredient_id": "hanh_la","quantity_g": 60,"expiry_date": "2026-04-15", "expiry_days": 2 },
+    { "ingredient_id": "hanh_tim","quantity_g": 150,"expiry_date": "2026-04-28", "expiry_days": 15 },
+    { "ingredient_id": "toi","quantity_g": 120,"expiry_date": "2026-05-05", "expiry_days": 22 },
+    { "ingredient_id": "nuoc_mam","quantity_g": 380,"expiry_date": "2026-11-01", "expiry_days": 202 },
+    { "ingredient_id": "sua_tuoi","quantity_g": 800,"expiry_date": "2026-04-16", "expiry_days": 3 },
+    { "ingredient_id": "gung","quantity_g": 80,"expiry_date": "2026-04-20", "expiry_days": 7 },
+    { "ingredient_id": "rau_muong","quantity_g": 250,"expiry_date": "2026-04-15", "expiry_days": 2 },
+    { "ingredient_id": "thit_heo_xay","quantity_g": 200,"expiry_date": "2026-04-16","expiry_days": 3 }
+  ]
+}

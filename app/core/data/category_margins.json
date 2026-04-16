@@ -1,0 +1,7 @@
+{
+  "fresh_meat":    0.12,
+  "fresh_seafood": 0.15,
+  "fresh_produce": 0.20,
+  "dairy":         0.18,
+  "processed":     0.25
+}
