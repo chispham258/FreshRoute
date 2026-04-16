@@ -1,3 +1,5 @@
+import { toVndInteger } from "@/lib/currency";
+
 const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 ).replace(/\/$/, "");
@@ -66,8 +68,8 @@ function mapCustomerCombo(combo) {
     name: combo?.name || "Combo chưa đặt tên",
     description: combo?.description || "Combo gợi ý theo dữ liệu cửa hàng.",
     discount: Math.round(toNumber(combo?.discount)),
-    originalPrice: toNumber(combo?.originalPrice),
-    newPrice: toNumber(combo?.newPrice),
+    originalPrice: toVndInteger(combo?.originalPrice),
+    newPrice: toVndInteger(combo?.newPrice),
     tags: Array.isArray(combo?.tags) ? combo.tags : [],
     image: combo?.image || DEFAULT_COMBO_IMAGE,
     ingredients: ingredients.map((ingredient) => ({

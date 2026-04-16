@@ -1,5 +1,6 @@
 import { FaBoxOpen, FaChartLine } from "react-icons/fa";
 import { SiProbot } from "react-icons/si";
+import { formatVnd } from "@/lib/currency";
 
 export default function ComboDetailModal({ combo, onClose, onAccept }) {
   if (!combo) return null;
@@ -62,11 +63,8 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                       </span>
                     </div>
                     <div className="font-bold text-gray-800 text-[14px] shrink-0 text-right whitespace-nowrap">
-                      <span className="font-semibold text-[13px] underline underline-offset-[3px] mr-px">
-                        đ
-                      </span>
                       {typeof ing.price === "number"
-                        ? ing.price.toLocaleString("vi-VN")
+                        ? formatVnd(ing.price)
                         : "-"}
                     </div>
                   </div>
@@ -88,20 +86,13 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
               <div className="flex justify-between items-center text-[13px]">
                 <span className="text-gray-500 font-medium">Giá gốc</span>
                 <span className="text-gray-600 font-semibold">
-                  <span className="font-medium text-[12px] underline underline-offset-2 mr-px">
-                    đ
-                  </span>
-                  {originalPrice.toLocaleString("vi-VN")}
+                  {formatVnd(originalPrice)}
                 </span>
               </div>
               <div className="flex justify-between items-center text-[13px]">
                 <span className="text-gray-500 font-medium">Giảm giá</span>
                 <span className="text-[#ff4d4f] font-semibold">
-                  -
-                  <span className="font-medium text-[12px] underline underline-offset-2 mr-px">
-                    đ
-                  </span>
-                  {discountValue.toLocaleString("vi-VN")}
+                  -{formatVnd(discountValue)}
                 </span>
               </div>
             </div>
@@ -112,10 +103,7 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                   Tổng giá trị nguyên liệu
                 </span>
                 <span className="text-[#4CAF50] font-bold text-[20px] leading-none">
-                  <span className="font-medium text-[15px] underline underline-offset-[3px] mr-px">
-                    đ
-                  </span>
-                  {newPrice.toLocaleString("vi-VN")}
+                  {formatVnd(newPrice)}
                 </span>
               </div>
 

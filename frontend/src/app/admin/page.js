@@ -20,6 +20,7 @@ import {
   fetchAdminInventory,
   rejectAdminCombo,
 } from "@/lib/adminApi";
+import { formatVnd } from "@/lib/currency";
 
 const STORE_OPTIONS = [
   { id: "BHX-HCM123", label: "BHX-HCM123 (Demo)" },
@@ -299,16 +300,10 @@ export default function AdminPage() {
                               <div className="flex justify-between items-end mb-5 pb-4 border-b border-dashed border-gray-200">
                                 <div>
                                   <p className="text-[11px] text-gray-400 line-through mb-0.5 font-medium">
-                                    {combo.originalPrice.toLocaleString(
-                                      "vi-VN",
-                                    )}{" "}
-                                    VNĐ
+                                    {formatVnd(combo.originalPrice)}
                                   </p>
                                   <p className="text-[22px] font-black text-[#00b14f] leading-none">
-                                    {combo.newPrice.toLocaleString("vi-VN")}{" "}
-                                    <span className="text-sm font-bold">
-                                      VNĐ
-                                    </span>
+                                    {formatVnd(combo.newPrice)}
                                   </p>
                                 </div>
                                 <div className="text-right">
@@ -316,10 +311,9 @@ export default function AdminPage() {
                                     Tiết kiệm
                                   </p>
                                   <p className="text-sm font-bold text-orange-600">
-                                    {(
-                                      combo.originalPrice - combo.newPrice
-                                    ).toLocaleString("vi-VN")}{" "}
-                                    VNĐ
+                                    {formatVnd(
+                                      combo.originalPrice - combo.newPrice,
+                                    )}
                                   </p>
                                 </div>
                               </div>

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { FaMoneyBillWave, FaShoppingCart } from "react-icons/fa";
+import { formatVnd } from "@/lib/currency";
 
 const DAY_LABELS = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
 
@@ -39,7 +40,7 @@ export default function AnalyticsDashboard({ combos = [], inventory = [] }) {
     }));
 
     return {
-      totalRevenue: Number((totalRevenueValue / 1_000_000).toFixed(2)),
+      totalRevenue: totalRevenueValue,
       revenueGrowth:
         criticalCount > 0 ? `${criticalCount} khẩn cấp` : "Ổn định",
       totalSold: safeCombos.length,
@@ -92,11 +93,8 @@ export default function AnalyticsDashboard({ combos = [], inventory = [] }) {
             <p className="text-gray-500 font-medium text-sm mb-1">
               Tổng Doanh Thu
             </p>
-            <p className="text-4xl font-extrabold text-gray-900 leading-none">
-              {data.totalRevenue}{" "}
-              <span className="text-base text-gray-500 font-medium">
-                Triệu VNĐ
-              </span>
+            <p className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-none">
+              {formatVnd(data.totalRevenue)}
             </p>
             <p className="text-xs text-gray-400 mt-2 font-medium">
               theo dữ liệu hiện tại
@@ -240,7 +238,7 @@ export default function AnalyticsDashboard({ combos = [], inventory = [] }) {
           </div>
 
           <div className="absolute left-2 sm:left-2 top-14 -rotate-90 text-[10px] text-gray-400 font-medium origin-center hidden sm:block">
-            Doanh thu (VNĐ)
+            Doanh thu (VND)
           </div>
           <div className="absolute right-0 top-14 rotate-90 text-[10px] text-gray-400 font-medium origin-center hidden sm:block">
             Số combo
@@ -357,7 +355,7 @@ export default function AnalyticsDashboard({ combos = [], inventory = [] }) {
               Trung bình / ngày
             </p>
             <p className="text-lg font-bold text-[#00b14f]">
-              {Math.round(averageRevenue).toLocaleString("vi-VN")} VNĐ
+              {formatVnd(averageRevenue)}
             </p>
           </div>
           <div>
@@ -365,7 +363,7 @@ export default function AnalyticsDashboard({ combos = [], inventory = [] }) {
               Cao nhất
             </p>
             <p className="text-lg font-bold text-[#2196F3]">
-              {highestRevenue.toLocaleString("vi-VN")} VNĐ
+              {formatVnd(highestRevenue)}
             </p>
           </div>
           <div>
@@ -373,7 +371,7 @@ export default function AnalyticsDashboard({ combos = [], inventory = [] }) {
               Thấp nhất
             </p>
             <p className="text-lg font-bold text-gray-700">
-              {lowestRevenue.toLocaleString("vi-VN")} VNĐ
+              {formatVnd(lowestRevenue)}
             </p>
           </div>
           <div>
