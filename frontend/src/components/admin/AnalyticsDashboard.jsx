@@ -1,57 +1,79 @@
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { FaMoneyBillWave, FaShoppingCart } from "react-icons/fa";
 
-export default function AnalyticsDashboard() {
+const DAY_LABELS = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
+
+export default function AnalyticsDashboard({ combos = [], inventory = [] }) {
   const [timeRange, setTimeRange] = useState("Ngày");
-  const [data, setData] = useState({
-    totalRevenue: 48.5,
-    revenueGrowth: "+18%",
-    totalSold: 837,
-    soldGrowth: "+23%",
-    topCombos: [
-      { name: "Combo Phở Bò", sold: 290 },
-      { name: "Bộ Xào Gà", sold: 240 },
-      { name: "Set Cá Hồi Nướng", sold: 195 },
-      { name: "Tô Rau Cầu Vồng", sold: 165 },
-      { name: "Pasta Ý", sold: 155 },
-    ],
-    revenueData: [
-      { day: "T2", rev: 15000, qty: 90 },
-      { day: "T3", rev: 18000, qty: 100 },
-      { day: "T4", rev: 16500, qty: 95 },
-      { day: "T5", rev: 21500, qty: 115 },
-      { day: "T6", rev: 24500, qty: 125 },
-      { day: "T7", rev: 28900, qty: 160 },
-      { day: "CN", rev: 26000, qty: 145 },
-    ],
-  });
 
-  // TODO: FETCH DATA FROM BACKEND API
-  /*
-  useEffect(() => {
-    const fetchAnalytics = async () => {
-      // 1. Fetch KPI Thống kê
-      const kpiRes = await fetch('/api/admin/analytics/kpi?storeId=Q1');
-      const kpiData = await kpiRes.json();
-      
-      // 2. Fetch Top Combo
-      const topComboRes = await fetch('/api/admin/analytics/top-combos?storeId=Q1');
-      const topComboData = await topComboRes.json();
+  const data = useMemo(() => {
+    const safeCombos = Array.isArray(combos) ? combos : [];
+    const safeInventory = Array.isArray(inventory) ? inventory : [];
 
-      // 3. Fetch Doanh thu 7 ngày qua
-      const seriesRes = await fetch('/api/admin/analytics/series?storeId=Q1');
-      const seriesData = await seriesRes.json();
+    const totalRevenueValue = safeCombos.reduce(
+      (sum, combo) => sum + Number(combo.newPrice || 0),
+      0,
+    );
 
-      setData({
-        totalRevenue: kpiData.totalRevenue,
-        ... // set data mapping API response
-      });
+    const criticalCount = safeInventory.filter(
+      (item) => item.status === "Khẩn Cấp",
+    ).length;
+    const warningCount = safeInventory.filter(
+      (item) => item.status === "Cảnh Báo",
+    ).length;
+
+    const topCombos = safeCombos
+      .slice()
+      .sort((a, b) => Number(b.confidence || 0) - Number(a.confidence || 0))
+      .slice(0, 5)
+      .map((item) => ({
+        name: item.name,
+        sold: Math.round(Number(item.confidence || 0)),
+      }));
+
+    const revenuePerDay = Math.round(totalRevenueValue / DAY_LABELS.length);
+    const revenueData = DAY_LABELS.map((day) => ({
+      day,
+      rev: revenuePerDay,
+      qty: safeCombos.length,
+    }));
+
+    return {
+      totalRevenue: Number((totalRevenueValue / 1_000_000).toFixed(2)),
+      revenueGrowth:
+        criticalCount > 0 ? `${criticalCount} khẩn cấp` : "Ổn định",
+      totalSold: safeCombos.length,
+      soldGrowth: warningCount > 0 ? `${warningCount} cảnh báo` : "Ổn định",
+      topCombos:
+        topCombos.length > 0
+          ? topCombos
+          : [{ name: "Chưa có dữ liệu", sold: 0 }],
+      revenueData,
     };
-    // fetchAnalytics();
-  }, []);
-  */
+  }, [combos, inventory]);
 
-  const maxSold = Math.max(...data.topCombos.map((c) => c.sold));
+  const maxSold = Math.max(1, ...data.topCombos.map((combo) => combo.sold));
+  const maxRevenue = Math.max(1, ...data.revenueData.map((item) => item.rev));
+  const maxQty = Math.max(1, ...data.revenueData.map((item) => item.qty));
+  const revenueTicks = [1, 0.75, 0.5, 0.25, 0].map((ratio) =>
+    Math.round(maxRevenue * ratio),
+  );
+  const quantityTicks = [1, 0.75, 0.5, 0.25, 0].map((ratio) =>
+    Math.round(maxQty * ratio),
+  );
+
+  const averageRevenue =
+    data.revenueData.reduce((sum, item) => sum + item.rev, 0) /
+    data.revenueData.length;
+  const highestRevenue = Math.max(...data.revenueData.map((item) => item.rev));
+  const lowestRevenue = Math.min(...data.revenueData.map((item) => item.rev));
+  const firstDayRevenue = data.revenueData[0]?.rev || 0;
+  const lastDayRevenue =
+    data.revenueData[data.revenueData.length - 1]?.rev || 0;
+  const trendPercent =
+    firstDayRevenue > 0
+      ? ((lastDayRevenue - firstDayRevenue) / firstDayRevenue) * 100
+      : 0;
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
@@ -76,7 +98,9 @@ export default function AnalyticsDashboard() {
                 Triệu VNĐ
               </span>
             </p>
-            <p className="text-xs text-gray-400 mt-2 font-medium">tháng này</p>
+            <p className="text-xs text-gray-400 mt-2 font-medium">
+              theo dữ liệu hiện tại
+            </p>
           </div>
         </div>
 
@@ -91,13 +115,15 @@ export default function AnalyticsDashboard() {
           </div>
           <div>
             <p className="text-gray-500 font-medium text-sm mb-1">
-              Số Lượng Combo Đã Bán
+              Số Combo Đề Xuất
             </p>
             <p className="text-4xl font-extrabold text-gray-900 leading-none">
               {data.totalSold}{" "}
               <span className="text-base text-gray-500 font-medium">combo</span>
             </p>
-            <p className="text-xs text-gray-400 mt-2 font-medium">tháng này</p>
+            <p className="text-xs text-gray-400 mt-2 font-medium">
+              theo dữ liệu hiện tại
+            </p>
           </div>
         </div>
       </div>
@@ -107,10 +133,10 @@ export default function AnalyticsDashboard() {
         <div className="flex justify-between items-center mb-6">
           <div>
             <h3 className="text-lg font-bold text-gray-900">
-              Top Combo Bán Chạy
+              Top Combo Theo Độ Tin Cậy AI
             </h3>
             <p className="text-sm text-gray-500">
-              Xếp hạng combo theo số lượng bán ra
+              Xếp hạng combo theo điểm confidence từ backend
             </p>
           </div>
           <span className="bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold px-2 py-1 flex items-center gap-1.5 rounded pr-2.5 shadow-sm">
@@ -155,8 +181,8 @@ export default function AnalyticsDashboard() {
         {/* Legend */}
         <div className="flex justify-center items-center mt-2 border-t border-gray-100 pt-4">
           <div className="flex items-center gap-1.5 text-sm font-medium text-gray-800">
-            <span className="w-3 h-3 bg-gray-900 rounded-sm"></span> Số Lượng
-            Bán
+            <span className="w-3 h-3 bg-gray-900 rounded-sm"></span> Điểm Tin
+            Cậy
           </div>
         </div>
       </div>
@@ -198,24 +224,16 @@ export default function AnalyticsDashboard() {
         <div className="w-full relative h-75 sm:h-87.5 font-sans">
           {/* Y Axis Grid */}
           <div className="absolute inset-0 flex flex-col justify-between z-0 pb-6 pr-5 sm:pr-10 pl-13.75">
-            {[30000, 22500, 15000, 7500, 0].map((val, i) => (
+            {revenueTicks.map((value, index) => (
               <div
-                key={i}
+                key={index}
                 className="w-full h-0 border-t border-dashed border-gray-200 relative"
               >
                 <span className="absolute -top-3 -left-13.75 text-[10px] text-gray-400 font-medium">
-                  {val}
+                  {value}
                 </span>
                 <span className="absolute -top-3 -right-2 sm:-right-2.5 text-[10px] text-gray-400 font-medium">
-                  {val === 30000
-                    ? "160"
-                    : val === 22500
-                      ? "120"
-                      : val === 15000
-                        ? "80"
-                        : val === 7500
-                          ? "40"
-                          : "0"}
+                  {quantityTicks[index]}
                 </span>
               </div>
             ))}
@@ -240,9 +258,9 @@ export default function AnalyticsDashboard() {
                 if (i === 0) return null;
                 const prev = data.revenueData[i - 1];
                 const x1 = `${((i - 1) / (data.revenueData.length - 1)) * 100}%`;
-                const y1 = `${100 - (prev.rev / 30000) * 100}%`;
+                const y1 = `${100 - (prev.rev / maxRevenue) * 100}%`;
                 const x2 = `${(i / (data.revenueData.length - 1)) * 100}%`;
-                const y2 = `${100 - (d.rev / 30000) * 100}%`;
+                const y2 = `${100 - (d.rev / maxRevenue) * 100}%`;
                 return (
                   <line
                     key={`rev-${i}`}
@@ -262,9 +280,9 @@ export default function AnalyticsDashboard() {
                 if (i === 0) return null;
                 const prev = data.revenueData[i - 1];
                 const x1 = `${((i - 1) / (data.revenueData.length - 1)) * 100}%`;
-                const y1 = `${100 - (prev.qty / 160) * 100}%`;
+                const y1 = `${100 - (prev.qty / maxQty) * 100}%`;
                 const x2 = `${(i / (data.revenueData.length - 1)) * 100}%`;
-                const y2 = `${100 - (d.qty / 160) * 100}%`;
+                const y2 = `${100 - (d.qty / maxQty) * 100}%`;
                 return (
                   <line
                     key={`qty-${i}`}
@@ -284,13 +302,13 @@ export default function AnalyticsDashboard() {
                 <g key={`pt-${i}`}>
                   <circle
                     cx={`${(i / (data.revenueData.length - 1)) * 100}%`}
-                    cy={`${100 - (d.rev / 30000) * 100}%`}
+                    cy={`${100 - (d.rev / maxRevenue) * 100}%`}
                     r="4.5"
                     fill="#00b14f"
                   />
                   <circle
                     cx={`${(i / (data.revenueData.length - 1)) * 100}%`}
-                    cy={`${100 - (d.qty / 160) * 100}%`}
+                    cy={`${100 - (d.qty / maxQty) * 100}%`}
                     r="4.5"
                     fill="#ff9800"
                   />
@@ -338,25 +356,36 @@ export default function AnalyticsDashboard() {
             <p className="text-[11px] text-gray-500 font-medium mb-1 uppercase tracking-wider">
               Trung bình / ngày
             </p>
-            <p className="text-lg font-bold text-[#00b14f]">21.600 VNĐ</p>
+            <p className="text-lg font-bold text-[#00b14f]">
+              {Math.round(averageRevenue).toLocaleString("vi-VN")} VNĐ
+            </p>
           </div>
           <div>
             <p className="text-[11px] text-gray-500 font-medium mb-1 uppercase tracking-wider">
               Cao nhất
             </p>
-            <p className="text-lg font-bold text-[#2196F3]">28.900 VNĐ</p>
+            <p className="text-lg font-bold text-[#2196F3]">
+              {highestRevenue.toLocaleString("vi-VN")} VNĐ
+            </p>
           </div>
           <div>
             <p className="text-[11px] text-gray-500 font-medium mb-1 uppercase tracking-wider">
               Thấp nhất
             </p>
-            <p className="text-lg font-bold text-gray-700">15.200 VNĐ</p>
+            <p className="text-lg font-bold text-gray-700">
+              {lowestRevenue.toLocaleString("vi-VN")} VNĐ
+            </p>
           </div>
           <div>
             <p className="text-[11px] text-gray-500 font-medium mb-1 uppercase tracking-wider">
               Xu hướng
             </p>
-            <p className="text-lg font-bold text-[#00b14f]">↗ +18%</p>
+            <p
+              className={`text-lg font-bold ${trendPercent >= 0 ? "text-[#00b14f]" : "text-red-500"}`}
+            >
+              {trendPercent >= 0 ? "↗" : "↘"} {trendPercent >= 0 ? "+" : ""}
+              {trendPercent.toFixed(1)}%
+            </p>
           </div>
         </div>
       </div>

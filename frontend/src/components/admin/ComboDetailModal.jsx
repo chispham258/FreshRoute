@@ -1,16 +1,15 @@
-import {
-  FaBoxOpen,
-  FaChartLine,
-  FaDollarSign,
-  FaUserFriends,
-  FaLeaf,
-} from "react-icons/fa";
-import { HiOutlineSparkles } from "react-icons/hi";
-import { RiCopperCoinLine } from "react-icons/ri";
+import { FaBoxOpen, FaChartLine } from "react-icons/fa";
 import { SiProbot } from "react-icons/si";
 
 export default function ComboDetailModal({ combo, onClose, onAccept }) {
   if (!combo) return null;
+
+  const ingredientsDetail = Array.isArray(combo.ingredientsDetail)
+    ? combo.ingredientsDetail
+    : [];
+  const originalPrice = Number(combo.originalPrice || 0);
+  const newPrice = Number(combo.newPrice || 0);
+  const discountValue = Math.max(originalPrice - newPrice, 0);
 
   return (
     <div
@@ -26,14 +25,14 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
           {/* Card 1: Title & Tags */}
           <div className="bg-white rounded-xl p-5 shadow-xs border border-gray-100 flex flex-col">
             <h2 className="text-[17px] font-bold text-gray-800 leading-tight mb-4">
-              {combo.name || "Combo Phở Bò 2 Người"}
+              {combo.name || "Combo chưa đặt tên"}
             </h2>
             <div className="flex flex-wrap gap-2">
               <span className="px-2.5 py-1 bg-orange-50 border border-orange-200 text-orange-400 text-[11px] font-semibold rounded-[20px]">
-                Sắp hết hạn
+                Giảm {combo.discount || 0}%
               </span>
               <span className="px-2.5 py-1 bg-green-50 border border-green-200 text-[#00b14f] text-[11px] font-semibold rounded-[20px]">
-                Lợi nhuận cao
+                Tin cậy {combo.confidence || 0}%
               </span>
             </div>
           </div>
@@ -45,102 +44,37 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
             </h3>
 
             <div className="space-y-4">
-              {combo.ingredientsDetail ? (
-                combo.ingredientsDetail.map((ing, i) => (
+              {ingredientsDetail.length > 0 ? (
+                ingredientsDetail.map((ing, i) => (
                   <div
                     key={i}
-                    className={`flex justify-between items-start ${i !== combo.ingredientsDetail.length - 1 ? "pb-4 border-b border-gray-100" : ""}`}
+                    className={`flex justify-between items-start ${i !== ingredientsDetail.length - 1 ? "pb-4 border-b border-gray-100" : ""}`}
                   >
                     <div className="flex-1 pr-4">
                       <div className="font-bold text-gray-800 text-[14px] mb-0.5">
                         {ing.name || "Nguyên liệu"}
                       </div>
                       <div className="text-[12px] text-gray-400 mb-2">
-                        {ing.weight || "500g"}
+                        {ing.weight || "Không có dữ liệu định lượng"}
                       </div>
                       <span className="inline-block px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-400 text-[11px] font-semibold rounded-[20px] whitespace-nowrap">
-                        Hết hạn sau: {ing.daysLeft} ngày
+                        Trạng thái: {ing.status || "Bình Thường"}
                       </span>
                     </div>
                     <div className="font-bold text-gray-800 text-[14px] shrink-0 text-right whitespace-nowrap">
                       <span className="font-semibold text-[13px] underline underline-offset-[3px] mr-px">
                         đ
                       </span>
-                      {(ing.price || 45000).toLocaleString("vi-VN")}
+                      {typeof ing.price === "number"
+                        ? ing.price.toLocaleString("vi-VN")
+                        : "-"}
                     </div>
                   </div>
                 ))
               ) : (
-                <>
-                  <div className="flex justify-between items-start pb-4 border-b border-gray-100">
-                    <div className="flex-1 pr-4">
-                      <div className="font-bold text-gray-800 text-[14px] mb-0.5">
-                        Thịt bò Úc
-                      </div>
-                      <div className="text-[12px] text-gray-400 mb-2">500g</div>
-                      <span className="inline-block px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-400 text-[11px] font-semibold rounded-[20px] whitespace-nowrap">
-                        Hết hạn sau: 2 ngày
-                      </span>
-                    </div>
-                    <div className="font-bold text-gray-800 text-[14px] shrink-0 text-right whitespace-nowrap">
-                      <span className="font-semibold text-[13px] underline underline-offset-[3px] mr-px">
-                        đ
-                      </span>
-                      85.000
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-start pb-4 border-b border-gray-100">
-                    <div className="flex-1 pr-4">
-                      <div className="font-bold text-gray-800 text-[14px] mb-0.5">
-                        Bánh phở tươi
-                      </div>
-                      <div className="text-[12px] text-gray-400 mb-2">400g</div>
-                      <span className="inline-block px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-400 text-[11px] font-semibold rounded-[20px] whitespace-nowrap">
-                        Hết hạn sau: 1 ngày
-                      </span>
-                    </div>
-                    <div className="font-bold text-gray-800 text-[14px] shrink-0 text-right whitespace-nowrap">
-                      <span className="font-semibold text-[13px] underline underline-offset-[3px] mr-px">
-                        đ
-                      </span>
-                      25.000
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-start pb-4 border-b border-gray-100">
-                    <div className="flex-1 pr-4">
-                      <div className="font-bold text-gray-800 text-[14px] mb-0.5">
-                        Hành lá
-                      </div>
-                      <div className="text-[12px] text-gray-400 mb-2">100g</div>
-                      <span className="inline-block px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-400 text-[11px] font-semibold rounded-[20px] whitespace-nowrap">
-                        Hết hạn sau: 3 ngày
-                      </span>
-                    </div>
-                    <div className="font-bold text-gray-800 text-[14px] shrink-0 text-right whitespace-nowrap">
-                      <span className="font-semibold text-[13px] underline underline-offset-[3px] mr-px">
-                        đ
-                      </span>
-                      8.000
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1 pr-4">
-                      <div className="font-bold text-gray-800 text-[14px] mb-0.5">
-                        Rau thơm
-                      </div>
-                      <div className="text-[12px] text-gray-400 mb-2">150g</div>
-                      <span className="inline-block px-2.5 py-0.5 bg-orange-50 border border-orange-200 text-orange-400 text-[11px] font-semibold rounded-[20px] whitespace-nowrap">
-                        Hết hạn sau: 2 ngày
-                      </span>
-                    </div>
-                    <div className="font-bold text-gray-800 text-[14px] shrink-0 text-right whitespace-nowrap">
-                      <span className="font-semibold text-[13px] underline underline-offset-[3px] mr-px">
-                        đ
-                      </span>
-                      12.000
-                    </div>
-                  </div>
-                </>
+                <div className="text-sm text-gray-500 bg-gray-50 border border-gray-100 rounded-lg p-4">
+                  Chưa có chi tiết nguyên liệu cho combo này.
+                </div>
               )}
             </div>
           </div>
@@ -157,7 +91,7 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                   <span className="font-medium text-[12px] underline underline-offset-2 mr-px">
                     đ
                   </span>
-                  {(combo.originalPrice || 180000).toLocaleString("vi-VN")}
+                  {originalPrice.toLocaleString("vi-VN")}
                 </span>
               </div>
               <div className="flex justify-between items-center text-[13px]">
@@ -167,9 +101,7 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                   <span className="font-medium text-[12px] underline underline-offset-2 mr-px">
                     đ
                   </span>
-                  {(
-                    combo.originalPrice - combo.newPrice || 41000
-                  ).toLocaleString("vi-VN")}
+                  {discountValue.toLocaleString("vi-VN")}
                 </span>
               </div>
             </div>
@@ -183,20 +115,16 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                   <span className="font-medium text-[15px] underline underline-offset-[3px] mr-px">
                     đ
                   </span>
-                  {(combo.newPrice || 139000).toLocaleString("vi-VN")}
+                  {newPrice.toLocaleString("vi-VN")}
                 </span>
               </div>
 
-              {/* Added Expected Profit based entirely on your last snapshot design */}
               <div className="flex justify-between items-center">
                 <span className="text-gray-500 font-medium text-[13px]">
                   Lợi nhuận dự kiến
                 </span>
                 <span className="text-[#4CAF50] font-semibold text-[13px]">
-                  <span className="font-medium text-[12px] underline underline-offset-2 mr-px">
-                    đ
-                  </span>
-                  48.000
+                  Chưa có dữ liệu
                 </span>
               </div>
             </div>
@@ -218,11 +146,11 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                 <FaBoxOpen className="text-[#4CAF50] text-[14px] mt-0.5 shrink-0" />
                 <div>
                   <div className="font-bold text-[13px] text-gray-800 mb-1">
-                    Sản phẩm sắp hết hạn
+                    Tóm tắt đề xuất
                   </div>
                   <div className="text-[12px] text-gray-500 font-normal leading-[1.6]">
-                    Thịt bò và bánh phở sẽ hết hạn trong 1-2 ngày. Kết hợp ngay
-                    để tránh lãng phí.
+                    {combo.aiReason ||
+                      "AI chưa cung cấp giải thích cho combo này."}
                   </div>
                 </div>
               </div>
@@ -231,37 +159,11 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                 <FaChartLine className="text-[#4CAF50] text-[14px] mt-0.5 shrink-0" />
                 <div>
                   <div className="font-bold text-[13px] text-gray-800 mb-1">
-                    Xu hướng tiêu dùng
+                    Chỉ số mô hình
                   </div>
                   <div className="text-[12px] text-gray-500 font-normal leading-[1.6]">
-                    Phở bò là món được tìm kiếm nhiều nhất vào cuối tuần với tỷ
-                    lệ mua hàng 89%.
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-[#f8f9fa] rounded-lg p-3.5 flex gap-3.5 items-start">
-                <FaDollarSign className="text-[#4CAF50] text-[14px] mt-0.5 shrink-0" />
-                <div>
-                  <div className="font-bold text-[13px] text-gray-800 mb-1">
-                    Tối ưu giá trị
-                  </div>
-                  <div className="text-[12px] text-gray-500 font-normal leading-[1.6]">
-                    Combo này mang lại lợi nhuận 34% trong khi giảm giá 23%, cân
-                    bằng tốt nhất.
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-[#f8f9fa] rounded-lg p-3.5 flex gap-3.5 items-start">
-                <FaUserFriends className="text-[#4CAF50] text-[14px] mt-0.5 shrink-0" />
-                <div>
-                  <div className="font-bold text-[13px] text-gray-800 mb-1">
-                    Nhóm khách hàng
-                  </div>
-                  <div className="text-[12px] text-gray-500 font-normal leading-[1.6]">
-                    Phù hợp với 2,450 khách hàng trong database có lịch sử mua
-                    phở.
+                    Độ tin cậy: {combo.confidence || 0}% · Giảm giá:{" "}
+                    {combo.discount || 0}%
                   </div>
                 </div>
               </div>

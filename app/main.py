@@ -50,7 +50,9 @@ app = FastAPI(
 
 origins = [
     "http://localhost:3000",    # Next.js/React
-    "http://127.0.0.1:3000"
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",    # Alternate local frontend port
+    "http://127.0.0.1:3001",
 ]
 
 from fastapi.middleware.cors import CORSMiddleware
