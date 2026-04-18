@@ -23,9 +23,7 @@ import {
 import { formatVnd } from "@/lib/currency";
 
 const STORE_OPTIONS = [
-  { id: "BHX-HCM123", label: "BHX-HCM123 (Demo)" },
   { id: "BHX-HCM001", label: "BHX-HCM001" },
-  { id: "BHX-HCM002", label: "BHX-HCM002" },
 ];
 
 function toProgressWidth(item) {
@@ -111,10 +109,13 @@ export default function AdminPage() {
   const handleAcceptCombo = async (id, event) => {
     if (event) event.stopPropagation();
 
+    const combo = combos.find((c) => c.id === id);
+    if (!combo) return;
+
     try {
-      await acceptAdminCombo({ comboId: id, storeId });
+      await acceptAdminCombo({ comboId: id, storeId, combo });
       alert("Đã chuyển Combo qua site Customer thành công!");
-      setCombos((prev) => prev.filter((combo) => combo.id !== id));
+      setCombos((prev) => prev.filter((c) => c.id !== id));
       setSelectedCombo(null);
     } catch (actionError) {
       alert(actionError.message || "Có lỗi xảy ra khi gọi API");

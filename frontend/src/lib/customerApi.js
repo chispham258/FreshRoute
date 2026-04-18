@@ -87,17 +87,20 @@ export async function fetchCustomerCombos({ storeId, limit = 10 }) {
   return Array.isArray(payload) ? payload.map(mapCustomerCombo) : [];
 }
 
-export async function sendConsumerChat({ message, threadId }) {
+export async function sendConsumerChat({ message, threadId, allergies }) {
   const payload = await requestJson("/consumer/chat", {
     method: "POST",
     body: {
       message,
       thread_id: threadId,
+      ...(allergies && allergies.length > 0 ? { allergies } : {}),
     },
   });
 
   return {
     reply: String(payload?.reply || ""),
     threadId: String(payload?.thread_id || threadId || ""),
+    shoppingList: Array.isArray(payload?.shopping_list) ? payload.shopping_list : null,
+    recipeSuggestions: Array.isArray(payload?.recipe_suggestions) ? payload.recipe_suggestions : null,
   };
 }

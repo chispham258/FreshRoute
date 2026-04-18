@@ -12,6 +12,7 @@ from app.core.data.repository import DataRepository
 from app.core.models.bundle import BundleOutput
 from app.core.pipeline.base import PipelineContext, PipelineStage, PipelineChain
 from app.core.pipeline.p1_priority import run_p1
+from app.core.pipeline import p1_cache
 from app.core.pipeline.p2_retrieval import run_p2
 from app.core.pipeline.p3_feasibility import run_p3
 from app.core.pipeline.p5_waste import run_p5
@@ -193,6 +194,10 @@ async def run_pipeline(
     )
 
     context = chain.execute(context)
+
+    # Cache P1 scores for /inventory to query without re-running the pipeline
+    if context.p1_output:
+        p1_cache.put(store_id, context.p1_output)
 
     # Return final bundles (or empty list if pipeline failed)
     return context.final_bundles or []

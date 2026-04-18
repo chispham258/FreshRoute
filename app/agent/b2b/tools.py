@@ -60,6 +60,10 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
         recipe_names = repo.recipe_names()
         recipe_lookup = repo.recipe_lookup()
 
+        # Deduplicate recipe_ids preserving order
+        seen: set = set()
+        recipe_ids = [r for r in recipe_ids if not (r in seen or seen.add(r))]
+
         logger.info(f"finalize_bundles called: recipe_ids={recipe_ids}, store_id={store_id}, top_k={top_k}")
 
         # ── Step 1: Build urgency lookup from store's urgent inventory ──────────
@@ -88,8 +92,7 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
                 logger.warning(f"Recipe {recipe_id} not found, skipping")
                 continue
 
-            recipe_with_store = {**recipe, "store_id": store_id}
-            result = _check_feasibility(recipe_with_store)
+            result = _check_feasibility(recipe, store_id=store_id)
 
             logger.debug(
                 f"  {recipe_id}: feasible={result.get('feasible')}, "
@@ -130,7 +133,9 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
         logger.info(f"finalize_bundles: {len(validated_recipes)}/{len(recipe_ids)} recipes passed allocation")
 
         if not validated_recipes:
-            return json.dumps({"error": "No recipes passed allocation"}, ensure_ascii=False)
+            # Return empty list (no viable bundles) rather than error dict
+            # This allows the fallback to work: agent returns [], admin.py falls back to pipeline
+            return json.dumps([], ensure_ascii=False)
 
         # ── Step 3: Run P5 → P6 → P7 ───────────────────────────────────────────
         p5_output = run_p5(validated_recipes, sku_lookup)

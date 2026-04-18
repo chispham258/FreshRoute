@@ -9,22 +9,20 @@ import {
   FaLeaf,
   FaTimes,
   FaCheckCircle,
-  FaRobot,
-  FaPlus,
-  FaMinus,
 } from "react-icons/fa";
 import { MdChat, MdOutlineFastfood } from "react-icons/md";
 import { HiOutlineSparkles } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchCustomerCombos } from "@/lib/customerApi";
+import { loadCart, addItemToCart } from "@/lib/cart";
 
-const DEFAULT_STORE_ID = "BHX-HCM123";
+const DEFAULT_STORE_ID = "BHX-HCM001";
 const COMBO_LIMIT = 12;
 
 export default function CustomerPage() {
   const [combos, setCombos] = useState([]);
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => loadCart());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [reloadToken, setReloadToken] = useState(0);
@@ -66,37 +64,12 @@ export default function CustomerPage() {
   }, [reloadToken]);
 
   const addToCart = (combo) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === combo.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === combo.id ? { ...item, qty: item.qty + 1 } : item,
-        );
-      }
-      return [...prev, { ...combo, qty: 1 }];
-    });
-    setSelectedCombo(null); // Close modal if open
+    const updated = addItemToCart(combo);
+    setCart(updated);
+    setSelectedCombo(null);
   };
 
-  const updateQty = (id, delta) => {
-    setCart((prev) =>
-      prev
-        .map((item) => {
-          if (item.id === id) {
-            const newQty = item.qty + delta;
-            return newQty > 0 ? { ...item, qty: newQty } : item;
-          }
-          return item;
-        })
-        .filter((item) => item.qty > 0),
-    );
-  };
-
-  const cartItemCount = cart.reduce((total, item) => total + item.qty, 0);
-  const cartTotal = cart.reduce(
-    (total, item) => total + item.newPrice * item.qty,
-    0,
-  );
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <div className="min-h-screen bg-[#f8f9fc] pb-24 relative font-sans">
@@ -402,133 +375,6 @@ export default function CustomerPage() {
         )}
       </AnimatePresence>
 
-      {/* Cart Drawer REMOVED */}
-      <AnimatePresence>
-        {false && (
-          <div className="fixed inset-0 z-50 overflow-hidden">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => null}
-              className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity"
-            />
-            <div className="fixed inset-y-0 right-0 max-w-sm w-full flex">
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="w-full h-full bg-white shadow-2xl flex flex-col pointer-events-auto"
-              >
-                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-white">
-                  <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <FaShoppingCart className="text-orange-500" /> Giỏ Hàng Của
-                    Bạn
-                  </h2>
-                  <button
-                    onClick={() => null}
-                    className="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
-                  >
-                    <FaTimes />
-                  </button>
-                </div>
-
-                <div className="flex-1 overflow-y-auto p-4 sm:p-5 bg-gray-50/50">
-                  {cart.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center h-full text-gray-400 space-y-4">
-                      <FaShoppingCart className="text-6xl text-gray-200" />
-                      <p className="font-semibold text-sm">
-                        Chưa có sản phẩm nào
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <AnimatePresence>
-                        {cart.map((item) => (
-                          <motion.div
-                            key={item.id}
-                            initial={{ opacity: 0, height: 0, marginBottom: 0 }}
-                            animate={{
-                              opacity: 1,
-                              height: "auto",
-                              marginBottom: 16,
-                            }}
-                            exit={{
-                              opacity: 0,
-                              height: 0,
-                              marginBottom: 0,
-                              scale: 0.95,
-                            }}
-                            className="bg-white rounded-xl p-3 border border-gray-100 shadow-sm flex gap-3 sm:gap-4 overflow-hidden"
-                          >
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover bg-gray-100 shrink-0"
-                            />
-                            <div className="flex-1 flex flex-col justify-between">
-                              <div>
-                                <h3 className="font-bold text-gray-900 text-sm sm:text-base leading-tight mb-1 line-clamp-2">
-                                  {item.name}
-                                </h3>
-                                <p className="font-black text-orange-600 text-sm">
-                                  {item.newPrice.toLocaleString("vi-VN")} đ
-                                </p>
-                              </div>
-                              <div className="flex items-center justify-between mt-2">
-                                <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-1 border border-gray-200">
-                                  <button
-                                    onClick={() => updateQty(item.id, -1)}
-                                    className="p-1 hover:bg-white rounded shadow-sm text-gray-600 transition-colors"
-                                  >
-                                    <FaMinus className="text-[10px]" />
-                                  </button>
-                                  <span className="font-bold text-sm w-4 text-center text-gray-800">
-                                    {item.qty}
-                                  </span>
-                                  <button
-                                    onClick={() => updateQty(item.id, 1)}
-                                    className="p-1 hover:bg-white rounded shadow-sm text-gray-600 transition-colors"
-                                  >
-                                    <FaPlus className="text-[10px]" />
-                                  </button>
-                                </div>
-                                <p className="font-bold text-gray-800 text-sm">
-                                  {(item.newPrice * item.qty).toLocaleString(
-                                    "vi-VN",
-                                  )}{" "}
-                                  đ
-                                </p>
-                              </div>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </AnimatePresence>
-                    </div>
-                  )}
-                </div>
-
-                {cart.length > 0 && (
-                  <div className="px-5 py-4 bg-white border-t border-gray-100 shadow-[0_-10px_20px_rgba(0,0,0,0.03)] shrink-0">
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="font-bold text-gray-600">
-                        Tổng thanh toán:
-                      </span>
-                      <span className="text-xl font-black text-orange-600">
-                        {cartTotal.toLocaleString("vi-VN")} VNĐ
-                      </span>
-                    </div>
-                    <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-orange-500/30 transition-all active:scale-[0.98]">
-                      Đặt Hàng Ngay ({cartItemCount} SP)
-                    </button>
-                  </div>
-                )}
-              </motion.div>
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

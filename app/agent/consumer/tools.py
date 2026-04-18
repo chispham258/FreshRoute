@@ -12,6 +12,7 @@ from app.agent.tools import (
     get_recipe_by_name as _get_recipe_by_name,
     get_remaining_ingredients as _get_remaining_ingredients,
     get_ingredient_suggestions as _get_ingredient_suggestions,
+    note_allergy as _note_allergy,
 )
 from app.agent.shared.tool_factory import make_tool
 from app.agent.shared.ontology import query_ontology as _query_ontology
@@ -30,7 +31,10 @@ get_user_urgent_ingredients = make_tool(
 
 find_recipes_for_consumer = make_tool(
     _find,
-    description="Find and score recipes for a consumer based on their ingredients."
+    description=(
+        "Find and score recipes for a consumer based on their ingredients. "
+        "Pass allergies as a list of resolved ingredient IDs to exclude unsafe recipes entirely."
+    ),
 )
 
 adjust_recipe_for_user = make_tool(
@@ -60,6 +64,15 @@ query_ontology = make_tool(
     description="Look up ingredient relationships in the Vietnamese food ontology."
 )
 
+note_allergy = make_tool(
+    _note_allergy,
+    description=(
+        "Record food allergies for this conversation. Call this IMMEDIATELY when the user "
+        "mentions anything they cannot eat (dị ứng, không ăn được, etc.). "
+        "Returns allergy_ids — pass these to find_recipes_for_consumer and adjust_recipe_for_user."
+    ),
+)
+
 
 # All consumer tools for LangGraph agent registration
 consumer_langchain_tools = [
@@ -74,4 +87,5 @@ consumer_langchain_tools = [
     get_ingredient_suggestions,
     # Shared
     query_ontology,
+    note_allergy,
 ]

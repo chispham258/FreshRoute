@@ -30,31 +30,74 @@ logger.setLevel(logging.DEBUG)
 def _recover_tool_call_from_text(response, tools):
     """Fallback: FPT model may return tool args as JSON text instead of tool_calls.
 
-    Detects when the model outputs a JSON dict whose required keys match a registered
-    tool's schema, then reconstructs a proper AIMessage with tool_calls so the graph
-    can route to the ToolNode normally.
+    Handles two formats the model may produce:
+      1. Raw JSON dict: {"recipe_ids": [...], "store_id": "...", "top_k": 10}
+      2. Python call syntax: finalize_bundles(recipe_ids=[...], store_id="...", top_k=10)
+
+    Reconstructs a proper AIMessage with tool_calls so the graph routes to ToolNode.
     """
+    import re
     try:
         content = response.content
-        if not (isinstance(content, str) and content.strip().startswith("{")):
+        if not isinstance(content, str):
             return response
-        args = json.loads(content.strip())
-        if not isinstance(args, dict):
-            return response
-        for t in tools:
-            schema = t.args_schema.schema() if hasattr(t, "args_schema") else {}
-            required = set(schema.get("required", []))
-            if required and required.issubset(args.keys()):
-                logger.warning(f"[fallback] Recovering tool call '{t.name}' from text content")
-                return AIMessage(
-                    content="",
-                    tool_calls=[{
-                        "id": f"call_{uuid.uuid4().hex[:8]}",
-                        "name": t.name,
-                        "args": args,
-                        "type": "tool_call",
-                    }]
-                )
+
+        stripped = content.strip()
+        args = None
+        matched_tool = None
+
+        # --- Format 1: JSON dict ---
+        if stripped.startswith("{"):
+            try:
+                candidate = json.loads(stripped)
+                if isinstance(candidate, dict):
+                    for t in tools:
+                        schema = t.args_schema.schema() if hasattr(t, "args_schema") else {}
+                        required = set(schema.get("required", []))
+                        if required and required.issubset(candidate.keys()):
+                            args = candidate
+                            matched_tool = t
+                            break
+            except Exception:
+                pass
+
+        # --- Format 2: Python call syntax  tool_name(key=val, ...) ---
+        if args is None:
+            m = re.match(r"^\s*(\w+)\s*\(", stripped)
+            if m:
+                call_name = m.group(1)
+                for t in tools:
+                    if t.name == call_name:
+                        # Extract body between outermost parens
+                        body_match = re.search(r"\((.*)\)\s*$", stripped, re.DOTALL)
+                        if body_match:
+                            body = body_match.group(1).strip()
+                            # Convert  key=value  →  "key": value  for JSON parsing
+                            json_body = re.sub(
+                                r'(\w+)\s*=\s*',
+                                r'"\1": ',
+                                body,
+                            )
+                            try:
+                                candidate = json.loads("{" + json_body + "}")
+                                if isinstance(candidate, dict):
+                                    args = candidate
+                                    matched_tool = t
+                            except Exception:
+                                pass
+                        break
+
+        if args is not None and matched_tool is not None:
+            logger.warning(f"[fallback] Recovering tool call '{matched_tool.name}' from text content")
+            return AIMessage(
+                content="",
+                tool_calls=[{
+                    "id": f"call_{uuid.uuid4().hex[:8]}",
+                    "name": matched_tool.name,
+                    "args": args,
+                    "type": "tool_call",
+                }]
+            )
     except Exception:
         pass
     return response
@@ -69,13 +112,8 @@ def _build_b2b_graph():
     tool_node = ToolNode(b2b_langchain_tools)
 
     def call_agent(state: MessagesState):
-        """LLM node — prepends system message on every call."""
-        # messages = [SystemMessage(content=B2B_SYSTEM_PROMPT)] + state["messages"]
-        messages = state["messages"]
-
-        # Add system prompt only once, at the very beginning
-        if len(messages) == 1 and isinstance(messages[0], HumanMessage):
-            messages = [SystemMessage(content=B2B_SYSTEM_PROMPT)] + messages
+        """LLM node — prepends system message on every call to prevent drift."""
+        messages = [SystemMessage(content=B2B_SYSTEM_PROMPT)] + state["messages"]
 
         response = llm_with_tools.invoke(messages)
 
@@ -248,18 +286,19 @@ async def run_b2b_agent(store_id: str, top_k: int = 10) -> list:
     finalize_called = "finalize_bundles" in tool_calls_sequence
     bundles = []
 
-    for i, msg in enumerate(messages):
-        if isinstance(msg, AIMessage) and any(tc.get("name") == "finalize_bundles" for tc in getattr(msg, "tool_calls", [])):
-            if i + 1 < len(messages):
-                tool_resp = messages[i + 1]
-                raw = getattr(tool_resp, "content", "")
-                try:
-                    parsed = json.loads(raw) if isinstance(raw, str) else raw
-                    if isinstance(parsed, list):
-                        bundles = parsed
-                except Exception:
-                    logger.warning("Could not parse finalize_bundles response")
-                    pass
+    # Search backwards for the ToolMessage produced by finalize_bundles.
+    # Walking in reverse is safe even when multiple tools fired in one AIMessage turn.
+    for msg in reversed(messages):
+        if isinstance(msg, ToolMessage) and msg.name == "finalize_bundles":
+            raw = getattr(msg, "content", "")
+            try:
+                parsed = json.loads(raw) if isinstance(raw, str) else raw
+                if isinstance(parsed, list):
+                    bundles = parsed
+                else:
+                    logger.warning(f"finalize_bundles returned non-list: {str(raw)[:200]}")
+            except Exception:
+                logger.warning("Could not parse finalize_bundles response")
             break
     logger.info(f"finalize_bundles_called={finalize_called}, bundles={len(bundles)}")
     return bundles

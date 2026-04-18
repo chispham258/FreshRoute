@@ -1,163 +1,296 @@
-# FreshRoute — Technical Report
+# FreshRoute — Technical Architecture Report
 
-**Project:** FreshRoute — AI-Powered Food Waste Reduction for Vietnamese Retailers  
-**Stack:** Python 3.13 · FastAPI · LangGraph · FPT AI Factory · Next.js 16 · Pydantic v2  
+**Stack:** Python 3.13 · FastAPI · LangGraph · FPT AI Factory · Next.js · Pydantic v2
+
 **Date:** April 2026
+
+**Theme:** Agent of Change — Autonomous AI systems making real-world decisions
 
 ---
 
 ## Table of Contents
 
-1. [Problem Statement](#1-problem-statement)
-2. [Solution Overview](#2-solution-overview)
-3. [System Architecture](#3-system-architecture)
-4. [P1–P7 Pipeline Specification](#4-p1p7-pipeline-specification)
-5. [FEFO Allocation Engine](#5-fefo-allocation-engine)
-6. [Agent Layer](#6-agent-layer)
+1. [System Overview](#1-system-overview)
+2. [Agent Architecture](#2-agent-architecture)
+3. [B2B Agent](#3-b2b-agent)
+4. [Consumer Agent](#4-consumer-agent)
+5. [Deterministic Pipeline (P1–P7)](#5-deterministic-pipeline-p1p7)
+6. [FEFO Allocation Engine](#6-fefo-allocation-engine)
 7. [Ingredient Ontology](#7-ingredient-ontology)
-8. [Frontend Architecture](#8-frontend-architecture)
-9. [API Design](#9-api-design)
-10. [Data Models](#10-data-models)
-11. [Data Flow](#11-data-flow)
-12. [Reference Data](#12-reference-data)
-13. [Testing Strategy](#13-testing-strategy)
-14. [Deployment](#14-deployment)
+8. [Data Layer](#8-data-layer)
+9. [Frontend Integration](#9-frontend-integration)
+10. [Testing](#10-testing)
+11. [Deployment](#11-deployment)
 
 ---
 
-## 1. Problem Statement
+## 1. System Overview
 
-Food waste in Vietnamese retail is concentrated in the last 2–3 days before a product expires. At that point:
+FreshRoute reduces food waste in Vietnamese retail by intelligently matching expiring store inventory with recipes, packaging them as discounted bundles, and helping home cooks discover meals from what they already have.
 
-- Supermarkets have priced items at full retail, making them unattractive vs. fresher stock
-- Bundle promotions are created manually, too slowly and inconsistently
-- Home consumers do not know which of their own ingredients are about to expire or how to use them together
+**Three interlocking layers:**
 
-The cost is substantial: unsold perishables are discarded at full cost price, and the environmental impact compounds through cold chain energy waste.
+- **B2B Agent** — analyzes store inventory, reasons about recipe feasibility, selects bundles, hands off to deterministic pricing
+- **Consumer Agent** — multi-turn conversational assistant for home cooks (recipe discovery + shopping list generation)
+- **P1→P7 Pipeline** — deterministic fallback and finalization stage; always available, no LLM required
 
-FreshRoute addresses both sides: it helps stores create data-driven bundle deals from near-expiry inventory at the right discount, and it helps home cooks plan meals around what they already have before it goes bad.
+**Data:**
 
----
-
-## 2. Solution Overview
-
-FreshRoute has two tightly coupled features sharing the same data layer and ingredient ontology.
-
-### Feature 1 — B2B Store Bundle Engine
-
-A deterministic seven-stage pipeline (P1–P7) that ingests a store's current inventory, identifies batches at highest risk of expiry, matches them to Vietnamese recipes, checks whether the store can fulfil each recipe from current stock, and outputs ranked, margin-safe, discounted bundle recommendations. An optional LangGraph agent runs the same logic through an LLM for richer reasoning.
-
-### Feature 2 — Consumer Cooking Assistant
-
-A multi-turn conversational agent (Vietnamese language) that operates in two modes: Discovery Mode (user has ingredients, agent suggests recipes prioritising near-expiry items) and Shopping Mode (user names a dish, agent computes a shopping list from what they already have).
-
-Both features are surfaced through a fullstack application: a Next.js 16 frontend with dedicated admin and customer portals backed by a FastAPI server.
+- 93 SKUs (fresh meat, seafood, produce, dairy, condiments, dry goods)
+- 40 Vietnamese recipes
+- 178 ingredient aliases for Vietnamese name resolution
+- 29 substitution groups in ingredient ontology
+- 5 urgency decay categories
 
 ---
 
-## 3. System Architecture
+## 2. Agent Architecture
 
-### 3.1 Layer Overview
+### 2.1 Custom StateGraph (both agents)
 
-```text
-┌─────────────────────────────────────────────────────────────┐
-│                      Frontend (Next.js 16)                  │
-│   /admin  ·  /customer  ·  /customer/ai-chat               │
-└────────────────────────┬────────────────────────────────────┘
-                         │ HTTP (fetch via api.js)
-┌────────────────────────▼────────────────────────────────────┐
-│                       API Layer (FastAPI)                    │
-│  /bundles  ·  /api/admin  ·  /consumer  ·  /metrics        │
-└───────────┬────────────────────────┬────────────────────────┘
-            │                        │
-┌───────────▼──────────┐  ┌──────────▼──────────────┐
-│  Deterministic        │  │   Agent Layer            │
-│  Pipeline (P1–P7)     │  │   B2B Agent (StateGraph) │
-│  Chain of             │  │   Consumer Agent         │
-│  Responsibility       │  │   (create_react_agent)   │
-└───────────┬──────────┘  └──────────┬───────────────┘
-            └──────────────┬──────────┘
-                           │
-┌──────────────────────────▼──────────────────────────────────┐
-│                      Core Domain Layer                       │
-│  DataRepository · AllocationEngine · Pydantic Models        │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────▼──────────────────────────────────┐
-│                    Integrations Layer                        │
-│  FPTChatOpenAI · MockConnector · Firestore · PostgreSQL     │
-└─────────────────────────────────────────────────────────────┘
-```
+Both agents use a custom LangGraph `StateGraph`, not the prebuilt `create_react_agent`. This provides:
 
-### 3.2 Design Patterns
-
-| Pattern | Location | Purpose |
-| --- | --- | --- |
-| Singleton | `DataRepository` | One source of truth for static reference data |
-| Chain of Responsibility | `PipelineStage`, `PipelineChain` | P1–P7 stages sharing an immutable context |
-| Factory | `make_tool()`, `get_llm()` | Wrap functions as LangChain tools; create LLM instances |
-| Strategy | `allocate_fefo(strategy=...)` | `strict` / `approx` / `best` allocation behaviours |
-| Facade | `run_pipeline()` | Single entry point over the seven-stage pipeline |
-| Adapter | `StoreConnector` ABC | Decouple data source from domain logic |
-| State Machine | LangGraph `StateGraph` | Typed agent state with conditional routing edges |
-
-### 3.3 Directory Structure
-
-```text
-app/
-├── core/                    Framework-free domain logic
-│   ├── pipeline/            P1–P7 stages + orchestrator
-│   ├── engine/              Packet-based FEFO allocation
-│   ├── data/                DataRepository, SKUs, recipes, JSON configs
-│   └── models/              Pydantic schemas
-├── agent/
-│   ├── shared/              tool_factory.py, ontology.py
-│   ├── b2b/                 B2B agent (graph, tools, prompt)
-│   ├── consumer/            Consumer agent (graph, tools, prompt, state)
-│   └── tools.py             Core tool implementations
-├── api/                     FastAPI route handlers
-├── integrations/            LLM wrapper, connectors, DB clients
-├── config.py                Pydantic BaseSettings
-├── dependencies.py          FastAPI DI
-└── main.py                  Entry point
-
-frontend/
-└── src/
-    ├── app/admin/           Admin portal
-    ├── app/customer/        Customer + AI chat portals
-    ├── components/admin/    AnalyticsDashboard, ComboDetailModal
-    └── lib/api.js           Centralised API client
-```
-
----
-
-## 4. P1–P7 Pipeline Specification
-
-The pipeline runs as a `PipelineChain`. Each `PipelineStage` receives the shared `PipelineContext`, enriches it, and passes it on. Stage exceptions are caught without halting the chain.
+- **Explicit routing:** conditional edges that terminate the loop on a specific tool call, not just "when LLM stops"
+- **Debuggability:** state transitions visible in code
+- **Recovery hook:** a `_recover_tool_call_from_text` step between the LLM output and ToolNode execution
 
 ```python
-bundles = await run_pipeline(
-    store_id="BHX-HCM001",
-    connector=MockConnector(),
-    top_n=20,     # P1 batch count
-    top_k_p2=20,  # P2 recipe candidates
-    top_k_p6=10,  # P6 final bundle count
+graph = StateGraph(MessagesState)
+graph.add_node("agent", call_agent)      # LLM decision node
+graph.add_node("tools", ToolNode(tools)) # tool execution node
+graph.add_conditional_edges("agent", route_after_agent, {"tools": "tools", END: END})
+graph.add_conditional_edges("tools", route_after_tools, {"agent": "agent", END: END})
+```
+
+### 2.2 FPT AI Factory and Tool Call Recovery
+
+The FPT AI Factory (OpenAI-compatible API) frequently returns tool calls as plain text instead of structured `tool_calls` in the response. Both agents carry a fallback:
+
+```python
+def _recover_tool_call_from_text(response, tools):
+    # Format 1: raw JSON dict  {"user_inputs": [...]}
+    # Format 2: Python call    resolve_ingredient_names(user_inputs=[...])
+    # Uses ast.parse() for Format 2 — handles both single- and double-quoted dicts
+```
+
+The consumer graph uses `ast.parse` / `ast.literal_eval` to parse kwargs reliably for complex nested args like `find_recipes_for_consumer(available_ingredients=[{...}, ...], ...)`.
+
+An `FPTChatOpenAI` adapter in `app/integrations/llm.py` also injects the `name` field into tool response messages, which FPT AI requires but LangChain doesn't add by default.
+
+### 2.3 Tool Factory
+
+`app/agent/shared/tool_factory.py::make_tool()` wraps any Python function as a LangChain `@tool` with JSON serialization and error handling:
+
+```python
+find_recipes_for_consumer = make_tool(
+    _find,
+    description="Find and score recipes for a consumer ..."
 )
 ```
 
-### 4.1 P1 — Inventory Risk Scoring
+All tools return JSON strings so the LLM can reason over structured results.
 
-**Input:** All store batches + 14-day sales history per SKU  
-**Output:** `List[P1Output]` sorted by priority score
+---
 
-**Scoring formula:**
+## 3. B2B Agent
+
+**File:** `app/agent/b2b/graph.py`
+
+### 3.1 Flow
 
 ```text
-priority_score = w_e × expiry_score + w_s × supply_score + w_d × demand_score
+START
+  └─ agent: LLM sees system prompt + urgent inventory context
+      └─ calls search_recipes_from_ingredients(ingredient_ids, urgency_dict)
+          └─ agent: LLM evaluates candidates
+              └─ calls check_feasibility_and_substitute(recipe, store_id) × N
+                  └─ agent: LLM selects feasible recipes
+                      └─ calls finalize_bundles(recipe_ids, store_id)
+                          └─ route_after_tools: "finalize_bundles" in last call → END
+```
 
-expiry_score  = exp(−λ × expiry_days)                              # exponential decay
-supply_score  = sigmoid(days_of_supply / max(expiry_days, 1) − 1)  # supply/demand ratio
-demand_score  = 1 − total_sold / (total_sold + remaining_qty_g)    # sell-through inversion
+The agent loop terminates as soon as `finalize_bundles` appears in the last tool call. This prevents the LLM from calling it repeatedly.
+
+**Urgency context injection:**
+
+Before invoking the LLM, `run_b2b_agent()` fetches urgent inventory and injects it into the system prompt:
+
+```text
+These ingredients are most at risk (sorted by urgency):
+- thit_vit: score=0.92 (CRITICAL), 3 days left, 4.5kg available
+- ca_ot: score=0.68 (HIGH), 7 days left, 2.0kg available
+...
+```
+
+### 3.2 Tools
+
+**`search_recipes_from_ingredients(ingredient_ids, ingredient_urgency, top_k=10)`**
+
+Finds recipes from `DataRepository.get().recipes()` that use at least one urgent ingredient. Scores each:
+
+```text
+score = max(urgency_scores_in_recipe) + 0.3 × Σ(other urgencies)
+```
+
+Returns top-k sorted by score.
+
+**`check_feasibility_and_substitute(recipe, store_id, inventory=None)`**
+
+For each ingredient in the recipe:
+
+1. Run `allocate_fefo(batches_for_ingredient, required_g, strategy="best")`
+2. If allocation fails: look up substitutes from ontology, try each
+3. If all fail and ingredient is optional: mark "skip"
+
+Returns `completeness_score`, per-ingredient status, batch allocation details.
+
+**`query_ontology(ingredient_id, relation="substitute")`**
+
+Returns substitute ingredient IDs from `substitute_groups.json`.
+
+**`finalize_bundles(recipe_ids, store_id, top_k=10)`**
+
+Bridge from agent to deterministic pipeline. Given recipe IDs selected by the LLM:
+
+1. Fetch full inventory and P1 urgency scores for `store_id`
+2. For each recipe: run P3 (FEFO allocation), P5 (waste scoring)
+3. Run P6 (multi-objective ranking) on all recipes together
+4. Run P7 (pricing) on top-k ranked recipes
+5. Return `List[BundleOutput]` as JSON
+
+The agent controls recipe selection; the pipeline enforces pricing and margins.
+
+### 3.3 Fallback Chain
+
+```text
+GET /api/admin/combos
+  ├─ try: run_b2b_agent(store_id) → BundleOutput list
+  └─ except: run_pipeline(store_id) → BundleOutput list (deterministic P1→P7)
+```
+
+---
+
+## 4. Consumer Agent
+
+**File:** `app/agent/consumer/graph.py`
+
+### 4.1 Flow
+
+Custom `StateGraph` with `MemorySaver` checkpointer for multi-turn state:
+
+```python
+memory = MemorySaver()
+# keyed by thread_id — persists [HumanMessage, AIMessage, ToolMessage, ...]
+config = {"configurable": {"thread_id": thread_id}}
+response = await agent.ainvoke({"messages": [HumanMessage(content)]}, config=config)
+```
+
+Loop exits when the LLM produces a message without tool calls (pure text response).
+
+### 4.2 Two Modes
+
+**Discovery Mode** — user lists available ingredients:
+
+```text
+1. resolve_ingredient_names(["thịt heo", "trứng gà", "hành tây"])
+   → [thit_heo, trung_ga, hanh_tay]
+2. find_recipes_for_consumer(
+     available_ingredients=[{ingredient_id, quantity_g=500, expiry_days=99}, ...],
+     urgent_ingredients=[],
+     allergies=[...],   ← from note_allergy results
+     top_k=3
+   )
+   → scored recipe list
+3. Agent responds; API returns recipe_suggestions array
+4. User picks dish → get_remaining_ingredients(recipe_id, available_ids)
+   → shopping_list in response
+```
+
+**Shopping Mode** — user names a specific dish:
+
+```text
+1. get_recipe_by_name("phở bò") → recipe dict (fuzzy match)
+2. resolve_ingredient_names([user's available items])
+3. get_remaining_ingredients(recipe_id, available_ingredient_ids)
+   → {to_buy: [{ingredient_id, name, required_qty_g, estimated_unit_price, ...}]}
+4. API returns shopping_list; ShoppingListPanel renders with per-item checkboxes
+```
+
+### 4.3 Allergy Handling
+
+`note_allergy` is a "tool-as-memory" pattern. When the user mentions an allergy:
+
+1. Agent calls `note_allergy(allergy_names=["tôm"])` immediately
+2. Tool resolves name → ingredient ID, returns `{"allergy_ids": ["tom"], ...}`
+3. This creates a `ToolMessage` persisted in conversation history by `MemorySaver`
+4. On subsequent turns, the LLM reads prior `note_allergy` results and passes IDs to `find_recipes_for_consumer(allergies=[...])`
+
+This is more reliable than instructing the LLM to "remember allergies" — the structured tool result is always in the message history.
+
+### 4.4 API Response Shape
+
+`POST /consumer/chat` returns:
+
+```json
+{
+  "reply": "...",
+  "thread_id": "...",
+  "shopping_list": [
+    {
+      "ingredient_id": "hanh_tay",
+      "name": "hành tây",
+      "required_qty_g": 150,
+      "estimated_unit_price": 8000,
+      "sku_id": "SKU-V002",
+      "is_optional": false
+    }
+  ],
+  "recipe_suggestions": [
+    {
+      "recipe_id": "R003",
+      "name": "Thịt heo xay chưng trứng",
+      "score": 2.0,
+      "ingredients": [
+        {"name": "trứng gà", "have": true, "optional": false},
+        {"name": "thịt heo xay", "have": false, "optional": false},
+        {"name": "hành lá", "have": false, "optional": true}
+      ]
+    }
+  ]
+}
+```
+
+`recipe_suggestions` is extracted from the last `find_recipes_for_consumer` ToolMessage in the conversation history by `_extract_recipe_suggestions()` in `graph.py`. The `have` flag is set by comparing each recipe ingredient ID against the resolved IDs the user provided.
+
+### 4.5 Price Accuracy
+
+Shopping list prices come from `DataRepository.ingredient_sku_lookup()`, keyed by `ingredient_id`. (An earlier version used `sku_dict_lookup()` keyed by `sku_id`, which always missed and returned price=0.)
+
+---
+
+## 5. Deterministic Pipeline (P1–P7)
+
+**Orchestrator:** `app/core/pipeline/orchestrator.py`
+
+Chain of Responsibility pattern — each `PipelineStage` reads from `PipelineContext`, writes results back, passes context to next stage.
+
+### 5.1 P1 — Priority Scoring
+
+Scores each batch by urgency. Three components:
+
+```python
+# Expiry decay — exponential, rate λ varies by category
+expiry_score = exp(-λ × expiry_days)
+
+# Supply/demand ratio — sigmoid
+days_of_supply = remaining_qty_g / avg_daily_sales
+supply_score = sigmoid(days_of_supply / max(expiry_days, 1) - 1)
+
+# Demand weakness — inverse sell-through
+sell_through = total_sold / (total_sold + remaining_qty_g)
+demand_score = 1 - sell_through
+
+priority = w_e × expiry_score + w_s × supply_score + w_d × demand_score
 ```
 
 **Category parameters:**
@@ -170,760 +303,280 @@ demand_score  = 1 − total_sold / (total_sold + remaining_qty_g)    # sell-thro
 | dairy | 0.12 | 0.45 | 0.35 | 0.20 |
 | processed | 0.08 | 0.30 | 0.45 | 0.25 |
 
-**Urgency thresholds:**
+Assigns `urgency_flag`: CRITICAL (≥0.80), HIGH (≥0.65), MEDIUM (≥0.40), WATCH (<0.40).
 
-| Flag | Score | Strategy |
-| --- | --- | --- |
-| `CRITICAL` | ≥ 0.80 | Move at any discount |
-| `HIGH` | ≥ 0.65 | Aggressive discount |
-| `MEDIUM` | ≥ 0.50 | Standard discount |
-| `WATCH` | < 0.50 | Monitor only |
+Output cached in `p1_cache` for `/api/admin/inventory` queries.
 
-### 4.2 P2 — Recipe Retrieval
+### 5.2 P2 — Recipe Retrieval
 
-**Input:** P1 batches + inverted index (`ingredient_id → [recipe_ids]`)  
-**Output:** Top-K recipe candidates scored by urgency coverage
+Groups P1 batches by `ingredient_id`, then for each recipe:
 
 ```text
-urgency_coverage = max_priority_in_recipe + 0.3 × sum(other_matched_priorities)
+score = max(priority_scores of matched ingredients)
+      + 0.3 × Σ(other matched ingredient priorities)
 ```
 
-Recipes are filtered to those matching at least one urgent ingredient, then sorted by coverage score and truncated to `top_k_p2`. This formula ensures recipes using the single most-critical ingredient rank above recipes matching many low-urgency ingredients.
+Returns top-k recipes by `urgency_coverage_score`.
 
-### 4.3 P3 — Feasibility Check
-
-**Input:** P2 candidates + full inventory + substitute groups  
-**Output:** Per-ingredient status + `completeness_score`
+### 5.3 P3 — Feasibility
 
 For each recipe ingredient:
 
-1. Find matching batches (by `ingredient_id`)
-2. Run `allocate_fefo()` on those batches
-3. If infeasible, try each substitute from the ontology
-4. Assign status: `fulfilled` | `substitute` | `skip` (optional) | `missing` (required)
+1. `allocate_fefo(batches, required_g, strategy="best")`
+2. If fails: try substitutes from ontology in order
+3. If all fail and optional: mark "skip"
 
-```text
-completeness = (required_fulfilled + 0.3 × optional_fulfilled)
-             / (required_total + 0.3 × optional_total)
-```
+`completeness_score = (n_required_fulfilled + 0.3 × n_optional_fulfilled) / n_total`
 
-Recipes with `completeness < 0.7` are discarded. The `ingredient_status[]` list records `batches_used` per ingredient, which P7 uses for accurate pricing.
+Recipes with completeness < 0.70 are discarded.
 
-### 4.4 P5 — Waste Value Scoring
-
-**Input:** P3 feasible recipes + SKU costs  
-**Output:** `waste_score` and `waste_score_normalized`
+### 5.4 P5 — Waste Scoring
 
 ```text
 waste_score = Σ (priority_score × cost_per_gram × qty_taken_g)
-              for each ingredient where urgency ∈ {CRITICAL, HIGH} and status == "fulfilled"
-
-waste_score_normalized = (score − min) / (max − min)   # across all candidates
+              for CRITICAL and HIGH ingredients only
+waste_score_normalized = waste_score / max(waste_score across recipes)
 ```
 
-### 4.5 P6 — Multi-Objective Ranking
-
-**Input:** P5 recipes + weights (Firestore or `default_weights.json`)  
-**Output:** Top-K recipes with `rank` and `final_score`
+### 5.5 P6 — Multi-Objective Ranking
 
 ```text
-final_score = w1 × urgency_coverage_score
-            + w2 × completeness_score
-            + w3 × waste_score_normalized
+final_score = w1 × urgency_coverage
+            + w2 × completeness
+            + w3 × waste_norm
             − w4 × avg_deviation
-            − w5 × total_rounding_loss_g / 1000
-            + w_popularity × popularity_score
+            − w5 × norm_rounding_loss
+            + w_popularity × popularity
             − substitute_penalty
-
-substitute_penalty = 0.05 × (n_substitute / n_total_ingredients)
 ```
 
-**Default weights (cold start — no popularity data):**
+**Cold-start weights** (no popularity data): w1=0.50, w2=0.30, w3=0.20, rest=0.
 
-| Weight | Value | Factor |
-| --- | --- | --- |
-| w1 (urgency) | 0.50 | Urgency coverage |
-| w2 (completeness) | 0.30 | Feasibility |
-| w3 (waste) | 0.20 | Waste value rescued |
-| w4 (deviation) | 0.00 | Disabled at cold start |
-| w_popularity | 0.00 | Disabled at cold start |
+Weights stored in Firestore per store; defaults from `default_weights.json`.
 
-Switches to `with_popularity` weights once impression data accumulates.
+### 5.6 P7 — Dynamic Pricing
 
-### 4.6 P7 — Dynamic Pricing
-
-**Input:** P6 ranked recipes + SKU retail/cost prices + category margins  
-**Output:** `List[BundleOutput]` with full pricing
-
-```text
-bundle_retail = Σ (retail_price_per_gram × qty_taken_g)  for each batch used
-bundle_cost   = Σ (cost_price_per_gram  × qty_taken_g)
-
-raw_discount      = min(0.05 + 0.25 × waste_score_normalized, 0.30)
-discounted_price  = bundle_retail × (1 − raw_discount)
+```python
+raw_discount = min(0.05 + 0.25 × waste_norm, 0.30)   # 5–30% range
+final_price = bundle_retail × (1 - raw_discount)
 
 # Margin floor check
-achieved_margin = (discounted_price − bundle_cost) / discounted_price
-if achieved_margin >= min_margin:
-    final_price = discounted_price
-else:
-    final_price = bundle_cost / (1 − min_margin)   # floor to protect margin
-
-# Weighted minimum margin by category cost proportion
-min_margin = Σ (category_margin[cat] × cat_cost / bundle_cost)
+weighted_margin = Σ(ingredient_cost × category_min_margin) / Σ(ingredient_cost)
+if (final_price - bundle_cost) / final_price < weighted_margin:
+    final_price = bundle_cost / (1 - weighted_margin)
 ```
 
-**Category minimum margins:**
-
-| Category | Min Margin |
-| --- | --- |
-| fresh_meat | 12% |
-| fresh_seafood | 15% |
-| dairy | 18% |
-| fresh_produce | 20% |
-| processed | 25% |
-
-Discount is bounded between 5% (minimum deal) and 30% (maximum allowed discount). Every bundle ingredient is enriched with its `urgency_flag` from the P1 lookup.
+Outputs `List[BundleOutput]` with `original_price`, `discount_rate`, `final_price`, `gross_margin`, per-ingredient allocation details.
 
 ---
 
-## 5. FEFO Allocation Engine
+## 6. FEFO Allocation Engine
 
-**File:** `app/core/engine/allocation.py`
+**File:** `app/core/engine/allocation.py::allocate_fefo()`
 
-Allocates discrete inventory packets (not continuous grams) respecting First-Expiry-First-Out ordering.
-
-### 5.1 Result Structure
-
-```python
-@dataclass
-class AllocationResult:
-    packets_used: int
-    allocated_g: float
-    deviation: float          # |allocated − required| / required
-    strategy: Literal["strict", "approx"]
-    batches_used: List[dict]  # [{batch_id, sku_id, packets_taken, grams_taken}]
-    feasible: bool
-```
-
-### 5.2 Strategies
-
-| Strategy | Rounding | Behaviour |
-| --- | --- | --- |
-| `strict` | `ceil()` packs | May slightly over-allocate; ensures required grams are met |
-| `approx` | `floor()` packs | May under-allocate; avoids wasting a full extra pack |
-| `best` | Tries `strict` first | Falls back to `approx` if deviation > 25% |
+Allocates discrete packets (not continuous grams) respecting FEFO order.
 
 ```python
 def allocate_fefo(batches, required_g, strategy="best"):
-    # Sort batches by expiry_days ASC (earliest first — FEFO)
-    for batch in sorted_batches:
-        packets_to_take = ceil_or_floor(remaining_needed / pack_size_g)
-        packets_to_take = min(packets_to_take, batch.unit_count)
-        grams_taken = packets_to_take × pack_size_g
-        # accumulate...
-
-    deviation = |allocated_g − required_g| / required_g
-    feasible = (allocated_g >= required_g)
+    # Batches sorted by expiry_days ascending
+    # For each batch: take ceil or floor of (remaining_needed / pack_size) packets
+    # Stop when remaining_needed <= 0
 ```
 
-`MAX_DEVIATION = 0.25` — allocations exceeding 25% deviation are penalised in P6 ranking.
+**Three strategies:**
 
----
-
-## 6. Agent Layer
-
-### 6.1 B2B Store Bundle Agent
-
-**File:** `app/agent/b2b/graph.py`
-
-Uses a custom `StateGraph` (not `create_react_agent`) with a conditional edge that terminates the loop immediately after `finalize_bundles` completes, preventing repeated calls.
-
-```text
-START
-  │
-  ▼
-[agent] ──(tool calls?)──► [tools] ──(finalize_bundles?)──► END
-  ▲                            │
-  └────────(other tools)───────┘
-```
-
-**Workflow:**
-
-1. Pre-compute P1 urgent inventory deterministically (no LLM)
-2. Build `ingredient_urgency` dict (`ingredient_id → priority_score`) and inject into prompt
-3. LLM calls `search_recipes_from_ingredients` with urgent IDs + urgency weights
-4. LLM calls `check_feasibility_and_substitute` for each candidate
-5. LLM calls `query_ontology` when substitutes are needed
-6. When 3–10 feasible recipes are collected, LLM calls `finalize_bundles` once
-7. `finalize_bundles` runs P5 → P6 → P7 and returns `List[BundleOutput]`
-
-**FPT model fallback:** The FPT AI model occasionally returns tool arguments as JSON text rather than structured `tool_calls`. The agent detects this by checking whether `response.content` is a JSON dict whose required keys match a registered tool's schema, then reconstructs a proper `AIMessage` with `tool_calls`.
-
-**B2B tools:**
-
-| Tool | Input | Output |
+| Strategy | Rounding | When to use |
 | --- | --- | --- |
-| `search_recipes_from_ingredients` | `ingredient_ids`, `ingredient_urgency` | Recipes sorted by P2 urgency-weighted score |
-| `check_feasibility_and_substitute` | `recipe`, `full_inventory` | Feasibility result with `ingredient_status[]` |
-| `query_ontology` | `ingredient_id`, `relation` | Substitute IDs from ontology |
-| `finalize_bundles` | `recipe_ids[]`, `store_id`, `top_k` | Priced `BundleOutput` JSON |
+| `strict` | `ceil()` | Must meet recipe requirements exactly |
+| `approx` | `floor()` | Minimize waste; may under-deliver slightly |
+| `best` | strict first, fallback to approx | Default; picks lower deviation |
 
-**Urgency-weighted recipe search:** `search_recipes_from_ingredients` accepts an optional `ingredient_urgency` dict. When provided, it applies the same P2 formula (`max_priority + 0.3 × sum(others)`) rather than a simple match count, ensuring the agent ranks recipes the same way the deterministic pipeline does.
-
-### 6.2 Consumer Home Cooking Agent
-
-**File:** `app/agent/consumer/graph.py`
-
-Uses `create_react_agent` with `MemorySaver` checkpointer for persistent multi-turn state keyed by `thread_id`.
-
-**Discovery Mode** (user has ingredients, doesn't know what to cook):
-
-```text
-resolve_ingredient_names → get_user_urgent_ingredients
-  → find_recipes_for_consumer → (adjust_recipe_for_user if allergies)
-```
-
-**Shopping Mode** (user knows the dish, needs a shopping list):
-
-```text
-get_recipe_by_name → get_remaining_ingredients → get_ingredient_suggestions
-```
-
-**Consumer tools:**
-
-| Tool | Description |
-| --- | --- |
-| `resolve_ingredient_names` | Map Vietnamese free-text → `ingredient_id` via aliases |
-| `get_user_urgent_ingredients` | Filter user inventory to near-expiry items |
-| `find_recipes_for_consumer` | Score recipes by urgency + allergy compatibility |
-| `adjust_recipe_for_user` | Substitute allergens and unavailable ingredients |
-| `get_recipe_by_name` | Fuzzy-match Vietnamese recipe name |
-| `get_remaining_ingredients` | Compute shopping list from what user already has |
-| `get_ingredient_suggestions` | Ontology-based alternatives for missing ingredients |
-| `query_ontology` | Direct ontology lookup |
-
-### 6.3 Tool Factory
-
-**File:** `app/agent/shared/tool_factory.py`
-
-```python
-def make_tool(fn, serialize_output=True, name=None, description=None):
-    @tool
-    @functools.wraps(fn)
-    def wrapper(*args, **kwargs):
-        result = fn(*args, **kwargs)
-        return json.dumps(result, ensure_ascii=False, default=str) if serialize_output else result
-    return wrapper
-```
-
-All tool errors are returned as `{"error": "...", "type": "..."}` so the LLM can recover gracefully rather than the agent graph crashing.
-
-### 6.4 LLM Integration
-
-**File:** `app/integrations/llm.py`
-
-`FPTChatOpenAI` extends `langchain_openai.ChatOpenAI` with a `_get_request_payload` override that fixes FPT AI Factory's tool response format requirements:
-
-- Builds a `tool_call_id → tool_name` mapping from assistant messages
-- Injects the `name` field into every tool response (FPT AI requires it; OpenAI spec makes it optional)
-- Serialises `content` to string (FPT AI rejects structured content objects)
-
-`get_llm()` is not cached, so `OPENAI_MODEL` env var changes take effect immediately without restart.
+**`best` logic:** run strict, check `deviation = |allocated - required| / required`. If feasible (≤ 25% deviation), use strict. Else try approx, pick whichever has lower deviation.
 
 ---
 
 ## 7. Ingredient Ontology
 
-**Files:** `app/core/data/substitute_groups.json`, `app/agent/shared/ontology.py`
+**File:** `app/core/data/substitute_groups.json`
 
-29 substitution groups covering Vietnamese cuisine:
+29 Vietnamese cuisine substitution groups. Examples:
 
 ```json
 {
   "thit_heo": ["thit_ga", "thit_bo", "thit_de"],
-  "ca_loc":   ["ca_ro", "ca_tram", "ca_chep"],
-  "tom":      ["muc", "ngheu", "so_huyet"]
+  "tom":       ["muc", "ngheu", "so_huyet"],
+  "hanh_tay":  ["hanh_ta_trang", "hanh_tia"],
+  "nuoc_mam":  ["nuoc_cot"]
 }
 ```
 
-**API:**
+**Used by:**
 
-```python
-query_ontology("thit_heo", relation="substitute")
-# → {"ingredient_id": "thit_heo", "relation": "substitute", "substitutes": ["thit_ga", "thit_bo", ...]}
-
-are_substitutes("thit_heo", "thit_ga")  # → True (bidirectional)
-```
-
-**Uses across the system:**
-
-1. **P3 Feasibility** — when primary ingredient is out of stock, try each substitute in order
-2. **B2B agent** — `query_ontology` tool called when LLM needs alternatives for missing items
-3. **Consumer agent** — allergy filter blocks substitutes that match the user's allergy list
-4. **Shopping mode** — `get_ingredient_suggestions` uses ontology to propose what to buy instead
-
-**Ingredient aliases** (`ingredient_aliases.json`) map Vietnamese free-text variations to canonical IDs:
-
-```json
-{
-  "thịt heo": "thit_heo",
-  "thịt lợn": "thit_heo",
-  "cà chua":  "ca_chua",
-  "tomato":   "ca_chua"
-}
-```
-
-Used by `resolve_ingredient_names` and `DataRepository.ingredient_aliases()`.
+- **P3:** if primary ingredient unavailable, try substitutes in order
+- **B2B agent:** `query_ontology` tool exposes this to LLM reasoning
+- **Consumer agent:** allergy filtering — if allergen has no safe substitute available, exclude recipe; `get_ingredient_suggestions` returns alternatives for missing shopping items
 
 ---
 
-## 8. Frontend Architecture
-
-### 8.1 Technology
-
-- **Next.js 16.2.3** with App Router, all pages as client components (`"use client"`)
-- **React 19.2.4** with hooks for state and side effects
-- **Tailwind CSS 4** for styling
-- **Framer Motion** for UI animations
-- **Centralised API client** (`src/lib/api.js`) using `fetch` with a generic error-handling wrapper
-
-### 8.2 API Client
-
-```javascript
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-
-async function fetchAPI(endpoint, options = {}) {
-  const response = await fetch(`${API_URL}${endpoint}`, {
-    headers: { 'Content-Type': 'application/json', ...options.headers },
-    ...options,
-  });
-  if (!response.ok) throw new Error(`API error: ${response.status}`);
-  return response.json();
-}
-```
-
-All pages import named functions from `api.js` rather than calling `fetch` directly.
-
-### 8.3 Admin Portal (`/admin`)
-
-Connects to three backend endpoints on mount:
-
-| Backend Endpoint | Data |
-| --- | --- |
-| `GET /api/admin/combos?storeId=BHX-HCM001` | AI-suggested combo cards |
-| `GET /api/admin/inventory?storeId=BHX-HCM001` | Near-expiry inventory list |
-| `GET /metrics/BHX-HCM001` | Revenue and sales KPIs |
-
-**Data adaptations applied in the frontend:**
-
-- `combo.aiReasoning` (backend) → `combo.aiReason` (frontend field name)
-- `combo.ingredients[{name, quantity, unit}]` → `"Thịt heo 500g"` display strings
-- `inventory.weight` (grams float) → `"X.X kg"` display string
-- `metrics.total_revenue` (VNĐ) → `totalRevenue` in millions
-
-Accept and reject actions call `POST /api/admin/combos/{id}/accept|reject` with `{ storeId, reason }`.
-
-### 8.4 Customer Portal (`/customer`)
-
-Fetches `GET /consumer/api/customer/combos?storeId=BHX-HCM001` on mount.
-
-**Data adaptations:**
-
-- `image: null` → fallback Unsplash image
-- `tags: null` → `[]`
-- `ingredient.status: "Sắp hết"` → `"warning"` (matches CSS status class)
-- `ingredient.status: "Bình thường"` → `"safe"`
-
-### 8.5 AI Chat Portal (`/customer/ai-chat`)
-
-A stateful multi-turn chat UI. Each session generates a random `thread_id` on mount. Messages are sent to `POST /consumer/chat` with the current `thread_id`, and the text `reply` from the response is rendered as a bot message.
-
-The `TypingIndicator` component animates while waiting for the API response. On error, a Vietnamese-language fallback message is shown.
-
-### 8.6 Shopping Cart (`/customer/cart`)
-
-Cart is local state only — no backend cart API exists. Items are added from the customer combo page and are not persisted across page navigations in the current implementation.
-
----
-
-## 9. API Design
-
-### 9.1 Bundle Endpoints (`api/bundles.py`)
-
-**In-memory cache with stale-while-revalidate:**
-
-```text
-Request
-  │
-  ▼
-Cache hit and age < 6h? → serve cached bundles
-  │ miss or expired
-  ▼
-run_pipeline() or run_b2b_agent()
-  │
-  ▼
-Store in _bundle_cache[store_id]
-  │ if 3h < age < 6h on a cache hit
-  ▼
-BackgroundTask: silently refresh cache
-```
-
-Cache is process-local (`dict`). For multi-worker deployments, replace with Redis.
-
-### 9.2 Consumer Endpoints (`api/consumer.py`)
-
-Each `POST /consumer/chat` request passes a `thread_id`. LangGraph's `MemorySaver` checkpointer stores the full conversation state keyed by `thread_id`. Follow-up messages receive the complete prior context automatically.
-
-### 9.3 Request / Response Schemas
-
-**ChatRequest:**
-
-```python
-class ChatRequest(BaseModel):
-    message: str
-    thread_id: str
-    user_id: Optional[str] = None
-    allergies: List[str] = []
-    dietary_preferences: List[str] = []
-```
-
-**SuggestRequest / SuggestResponse:**
-
-```python
-class SuggestRequest(BaseModel):
-    ingredients: List[str]   # Vietnamese free-text or ingredient IDs
-    allergies: List[str] = []
-    top_k: int = 5
-
-class SuggestResponse(BaseModel):
-    resolved_ingredients: List[dict]
-    unresolved_ingredients: List[str]
-    allergy_ids: List[str]
-    suggestions: List[dict]  # recipe feasibility results
-```
-
----
-
-## 10. Data Models
-
-### 10.1 Inventory (`core/models/inventory.py`)
-
-```python
-class ProductSKU(BaseModel):
-    sku_id: str
-    ingredient_id: str
-    product_name: str
-    category_l1: Literal["fresh_meat", "fresh_seafood", "fresh_produce", "dairy", "processed"]
-    unit_type: Literal["kg", "piece", "pack", "bottle", "bag"]
-    pack_size_g: float      # grams per discrete packet
-    retail_price: float     # VND per pack
-    cost_price: float       # VND per pack
-
-class ProductBatch(BaseModel):
-    batch_id: str
-    sku_id: str
-    ingredient_id: str
-    store_id: str
-    unit_count: int         # discrete packets in stock
-    pack_size_g: float
-    expiry_date: date
-    expiry_days: int
-    cost_price: float
-
-    @property
-    def total_quantity_g(self) -> float:
-        return self.unit_count * self.pack_size_g
-
-class P1Output(BaseModel):
-    batch_id: str
-    ingredient_id: str
-    priority_score: float   # 0.0 – 1.0
-    expiry_days: int
-    urgency_flag: Literal["CRITICAL", "HIGH", "MEDIUM", "WATCH"]
-```
-
-### 10.2 Bundle (`core/models/bundle.py`)
-
-```python
-class BundleIngredientDisplay(BaseModel):
-    ingredient_id: str
-    sku_id: str
-    product_name: str
-    qty_taken_g: float
-    item_retail_price: float
-    is_substitute: bool
-    substitute_id: Optional[str]
-    urgency_flag: Optional[str]
-
-class BundleOutput(BaseModel):
-    bundle_id: str              # "{recipe_id}__{store_id}__{date}"
-    recipe_id: str
-    recipe_name: str
-    rank: int
-    final_score: float
-    urgency_coverage_score: float
-    completeness_score: float
-    waste_score_normalized: float
-    original_price: float
-    discount_rate: float        # 0.05 – 0.30
-    final_price: float
-    gross_profit: float
-    gross_margin: float
-    ingredients: List[BundleIngredientDisplay]
-    has_substitute: bool
-    store_id: str
-    generated_at: datetime
-    avg_deviation: float
-    total_rounding_loss_g: float
-    allocation_strategy: str    # "strict" | "approx" | "none"
-```
-
-### 10.3 Recipe (`core/models/recipe.py`)
-
-```python
-class RecipeRequirement(BaseModel):
-    ingredient_id: str
-    required_qty_g: float
-    is_optional: bool = False
-    role: str = "main"          # main | seasoning | garnish
-
-class Recipe(BaseModel):
-    recipe_id: str
-    name: str                   # Vietnamese dish name
-    servings: int
-    category: str
-    ingredients: List[RecipeRequirement]
-```
-
-### 10.4 DataRepository
+## 8. Data Layer
 
 **File:** `app/core/data/repository.py`
 
-Singleton with lazy-loaded, LRU-cached derived lookups:
+`DataRepository` is a singleton with `@lru_cache` on all methods:
 
 ```python
-repo = DataRepository.get()
+class DataRepository:
+    _instance = None
 
-# Primary data (loaded once)
-repo.skus()               # List[dict] — all 80+ SKUs
-repo.recipes()            # List[dict] — all 40+ recipes
-repo.substitute_groups()  # {ingredient_id: [substitutes]}
-repo.ingredient_aliases() # {vietnamese_name: ingredient_id}
-repo.default_weights()    # {mode: {w1, w2, w3, ...}}
-repo.category_margins()   # {category: float}
+    @classmethod
+    def get(cls) -> "DataRepository":
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
 
-# Derived lookups (LRU cached)
-repo.sku_lookup()          # {sku_id: ProductSKU}
-repo.recipe_lookup()       # {recipe_id: dict}
-repo.recipe_names()        # {recipe_id: name}
-repo.recipe_requirements() # {recipe_id: [RecipeRequirement]}
-repo.inverted_index()      # {ingredient_id: [recipe_ids]}
+    @lru_cache(maxsize=1)
+    def recipes(self) -> List[dict]: ...
+
+    @lru_cache(maxsize=1)
+    def skus(self) -> List[dict]: ...
+
+    @lru_cache(maxsize=1)
+    def ingredient_aliases(self) -> Dict[str, str]: ...  # alias → ingredient_id
+
+    @lru_cache(maxsize=1)
+    def ingredient_sku_lookup(self) -> Dict[str, dict]: ...  # ingredient_id → SKU dict
 ```
+
+**All agent tools read from `DataRepository`** — no tool reads from test fixtures or raw JSON files directly. This ensures a single canonical source of truth.
+
+**`ingredient_aliases.json`** is organized by category (proteins, vegetables, sauces_pantry, etc.) and flattened by the repository. 178 aliases map Vietnamese free-text names (with and without tone marks) to canonical ingredient IDs.
 
 ---
 
-## 11. Data Flow
+## 9. Frontend Integration
 
-### 11.1 Deterministic Bundle Generation
+**Stack:** Next.js App Router, all pages as `"use client"` components.
 
-```text
-HTTP GET /bundles/BHX-HCM001
-  │
-  ▼ cache miss or force_refresh=True
-run_pipeline(store_id, connector)
-  ├─ connector.get_batches()         → List[ProductBatch]
-  ├─ connector.get_sales_history()   → {sku_id: [sales]}
-  └─ DataRepository.get()
-       ├─ sku_lookup()               → {sku_id: ProductSKU}
-       ├─ recipe_lookup()            → {recipe_id: Recipe}
-       ├─ inverted_index()           → {ingredient_id: [recipe_ids]}
-       └─ substitute_groups()        → {ingredient_id: [substitutes]}
-  │
-  ▼
-PipelineChain.execute(context)
-  ├─ P1: context.p1_output + p1_ingredient_lookup
-  ├─ P2: context.p2_output (urgency-scored candidates)
-  ├─ P3: context.p3_output (feasibility + batches_used)
-  ├─ P5: context.p5_output (+ waste scores)
-  ├─ P6: context.p6_output (ranked, top-K)
-  └─ P7: context.final_bundles (List[BundleOutput])
-  │
-  ▼
-_bundle_cache["BHX-HCM001"] = {bundles, generated_at}
-  │
-  ▼
-HTTP Response: List[BundleOutput] as JSON
-```
+### 9.1 Pages
 
-### 11.2 Agent Bundle Generation
-
-```text
-HTTP GET /bundles/BHX-HCM001?agent=true
-  │
-  ▼
-run_b2b_agent(store_id, top_k=10)
-  ├─ get_urgent_inventory(store_id, top_n=25)  → P1 batches (no LLM)
-  └─ Build ingredient_urgency dict + inject into prompt
-  │
-  ▼
-graph.ainvoke({messages: [HumanMessage(prompt)]})
-  ├─ LLM: search_recipes_from_ingredients(ingredient_ids, ingredient_urgency)
-  ├─ LLM: check_feasibility_and_substitute(recipe, inventory) × N
-  ├─ LLM: query_ontology(missing_ingredient)  [if needed]
-  └─ LLM: finalize_bundles(recipe_ids, store_id, top_k)
-               ├─ run_p5(enriched_recipes, sku_lookup)
-               ├─ run_p6(p5_output, store_id, top_k)
-               └─ run_p7(p6_output, sku_lookup, store_id)
-  │
-  ▼
-Extract List[BundleOutput] from finalize_bundles ToolMessage
-  │
-  ▼
-HTTP Response: List[BundleOutput] as JSON
-```
-
-### 11.3 Consumer Chat Flow
-
-```text
-HTTP POST /consumer/chat {message, thread_id, allergies}
-  │
-  ▼
-consumer_graph.chat(message, thread_id, user_allergies)
-  ├─ MemorySaver loads state for thread_id (empty on first message)
-  ├─ Inject user context (allergies, dietary preferences) on first turn
-  │
-  ▼
-create_react_agent.ainvoke(messages, config={thread_id})
-  │
-  ├─ Discovery: resolve_ingredient_names
-  │             → get_user_urgent_ingredients
-  │             → find_recipes_for_consumer
-  │             → adjust_recipe_for_user  [if allergies present]
-  │
-  └─ Shopping:  get_recipe_by_name
-                → get_remaining_ingredients
-                → get_ingredient_suggestions  [if missing items]
-  │
-  ▼
-MemorySaver persists updated state for thread_id
-  │
-  ▼
-HTTP Response: {reply: string, thread_id: string}
-```
-
----
-
-## 12. Reference Data
-
-### 12.1 Inventory Coverage
-
-| Category | SKU Count | Sample Ingredients |
+| Route | Component | Purpose |
 | --- | --- | --- |
-| fresh_meat | 25 | thit_heo, thit_ga, thit_bo, thit_vit, trung_ga |
-| fresh_seafood | 12 | tom, ca_hoi, muc, ngheu, cua |
-| fresh_produce | 21 | ca_chua, hanh_tay, rau_muong, gia_do, nam |
-| processed | 22 | nuoc_mam, dau_an, sa_te, banh_pho, bun |
-| **Total** | **80+** | |
+| `/` | `page.js` | Portal selector (Admin / Customer) |
+| `/admin` | `admin/page.js` | Bundle suggestions + at-risk inventory |
+| `/customer` | `customer/page.js` | Combo browser for purchase |
+| `/customer/ai-chat` | `ai-chat/page.js` | Consumer agent chat |
+| `/customer/cart` | `cart/page.js` | Shopping cart (localStorage) |
 
-### 12.2 Recipe Coverage
+### 9.2 Admin Portal
 
-40+ Vietnamese dishes across six cooking categories:
+Loads combos and inventory in parallel on mount:
 
-| Category | Examples |
+```javascript
+Promise.allSettled([
+    fetchAdminCombos({ storeId, limit }),
+    fetchAdminInventory({ storeId, daysThreshold }),
+])
+```
+
+Combo cards show: name, discount %, confidence score, ingredient list, urgency badges. Clicking a card opens `ComboDetailModal`. Accept/Reject buttons POST to backend (currently logged, not persisted).
+
+### 9.3 AI Chat
+
+**State:**
+
+```javascript
+messages:          [{id, type: "bot"|"user", text, shoppingList?, recipeSuggestions?}]
+threadId:          persisted in useRef across renders
+allergies:         chip list in footer (user-entered tags sent with each message)
+allergyInput:      text input for adding new allergy chips
+```
+
+**`RecipeSuggestionCard`** — expand/collapse component:
+
+- Collapsed: shows recipe name + chevron
+- Expanded: lists all ingredients with green dot (user has it) or gray dot + "cần mua" (user needs it)
+
+**`ShoppingListPanel`** — per-item checkboxes:
+
+- All items pre-selected
+- `useEffect` deselects items matching any allergy chip
+- "Thêm N nguyên liệu vào giỏ hàng" adds selected items to `localStorage` cart
+
+### 9.4 API Clients
+
+`lib/adminApi.js` and `lib/customerApi.js` share a `requestJson(path, opts)` base function. All responses are mapped from backend snake_case to frontend camelCase before entering component state.
+
+```javascript
+export async function sendConsumerChat({ message, threadId, allergies }) {
+    const payload = await requestJson("/consumer/chat", {
+        method: "POST",
+        body: { message, thread_id: threadId, ...(allergies?.length ? { allergies } : {}) },
+    });
+    return {
+        reply: payload.reply,
+        threadId: payload.thread_id,
+        shoppingList: payload.shopping_list ?? null,
+        recipeSuggestions: payload.recipe_suggestions ?? null,
+    };
+}
+```
+
+---
+
+## 10. Testing
+
+**85 passing, 14 failing** as of April 2026.
+
+| File | Covers |
 | --- | --- |
-| Kho (braised) | thit_kho_tau, ca_kho_to, trung_kho_thit |
-| Xao (stir-fry) | bo_xao_hanh, muc_xao_sa_ot, rau_xao_toi |
-| Canh (soup) | canh_chua, pho, bun_bo_hue, bun_rieu |
-| Chien (fried) | ca_chien, cha_gio, trung_chien |
-| Luoc (boiled) | thit_luoc, rau_luoc, tom_luoc |
-| Nuong (grilled) | suon_nuong, ca_nuong |
+| `test_allocation.py` | FEFO strategies, deviation bounds, packet math |
+| `test_p1_priority.py` | Urgency scoring by category, flag thresholds |
+| `test_p2_retrieval.py` | Recipe candidate scoring |
+| `test_p3_feasibility.py` | Allocation + substitution + completeness |
+| `test_p5_waste.py` | Waste score composition and normalization |
+| `test_p6_ranking.py` | Weighted scoring, rank ordering |
+| `test_p7_pricing.py` | Discount bounds, margin floor enforcement |
+| `test_pipeline_integration.py` | Full P1→P7 with mock data |
+| `test_b2b_agent.py` | B2B tool logic (feasibility, search) |
+| `test_consumer_agent.py` | Consumer tool logic |
+| `test_agent_integration.py` | Cross-agent integration |
+
+All tests use deterministic fixture data from `tests/fixtures/`. No external API calls required.
+
+**Known failures:**
+
+- 5 tests in `test_b2b_agent.py::TestCheckFeasibilityWithPacketAllocation` — packet metrics assertions
+- `test_p6_ranking.py::test_run_p6_ranks` — index error in ranking output
+- `test_pipeline_integration.py::test_full_pipeline` — zero bundles returned
 
 ---
 
-## 13. Testing Strategy
+## 11. Deployment
 
-### 13.1 Test Matrix
+### 11.1 Environment Variables
 
-| File | Coverage | Key Assertions |
+| Variable | Required | Purpose |
 | --- | --- | --- |
-| `test_p1_priority.py` | P1 scoring | Category decay rates, urgency thresholds, top_n selection |
-| `test_p2_retrieval.py` | P2 retrieval | Inverted index matching, urgency coverage formula |
-| `test_p3_feasibility.py` | P3 feasibility | FEFO allocation, substitution, completeness threshold |
-| `test_p5_waste.py` | P5 waste | Score computation, normalization across candidates |
-| `test_p6_ranking.py` | P6 ranking | Weighted scoring, substitute penalty, ordering |
-| `test_p7_pricing.py` | P7 pricing | Discount bounds, margin floor, urgency flag enrichment |
-| `test_allocation.py` | FEFO engine | Strict/approx/best, multi-batch, deviation bounds |
-| `test_pipeline_integration.py` | Full P1–P7 | End-to-end with mock data, 10 bundles returned |
-| `test_b2b_agent.py` | B2B agent | Tool wrapping, graph routing, finalize_bundles |
-| `test_consumer_agent.py` | Consumer | Multi-turn state, discovery mode, shopping mode tools |
-| `test_agent_integration.py` | Integration | Tool calls, urgency flag propagation |
+| `OPENAI_API_KEY` | For agents | FPT AI Factory key |
+| `OPENAI_MODEL` | No (default: `gpt-oss-120b`) | LLM model ID |
+| `TEMPERATURE` | No (default: `0.1`) | Sampling temperature |
+| `DEFAULT_CONNECTOR` | No (default: `mock`) | `mock` or `postgres` |
+| `NEXT_PUBLIC_API_URL` | Frontend | Backend base URL |
 
-**Expected: 96+ tests passing.**
-
-### 13.2 Fixture Strategy
-
-All tests use deterministic mock data from `tests/fixtures/`:
-
-- `mock_inventory.json` — Batches with realistic expiry dates and quantities
-- `mock_skus.json` — Product definitions aligned with recipe requirements
-- `mock_recipes.json` — Recipe definitions used by agent tools
-- `mock_user_inventory.json` — Consumer home inventory scenarios
-
-`conftest.py` provides shared fixtures: `mock_connector`, `pipeline_context`, `repo`.
+### 11.2 Docker
 
 ```bash
-# Run all tests
-python -m pytest tests/ -v
-
-# With coverage report
-python -m pytest tests/ --cov=app --cov-report=html
+docker-compose up --build
+# backend:  http://localhost:8000   (Swagger: /docs)
+# frontend: http://localhost:3000
 ```
 
----
-
-## 14. Deployment
-
-### 14.1 Docker
-
-```bash
-# Backend only
-docker build -t freshroute .
-docker run -p 8000:8000 --env-file .env freshroute
-
-# Backend + Frontend
-docker-compose up
-```
-
-`Dockerfile` uses `python:3.13-slim`, installs via `pip install -r requirements.txt`, runs `uvicorn app.main:app --host 0.0.0.0 --port 8000`.
-
-`docker-compose.yml` starts both services with the frontend connected to the backend via `NEXT_PUBLIC_API_URL=http://localhost:8000`.
-
-### 14.2 Environment Variables
-
-| Variable | Default | Notes |
-| --- | --- | --- |
-| `OPENAI_API_KEY` | required | FPT AI Factory key |
-| `OPENAI_MODEL` | `gpt-oss-120b` | Any FPT-supported model ID |
-| `TEMPERATURE` | `0.3` | LLM sampling temperature |
-| `DEFAULT_CONNECTOR` | `mock` | `mock` (JSON fixtures) or `postgres` |
-| `DATABASE_URL` | — | PostgreSQL for events and metrics |
-| `FIREBASE_PROJECT_ID` | `freshroute-hackathon` | Firestore P6 weights cache |
-| `P1_TOP_N` | `20` | Batches scored by P1 |
-| `P2_TOP_K` | `20` | Recipe candidates from P2 |
-| `P6_TOP_K` | `10` | Final ranked bundles |
-| `BUNDLE_CACHE_TTL_SECONDS` | `3600` | Bundle cache lifetime (seconds) |
-
-### 14.3 Logging
-
-Rotating file logger at `logs/freshroute.log` (10 MB max, 5 backups) plus console output. Level controlled by `LOG_LEVEL` env var (default `INFO`).
-
-### 14.4 Scaling Considerations
+### 11.3 Scaling Notes
 
 | Component | Current | Production path |
 | --- | --- | --- |
-| `DataRepository` | Process-local (static data) | No change needed — data is read-only |
-| `_bundle_cache` | Process-local dict | Replace with Redis for multi-worker |
-| `MemorySaver` (consumer chat) | In-memory | Replace with `AsyncPostgresSaver` or `AsyncRedisSaver` |
-| LLM calls | Synchronous within LangGraph | Keep `recursion_limit` conservative (≤ 80) |
-| Frontend | Fetches backend at request time | Add CDN or Next.js caching headers for combo pages |
+| Bundle cache | Process-local dict (6h TTL) | Redis with multi-worker support |
+| Consumer chat state | `MemorySaver` (in-memory) | `AsyncPostgresSaver` |
+| DataRepository | Process-local singleton (read-only) | No change needed |
+| P1 cache | Process-local dict | Redis (key: store_id) |
+| LLM calls | Synchronous in LangGraph | Keep `recursion_limit` ≤ 80 |

@@ -193,6 +193,15 @@ def run_p7(
             BundleIngredientDisplay(**item) for item in prices["items"]
         ]
 
+        # Derive bundle-level allocation_strategy: "fefo" if any ingredient
+        # was allocated from real batches, "none" if all are unallocated.
+        ing_strategies = {
+            s.get("allocation_strategy", "none")
+            for s in recipe.get("ingredient_status", [])
+            if s.get("status") in ("fulfilled", "substitute")
+        }
+        bundle_strategy = "none" if ing_strategies <= {"none"} else "fefo"
+
         bundles.append(BundleOutput(
             bundle_id=bundle_id,
             recipe_id=recipe_id,
@@ -211,6 +220,7 @@ def run_p7(
             has_substitute=any(i.is_substitute for i in display_ingredients),
             store_id=store_id,
             generated_at=now,
+            allocation_strategy=bundle_strategy,
         ))
 
     return bundles

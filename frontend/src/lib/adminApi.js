@@ -102,12 +102,29 @@ export async function fetchAdminInventory({ storeId, daysThreshold = 14 }) {
   return Array.isArray(payload) ? payload.map(mapInventoryFromBackend) : [];
 }
 
-export async function acceptAdminCombo({ comboId, storeId }) {
+export async function acceptAdminCombo({ comboId, storeId, combo }) {
   return requestJson(
     `/api/admin/combos/${encodeURIComponent(comboId)}/accept`,
     {
       method: "POST",
-      body: { storeId },
+      body: {
+        storeId,
+        combo: {
+          id: combo.id,
+          name: combo.name,
+          discount: combo.discount,
+          confidence: combo.confidence,
+          ingredients: combo.ingredientsDetail.map((ing) => ({
+            name: ing.name,
+            status: ing.status,
+            quantity: parseFloat(ing.weight) || 0,
+            unit: ing.weight.replace(/[\d.]/g, "") || "g",
+          })),
+          originalPrice: combo.originalPrice,
+          newPrice: combo.newPrice,
+          aiReasoning: combo.aiReason,
+        },
+      },
     },
   );
 }

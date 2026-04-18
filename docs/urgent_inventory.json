@@ -1,0 +1,154 @@
+[
+  {
+    "id": "SKU-V019",
+    "name": "Rau bina",
+    "weight": 800,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-D001",
+    "name": "Bún tươi (gói)",
+    "weight": 3200,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-V011",
+    "name": "Hành lá",
+    "weight": 1300,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-V014",
+    "name": "Cải thìa",
+    "weight": 1500,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-D008",
+    "name": "Bánh phở tươi",
+    "weight": 2500,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-V013",
+    "name": "Rau ngò",
+    "weight": 200,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-M005A",
+    "name": "Sườn heo nướng (đã ướp)",
+    "weight": 4200,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-D005",
+    "name": "Bún đậu (gói)",
+    "weight": 3200,
+    "daysLeft": 2,
+    "limit": 20,
+    "status": "Cảnh Báo"
+  },
+  {
+    "id": "SKU-M008A",
+    "name": "Tim heo",
+    "weight": 1200,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-S004",
+    "name": "Cá rô phi",
+    "weight": 4000,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-P014",
+    "name": "Đậu hũ trắng (miếng)",
+    "weight": 900,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-D004",
+    "name": "Mì sợi tươi",
+    "weight": 900,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-S001",
+    "name": "Cá lóc phi lê",
+    "weight": 2800,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-S010",
+    "name": "Cua đồng",
+    "weight": 2500,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-S009",
+    "name": "Tôm hùm đất",
+    "weight": 3200,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-S012",
+    "name": "Sò huyết",
+    "weight": 2500,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-S006",
+    "name": "Cá trám",
+    "weight": 1500,
+    "daysLeft": 1,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-V001",
+    "name": "Rau muống",
+    "weight": 2100,
+    "daysLeft": 2,
+    "limit": 20,
+    "status": "Bình Thường"
+  },
+  {
+    "id": "SKU-V006",
+    "name": "Tỏi",
+    "weight": 1200,
+    "daysLeft": 2,
+    "limit": 20,
+    "status": "Bình Thường"
+  }
+]

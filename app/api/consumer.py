@@ -8,11 +8,9 @@ POST /consumer/suggest       — One-shot recipe suggestion from ingredient list
 
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
 
-from app.integrations.connectors.base import StoreConnector
-from app.dependencies import get_connector
 from app.agent.consumer.graph import chat, suggest
 
 router = APIRouter(prefix="/consumer", tags=["consumer"])
@@ -30,9 +28,34 @@ class ChatRequest(BaseModel):
     dietary_preferences: Optional[list[str]] = Field(None, description="e.g. ['vegetarian']")
 
 
+class ShoppingItem(BaseModel):
+    ingredient_id: str
+    name: str
+    required_qty_g: float
+    unit: str = "g"
+    is_optional: bool = False
+    estimated_unit_price: float = 0.0
+    sku_id: Optional[str] = None
+
+
+class RecipeSuggestionIngredient(BaseModel):
+    name: str
+    have: bool = False
+    optional: bool = False
+
+
+class RecipeSuggestion(BaseModel):
+    recipe_id: str
+    name: str
+    score: float = 0.0
+    ingredients: List[RecipeSuggestionIngredient] = []
+
+
 class ChatResponse(BaseModel):
     reply: str = Field(..., description="Agent response in Vietnamese")
     thread_id: str
+    shopping_list: Optional[List[ShoppingItem]] = Field(None)
+    recipe_suggestions: Optional[List[RecipeSuggestion]] = Field(None)
 
 
 class SuggestRequest(BaseModel):
@@ -71,13 +94,27 @@ async def consumer_chat(req: ChatRequest):
             "dietary_preferences": req.dietary_preferences or [],
         }
 
-    reply = await chat(
+    reply, raw_sl, raw_suggestions = await chat(
         message=req.message,
         thread_id=req.thread_id,
         user_context=user_context,
     )
 
-    return ChatResponse(reply=reply, thread_id=req.thread_id)
+    sl = None
+    if raw_sl:
+        try:
+            sl = [ShoppingItem(**item) for item in raw_sl if isinstance(item, dict) and "ingredient_id" in item]
+        except Exception:
+            sl = None
+
+    suggestions = None
+    if raw_suggestions:
+        try:
+            suggestions = [RecipeSuggestion(**s) for s in raw_suggestions if isinstance(s, dict)]
+        except Exception:
+            suggestions = None
+
+    return ChatResponse(reply=reply, thread_id=req.thread_id, shopping_list=sl or None, recipe_suggestions=suggestions or None)
 
 
 @router.post("/suggest", response_model=SuggestResponse)
@@ -125,65 +162,41 @@ class CustomerComboResponse(BaseModel):
 async def get_customer_combos(
     storeId: str = Query(..., description="Store ID e.g., BHX-HCM001"),
     limit: int = Query(10, ge=1, le=20, description="Max combos to return"),
-    connector: StoreConnector = Depends(get_connector),
 ):
     """
     Get combo bundles for customer shopping portal.
 
-    Returns available combos with pricing and ingredient details.
-    Optimized for customer-facing view with discounts highlighted.
+    Returns only admin-accepted combos. If no combos have been accepted
+    for this store, returns an empty list.
     """
-    from app.core.pipeline.orchestrator import run_pipeline
+    from app.api.admin import get_accepted_bundles
 
-    firestore_client = None
-    try:
-        firestore_client = get_connector.__self__.firestore_client
-    except:
-        pass
+    accepted = get_accepted_bundles(storeId)
 
-    try:
-        # Call the backend pipeline to get bundles
-        bundles = await run_pipeline(
-            store_id=storeId,
-            connector=connector,
-            firestore_client=firestore_client,
-            top_k_p6=limit,
-        )
+    combos = []
+    for combo in accepted[:limit]:
+        ingredients = [
+            CustomerComboIngredient(
+                name=ing.name,
+                status="Sắp hết" if ing.status == "Khẩn Cấp" else "Bình thường",
+            )
+            for ing in combo.ingredients
+        ]
 
-        # Convert BundleOutput to CustomerComboResponse format
-        combos = []
-        for bundle in bundles:
-            ingredients = [
-                CustomerComboIngredient(
-                    name=ing.product_name or ing.ingredient_id,
-                    status="Bình thường" if not ing.urgency_flag else "Sắp hết",
-                )
-                for ing in bundle.ingredients
-            ]
-
-            # Add recipe instructions if available
-            instructions = []
-            # TODO: Get instructions from recipe data if available
-            instructions = [
+        combos.append(CustomerComboResponse(
+            id=combo.id,
+            name=combo.name,
+            description=f"Công thức làm {combo.name} từ hàng sẵn có",
+            discount=combo.discount,
+            originalPrice=combo.originalPrice,
+            newPrice=combo.newPrice,
+            tags=["Khuyến mại", "Bền vững"],
+            ingredients=ingredients,
+            instructions=[
                 "Chuẩn bị các nguyên liệu",
                 "Nấu theo công thức",
                 "Dùng nóng",
-            ]
+            ],
+        ))
 
-            combo = CustomerComboResponse(
-                id=bundle.bundle_id,
-                name=bundle.recipe_name,
-                description=f"Công thức làm {bundle.recipe_name} từ hàng sẵn có",
-                discount=bundle.discount_rate * 100,  # Convert to percentage
-                originalPrice=bundle.original_price,
-                newPrice=bundle.final_price,
-                tags=["Khuyến mại", "Bền vững"],
-                ingredients=ingredients,
-                instructions=instructions,
-            )
-            combos.append(combo)
-
-        return combos
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch customer combos: {str(e)}")
+    return combos

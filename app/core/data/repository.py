@@ -125,6 +125,12 @@ class DataRepository:
         return {s["sku_id"]: s for s in skus}
 
     @lru_cache(maxsize=1)
+    def ingredient_sku_lookup(self) -> Dict[str, dict]:
+        """Build SKU lookup keyed by ingredient_id: {ingredient_id: dict}."""
+        skus = self.skus()
+        return {s["ingredient_id"]: s for s in skus if "ingredient_id" in s}
+
+    @lru_cache(maxsize=1)
     def recipe_requirements(self) -> Dict[str, List[dict]]:
         """Extract recipe requirements: {recipe_id: [ingredients]}."""
         recipes = self.recipes()

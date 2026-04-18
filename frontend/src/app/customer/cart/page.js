@@ -3,63 +3,16 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowLeft, FaTrash, FaLeaf, FaTimes } from "react-icons/fa";
+import { FaArrowLeft, FaTrash, FaLeaf } from "react-icons/fa";
 import {
   CheckCircle,
   Share2,
   Sparkles,
-  AlertCircle,
   RefreshCw,
   ChevronRight,
   Check,
 } from "lucide-react";
-
-const INITIAL_CART = [
-  {
-    id: 1,
-    type: "combo",
-    name: "Combo Phở Bò",
-    originalPrice: 185000,
-    price: 139000,
-    quantity: 1,
-    image:
-      "https://images.unsplash.com/photo-1582878826629-29b7ad1cb438?w=400&q=80",
-    tags: [
-      "Thịt Bò Bắp 500g",
-      "Bánh Phở 300g",
-      "Rau Thơm 100g",
-      "Hành Tây 200g",
-    ],
-    impact: 0.5,
-    isSavedFromWaste: true,
-  },
-  {
-    id: 2,
-    type: "combo",
-    name: "Set Cá Hồi Nướng",
-    originalPrice: 245000,
-    price: 172000,
-    quantity: 2,
-    image:
-      "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80",
-    tags: ["Phi Lê Cá Hồi 400g", "Chanh 2 trái", "Măng Tây 250g", "Tỏi 50g"],
-    impact: 0.8,
-    isSavedFromWaste: true,
-  },
-  {
-    id: 3,
-    type: "single",
-    name: "Cà Chua Cherry",
-    originalPrice: 45000,
-    price: 45000,
-    quantity: 1,
-    image:
-      "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=80",
-    tags: ["Sản Phẩm Đơn"],
-    impact: 0,
-    isSavedFromWaste: false,
-  },
-];
+import { loadCart, saveCart, clearCart } from "@/lib/cart";
 
 // Odometer effect for price ticker
 const PriceTicker = ({ value }) => {
@@ -76,7 +29,7 @@ const PriceTicker = ({ value }) => {
 };
 
 export default function CartPage() {
-  const [cart, setCart] = useState(INITIAL_CART);
+  const [cart, setCart] = useState(() => loadCart());
   const [removedItem, setRemovedItem] = useState(null);
   const [showUndo, setShowUndo] = useState(false);
   const [checkoutStep, setCheckoutStep] = useState(0); // 0: Cart, 1: Checkout, 2: Success
@@ -93,10 +46,7 @@ export default function CartPage() {
     0,
   );
   const finalTotal = subtotal - totalDiscount + 25000; // 25k shipping
-  const totalImpact = cart.reduce(
-    (sum, item) => sum + item.impact * item.quantity,
-    0,
-  );
+  const totalImpact = totalDiscount > 0 ? (totalDiscount / 100000).toFixed(1) : 0;
   const totalItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handlePullToRefresh = () => {
@@ -106,25 +56,29 @@ export default function CartPage() {
     }, 1500);
   };
 
+  const updateCartState = (newCart) => {
+    setCart(newCart);
+    saveCart(newCart);
+  };
+
   const updateQuantity = (id, delta) => {
-    setCart((prev) =>
-      prev.map((item) => {
-        if (item.id === id) {
-          const newQty = item.quantity + delta;
-          return newQty > 0 ? { ...item, quantity: newQty } : item;
-        }
-        return item;
-      }),
-    );
+    const updated = cart.map((item) => {
+      if (item.id === id) {
+        const newQty = item.quantity + delta;
+        return newQty > 0 ? { ...item, quantity: newQty } : item;
+      }
+      return item;
+    });
+    updateCartState(updated);
   };
 
   const removeItem = (id) => {
     const itemToRemove = cart.find((i) => i.id === id);
     setRemovedItem(itemToRemove);
-    setCart((prev) => prev.filter((i) => i.id !== id));
+    const updated = cart.filter((i) => i.id !== id);
+    updateCartState(updated);
     setShowUndo(true);
 
-    // Hide undo after 3 seconds
     setTimeout(() => {
       setShowUndo(false);
     }, 3000);
@@ -132,7 +86,10 @@ export default function CartPage() {
 
   const undoRemove = () => {
     if (removedItem) {
-      setCart((prev) => [...prev, removedItem].sort((a, b) => a.id - b.id)); // maintain order
+      const updated = [...cart, removedItem].sort((a, b) =>
+        String(a.id).localeCompare(String(b.id)),
+      );
+      updateCartState(updated);
       setShowUndo(false);
       setRemovedItem(null);
     }
@@ -147,6 +104,7 @@ export default function CartPage() {
     setTimeout(() => {
       setIsProcessing(false);
       setCheckoutStep(2);
+      clearCart();
     }, 2000);
   };
 
@@ -216,7 +174,7 @@ export default function CartPage() {
             </div>
             <p className="text-[13px] text-green-700 leading-relaxed font-medium">
               Chúc mừng! Bạn vừa giải cứu{" "}
-              <strong>{totalImpact.toFixed(1)}kg</strong> thực phẩm và giảm
+              <strong>{totalImpact}kg</strong> thực phẩm và giảm
               tương đương <strong>{(totalImpact * 2).toFixed(1)}kg</strong> khí
               thải CO2.
             </p>
@@ -332,78 +290,60 @@ export default function CartPage() {
                       overflow: "hidden",
                     }}
                     transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                    className="bg-white rounded-2xl p-3 shadow-xs border border-gray-100 flex gap-3 relative overflow-hidden"
+                    className="bg-white rounded-2xl p-4 shadow-xs border border-gray-100 relative overflow-hidden"
                   >
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl shrink-0 bg-gray-100 overflow-hidden relative border border-gray-100">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full h-full object-cover"
-                      />
-                      {item.isSavedFromWaste && (
-                        <div className="absolute top-1 left-1 bg-green-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-sm shadow-sm flex items-center gap-1">
-                          <FaLeaf className="text-[8px]" /> Saved
-                        </div>
-                      )}
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex-1">
+                        <h3 className="font-bold text-gray-800 text-[15px] leading-tight mb-1">
+                          {item.name}
+                        </h3>
+                        <p className="text-[11px] text-gray-400 mb-1 max-w-[260px] truncate">
+                          {(item.tags || []).join(", ")}
+                        </p>
+                        {item.discount > 0 && (
+                          <span className="inline-block bg-red-50 text-red-500 text-[10px] font-bold px-2 py-0.5 rounded-full border border-red-100">
+                            -{item.discount}%
+                          </span>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="text-gray-300 hover:text-red-500 transition-colors p-1"
+                      >
+                        <FaTrash className="text-sm" />
+                      </button>
                     </div>
 
-                    <div className="flex-1 flex flex-col justify-between">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="font-bold text-gray-800 text-[14px] leading-tight mb-0.5">
-                            {item.name}
-                          </h3>
-                          <p className="text-[11px] text-gray-400 mb-1 max-w-45 truncate">
-                            {item.tags.join(", ")}
-                          </p>
+                    <div className="flex justify-between items-end mt-2">
+                      <div>
+                        {item.originalPrice > item.price && (
+                          <div className="text-[11px] text-gray-400 line-through mb-0.5">
+                            {item.originalPrice.toLocaleString("vi-VN")}đ
+                          </div>
+                        )}
+                        <div className="font-extrabold text-[15px] text-emerald-600">
+                          {item.price.toLocaleString("vi-VN")}đ
                         </div>
+                      </div>
+
+                      {/* Quantity Controls */}
+                      <div className="flex items-center bg-gray-50 border border-gray-200 rounded-lg p-0.5">
                         <button
-                          onClick={() => removeItem(item.id)}
-                          className="text-gray-300 hover:text-red-500 transition-colors p-1"
+                          onClick={() => updateQuantity(item.id, -1)}
+                          className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-white hover:shadow-sm rounded-md transition-all font-medium text-lg"
                         >
-                          <FaTrash className="text-sm" />
+                          -
+                        </button>
+                        <span className="w-8 text-center text-[13px] font-bold text-gray-800">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => updateQuantity(item.id, 1)}
+                          className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-white hover:shadow-sm rounded-md transition-all font-medium text-lg"
+                        >
+                          +
                         </button>
                       </div>
-
-                      <div className="flex justify-between items-end mt-1">
-                        <div>
-                          {item.originalPrice > item.price && (
-                            <div className="text-[11px] text-gray-400 line-through mb-0.5">
-                              {item.originalPrice.toLocaleString("vi-VN")}đ
-                            </div>
-                          )}
-                          <div className="font-extrabold text-[15px] text-emerald-600">
-                            {item.price.toLocaleString("vi-VN")}đ
-                          </div>
-                        </div>
-
-                        {/* Quantity Controls */}
-                        <div className="flex items-center bg-gray-50 border border-gray-200 rounded-lg p-0.5">
-                          <button
-                            onClick={() => updateQuantity(item.id, -1)}
-                            className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-white hover:shadow-sm rounded-md transition-all font-medium text-lg"
-                          >
-                            -
-                          </button>
-                          <span className="w-8 text-center text-[13px] font-bold text-gray-800">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(item.id, 1)}
-                            className="w-7 h-7 flex items-center justify-center text-gray-500 hover:bg-white hover:shadow-sm rounded-md transition-all font-medium text-lg"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Impact Indicator */}
-                      {item.isSavedFromWaste && (
-                        <div className="mt-2 text-[11px] text-emerald-600 font-medium bg-emerald-50 px-2 py-1 rounded-md mb-1 w-max flex items-center gap-1.5">
-                          <Sparkles className="w-3 h-3" />
-                          Giảm {item.impact * item.quantity}kg rác thải
-                        </div>
-                      )}
                     </div>
                   </motion.div>
                 ))}

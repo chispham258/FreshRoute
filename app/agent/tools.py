@@ -100,6 +100,36 @@ def resolve_ingredient_names(user_inputs: List[str]) -> List[dict]:
     return results
 
 
+def note_allergy(allergy_names: List[str]) -> dict:
+    """
+    Record allergens for the current conversation session.
+
+    Resolves Vietnamese ingredient names to system IDs and stores them as
+    a structured result in the conversation history. The LLM should call
+    this IMMEDIATELY whenever the user mentions food allergies or intolerances.
+    Subsequent calls to find_recipes_for_consumer and adjust_recipe_for_user
+    MUST pass the allergy_ids returned here.
+
+    Args:
+        allergy_names: Vietnamese names the user cannot eat (e.g. ["trứng", "hải sản"]).
+
+    Returns:
+        {"allergy_ids": [...], "note": "..."} — pass allergy_ids to find_recipes_for_consumer.
+    """
+    resolved = resolve_ingredient_names(allergy_names)
+    ids = [r["ingredient_id"] for r in resolved if r["resolved"]]
+    unresolved = [r["input"] for r in resolved if not r["resolved"]]
+    return {
+        "allergy_ids": ids,
+        "unresolved": unresolved,
+        "note": (
+            f"Allergens recorded: {ids}. "
+            "Always pass these IDs as the allergies parameter to "
+            "find_recipes_for_consumer and adjust_recipe_for_user."
+        ),
+    }
+
+
 def get_ingredient_display_name(ingredient_id: str) -> str:
     """Get a human-readable Vietnamese name for an ingredient_id."""
     repo = DataRepository.get()
@@ -111,7 +141,10 @@ def get_ingredient_display_name(ingredient_id: str) -> str:
         if ing_id not in id_to_display:
             id_to_display[ing_id] = alias
 
-    return id_to_display.get(ingredient_id, ingredient_id)
+    if ingredient_id in id_to_display:
+        return id_to_display[ingredient_id]
+    # Fallback: turn snake_case ID into a readable label
+    return ingredient_id.replace("_", " ")
 
 
 # ---------------------------------------------------------------------------
@@ -119,23 +152,57 @@ def get_ingredient_display_name(ingredient_id: str) -> str:
 # ---------------------------------------------------------------------------
 
 def get_urgent_inventory(store_id: str, top_n: int = 20) -> List[dict]:
-    """Fetch the most urgent (near-expiry) batches for a store."""
-    batches = connector.get_batches(store_id)
+    """Fetch the most urgent (near-expiry) batches for a store, scored by real P1 priority.
 
-    # Convert Pydantic models to dicts if needed
-    batch_dicts = []
-    for b in batches:
+    Checks p1_cache first so repeated calls within a session are free.
+    On a cold cache, runs run_p1 and populates the cache.
+    """
+    from app.core.pipeline import p1_cache
+    from app.core.pipeline.p1_priority import run_p1
+
+    def _to_dict(item):
+        """Convert P1Output to the dict format expected by the B2B agent."""
+        return {
+            "batch_id":        item.batch_id,
+            "ingredient_id":   item.ingredient_id,
+            "sku_id":          item.sku_id,
+            "expiry_days":     item.expiry_days,
+            "remaining_qty_g": item.remaining_qty_g,
+            "priority_score":  round(item.priority_score, 4),
+            "urgency_flag":    item.urgency_flag,
+        }
+
+    # Warm path: use pre-computed P1 scores from cache
+    cached = p1_cache.get(store_id)
+    if cached:
+        top = sorted(cached, key=lambda x: x.priority_score, reverse=True)[:top_n]
+        return [_to_dict(item) for item in top]
+
+    # Cold path: run P1 and populate cache
+    repo = DataRepository.get()
+    batches_raw = connector.get_batches(store_id)
+    batches = []
+    for b in batches_raw:
         if hasattr(b, "model_dump"):
-            batch_dicts.append(b.model_dump())
+            d = b.model_dump()
         elif hasattr(b, "dict"):
-            batch_dicts.append(b.dict())
+            d = b.dict()
         elif isinstance(b, dict):
-            batch_dicts.append(b)
+            d = b
         else:
-            batch_dicts.append(dict(b))
+            d = dict(b)
+        if "remaining_qty_g" not in d:
+            d["remaining_qty_g"] = d.get("unit_count", 1) * d.get("pack_size_g", 500)
+        batches.append(d)
 
-    urgent = sorted(batch_dicts, key=lambda x: x.get("expiry_days", 999))[:top_n]
-    return urgent
+    all_sku_ids = {b["sku_id"] for b in batches}
+    sales_history = {sku_id: connector.get_sales_history(store_id, sku_id) for sku_id in all_sku_ids}
+
+    p1_scores = run_p1(batches, sales_history, repo.sku_lookup(), top_n=len(batches))
+    p1_cache.put(store_id, p1_scores)
+
+    top = sorted(p1_scores, key=lambda x: x.priority_score, reverse=True)[:top_n]
+    return [_to_dict(item) for item in top]
 
 
 def search_recipes_from_ingredients(
@@ -190,17 +257,14 @@ def search_recipes_from_ingredients(
 
 
 def check_feasibility_and_substitute(
-    recipe: dict, full_inventory: List[dict] = None
+    recipe: dict, store_id: str = "BHX-HCM001"
 ) -> dict:
     """Check recipe feasibility using packet-based allocation and attempt ontology-based substitution.
 
-    If full_inventory is not provided, fetches all batches for the store (less efficient).
+    Always fetches the full store inventory from the backend — never provide inventory manually.
+    store_id: the store whose inventory to check (e.g. "BHX-HCM001").
     """
-    # If full_inventory not provided, fetch all batches
-    if full_inventory is None:
-        # Get store from recipe metadata or use a default
-        store_id = recipe.get("store_id", "BHX-HCM001")
-        full_inventory = connector.get_batches(store_id)
+    full_inventory = connector.get_batches(store_id)
 
     # Convert Pydantic models to dicts if needed
     inventory_dicts = []
@@ -225,48 +289,69 @@ def check_feasibility_and_substitute(
             if b["ingredient_id"] == ing_id
         ]
 
+        chosen_sub = None
+        allocation = None
+
         if batches:
-            # Use packet-based FEFO allocation
             allocation = allocate_fefo(batches, required_g=needed, strategy="best")
             if allocation.feasible:
                 status = "fulfilled"
-                allocated_g = allocation.allocated_g
-                deviation = allocation.deviation
-                allocation_strategy = allocation.strategy
             else:
-                # Allocation infeasible; try substitutes
+                # Primary infeasible — try ontology substitutes
                 subs = query_ontology(ing_id, relation="substitute")
-                status = "substitute" if subs.get("substitutes") else "missing"
-                allocated_g = allocation.allocated_g
-                deviation = allocation.deviation
-                allocation_strategy = allocation.strategy
+                status = "missing"
+                for sub_id in subs.get("substitutes", []):
+                    sub_batches = [b for b in inventory_dicts if b["ingredient_id"] == sub_id]
+                    if not sub_batches:
+                        continue
+                    sub_alloc = allocate_fefo(sub_batches, required_g=needed, strategy="best")
+                    if sub_alloc.feasible:
+                        status = "substitute"
+                        chosen_sub = sub_id
+                        allocation = sub_alloc
+                        break
         else:
-            # No batches available; try substitutes
+            # No primary batches — try ontology substitutes directly
             subs = query_ontology(ing_id, relation="substitute")
-            status = "substitute" if subs.get("substitutes") else "missing"
-            allocated_g = 0.0
-            deviation = 1.0  # max deviation for infeasible case
-            allocation_strategy = "none"
+            status = "missing"
+            for sub_id in subs.get("substitutes", []):
+                sub_batches = [b for b in inventory_dicts if b["ingredient_id"] == sub_id]
+                if not sub_batches:
+                    continue
+                sub_alloc = allocate_fefo(sub_batches, required_g=needed, strategy="best")
+                if sub_alloc.feasible:
+                    status = "substitute"
+                    chosen_sub = sub_id
+                    allocation = sub_alloc
+                    break
 
-        # Extract batches_used from allocation for P7 compatibility
-        # Convert grams_taken → qty_taken_g for P7 naming convention
-        batches_used = []
-        if batches and hasattr(allocation, 'batches_used'):
-            for batch_info in allocation.batches_used:
-                batches_used.append({
-                    "sku_id": batch_info.get("sku_id", ""),
-                    "batch_id": batch_info.get("batch_id", ""),
-                    "qty_taken_g": batch_info.get("grams_taken", 0.0),
-                })
+        if allocation is not None and status in ("fulfilled", "substitute"):
+            allocated_g = allocation.allocated_g
+            deviation = allocation.deviation
+            allocation_strategy = allocation.strategy
+            batches_used = [
+                {
+                    "sku_id": b.get("sku_id", ""),
+                    "batch_id": b["batch_id"],
+                    "qty_taken_g": b["grams_taken"],
+                }
+                for b in allocation.batches_used
+            ]
+        else:
+            allocated_g = 0.0
+            deviation = 1.0
+            allocation_strategy = "none"
+            batches_used = []
 
         ingredient_status.append({
             "ingredient_id": ing_id,
             "status": status,
+            "substitute_id": chosen_sub,
             "required_qty_g": needed,
             "allocated_g": allocated_g,
             "deviation": deviation,
             "allocation_strategy": allocation_strategy,
-            "batches_used": batches_used,  # For P7 pricing
+            "batches_used": batches_used,
         })
 
     total = len(ingredient_status)
@@ -343,8 +428,7 @@ def find_recipes_for_consumer(
     available_ids = {item["ingredient_id"] for item in available_ingredients}
     urgent_ids = {item["ingredient_id"] for item in urgent_ingredients}
 
-    with open(FIXTURES_DIR / "mock_recipes.json", encoding="utf-8") as f:
-        recipes = json.load(f)
+    recipes = DataRepository.get().recipes()
 
     scored = []
     for recipe in recipes:
@@ -567,7 +651,7 @@ def get_remaining_ingredients(
     """
     repo = DataRepository.get()
     recipe_lookup = repo.recipe_lookup()
-    sku_lookup = repo.sku_dict_lookup()
+    sku_lookup = repo.ingredient_sku_lookup()
 
     recipe = recipe_lookup.get(recipe_id)
     if not recipe:

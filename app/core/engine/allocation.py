@@ -77,12 +77,11 @@ def allocate_fefo(
             remaining_needed -= grams_taken
 
         deviation = abs(allocated_g - required_g) / required_g if required_g > 0 else 0.0
+        # Feasible = we can provide at least the required amount.
+        # Deviation is tracked as a soft metric for scoring (P6) — not a hard
+        # gate — because packet-based allocation often over-allocates for small
+        # quantities (e.g. 10g herbs in 100g packs) and that is acceptable.
         feasible = allocated_g >= required_g
-        if use_ceil:
-            # Strict ceiling mode: also enforce the deviation tolerance.
-            # Over-allocating by more than MAX_DEVIATION means the bundle includes
-            # far more of this ingredient than the recipe needs.
-            feasible = feasible and deviation <= MAX_DEVIATION
         return AllocationResult(
             packets_used=packets_used,
             allocated_g=allocated_g,
@@ -97,10 +96,16 @@ def allocate_fefo(
     if strategy == "approx":
         return _run(use_ceil=False)
 
-    # strategy == "best": prefer strict, but check deviation
+    # strategy == "best": prefer strict (ceil), fall back to approx (floor)
+    # if approx yields lower deviation (closer to required quantity).
     strict = _run(use_ceil=True)
-    if strict.feasible:
-        return strict
     approx = _run(use_ceil=False)
-    # return whichever has lower deviation
-    return strict if strict.deviation <= approx.deviation else approx
+    if not strict.feasible and not approx.feasible:
+        # Neither can provide enough — return whichever got closer
+        return strict if strict.allocated_g >= approx.allocated_g else approx
+    if not strict.feasible:
+        return approx
+    if not approx.feasible:
+        return strict
+    # Both feasible — pick the one with less over-allocation
+    return approx if approx.deviation < strict.deviation else strict
