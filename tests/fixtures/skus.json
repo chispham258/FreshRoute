@@ -811,8 +811,8 @@
     "category_l2": "beef",
     "unit_type": "kg",
     "pack_size_g": 300,
-    "retail_price": 180000,
-    "cost_price": 150000,
+    "retail_price": 90000,
+    "cost_price": 75000,
     "typical_shelf_life_days": 4
   },
   {
@@ -823,8 +823,8 @@
     "category_l2": "beef",
     "unit_type": "kg",
     "pack_size_g": 200,
-    "retail_price": 120000,
-    "cost_price": 100000,
+    "retail_price": 60000,
+    "cost_price": 50000,
     "typical_shelf_life_days": 4
   },
   {
@@ -835,8 +835,8 @@
     "category_l2": "beef",
     "unit_type": "kg",
     "pack_size_g": 500,
-    "retail_price": 300000,
-    "cost_price": 250000,
+    "retail_price": 150000,
+    "cost_price": 125000,
     "typical_shelf_life_days": 4
   },
   {

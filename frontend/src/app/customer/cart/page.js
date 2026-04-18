@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -29,13 +28,23 @@ const PriceTicker = ({ value }) => {
 };
 
 export default function CartPage() {
-  const [cart, setCart] = useState(() => loadCart());
+  const [cart, setCart] = useState([]);
   const [removedItem, setRemovedItem] = useState(null);
   const [showUndo, setShowUndo] = useState(false);
   const [checkoutStep, setCheckoutStep] = useState(0); // 0: Cart, 1: Checkout, 2: Success
   const [paymentMethod, setPaymentMethod] = useState("momo");
   const [isProcessing, setIsProcessing] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setCart(loadCart());
+    }, 0);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const subtotal = cart.reduce(
     (sum, item) => sum + item.originalPrice * item.quantity,
@@ -46,7 +55,8 @@ export default function CartPage() {
     0,
   );
   const finalTotal = subtotal - totalDiscount + 25000; // 25k shipping
-  const totalImpact = totalDiscount > 0 ? (totalDiscount / 100000).toFixed(1) : 0;
+  const totalImpact =
+    totalDiscount > 0 ? (totalDiscount / 100000).toFixed(1) : 0;
   const totalItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handlePullToRefresh = () => {
@@ -173,10 +183,9 @@ export default function CartPage() {
               </h3>
             </div>
             <p className="text-[13px] text-green-700 leading-relaxed font-medium">
-              Chúc mừng! Bạn vừa giải cứu{" "}
-              <strong>{totalImpact}kg</strong> thực phẩm và giảm
-              tương đương <strong>{(totalImpact * 2).toFixed(1)}kg</strong> khí
-              thải CO2.
+              Chúc mừng! Bạn vừa giải cứu <strong>{totalImpact}kg</strong> thực
+              phẩm và giảm tương đương{" "}
+              <strong>{(totalImpact * 2).toFixed(1)}kg</strong> khí thải CO2.
             </p>
           </div>
 
