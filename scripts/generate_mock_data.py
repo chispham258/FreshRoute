@@ -15,6 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.core.data.skus import SKUS
+from app.core.data.recipes import RECIPES
 
 FIXTURES_DIR = Path(__file__).resolve().parent.parent / "tests" / "fixtures"
 
@@ -82,7 +83,7 @@ def generate_batches(store_id: str) -> list:
                 "product_name":  sku["product_name"],
                 "category_l1":   sku["category_l1"],
                 "category_l2":   sku["category_l2"],
-                "unit_count":    random.randint(8, 20),  # always plenty
+                "unit_count":    random.randint(5, 10),  # always plenty
                 "pack_size_g":   sku["pack_size_g"],
                 "retail_price":  sku["retail_price"],
                 "cost_price":    sku["cost_price"],
@@ -150,6 +151,9 @@ def main():
     with open(FIXTURES_DIR / "skus.json", "w", encoding="utf-8") as f:
         json.dump(SKUS, f, ensure_ascii=False, indent=2)
 
+    with open(FIXTURES_DIR / "recipes.json", "w", encoding="utf-8") as f:
+        json.dump(RECIPES, f, ensure_ascii=False, indent=2)
+
     # Summary
     from collections import Counter
     tier_counts = Counter(b["urgency_tier"] for b in batches)
@@ -157,6 +161,7 @@ def main():
 
     print(f"Generated {len(batches)} batches for store {args.store_id}")
     print(f"  SKUs covered:        {len(SKUS)}")
+    print(f"  Recipes exported:    {len(RECIPES)}")
     print(f"  Unique ingredients:  {unique_ings}")
     print(f"  Output:              {FIXTURES_DIR}")
     print(f"  Urgency distribution:")

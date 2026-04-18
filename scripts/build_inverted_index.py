@@ -20,13 +20,13 @@ def build_index(recipes: list) -> dict:
 
 
 def main():
-    with open(FIXTURES_DIR / "recipes.json") as f:
+    with open(FIXTURES_DIR / "recipes.json", encoding="utf-8") as f:
         recipes = json.load(f)
 
     index = build_index(recipes)
 
     output_path = FIXTURES_DIR / "inverted_index.json"
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(index, f, indent=2, ensure_ascii=False)
 
     print(f"Built inverted index: {len(index)} ingredients -> recipes")

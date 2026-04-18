@@ -3,13 +3,13 @@ RECIPES = [
         "recipe_id": "R001",
         "name": "Bò xào hành tây cần tỏi",
         "description": "Thịt bò mềm xào cùng hành tây ngọt thanh, thơm mùi tỏi phi.",
-        "category": "mon_chinh", "tags": ["thịt bò", "xào", "nhanh"], "servings": 2,
+        "category": "mon_chinh", "tags": ["thịt bò", "xào", "nhanh"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "thit_bo", "required_qty_g": 300, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "hanh_tay", "required_qty_g": 150, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "toi", "required_qty_g": 20, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "xi_dau", "required_qty_g": 20, "is_optional": True, "role": "seasoning"},
-            {"ingredient_id": "tieu", "required_qty_g": 5, "is_optional": True, "role": "spice"}
+            {"ingredient_id": "thit_bo", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "hanh_tay", "required_qty_g": 75, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "toi", "required_qty_g": 10, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "xi_dau", "required_qty_g": 10, "is_optional": True, "role": "seasoning"},
+            {"ingredient_id": "tieu", "required_qty_g": 3, "is_optional": True, "role": "spice"}
         ],
         "steps": [
             {"step": 1, "description": "Thịt bò thái mỏng, hành tây cắt múi cau."},
@@ -22,12 +22,12 @@ RECIPES = [
         "recipe_id": "R002",
         "name": "Sườn heo rim mặn ngọt",
         "description": "Sườn non heo rim vàng óng, vị đậm đà đưa cơm.",
-        "category": "mon_chinh", "tags": ["sườn heo", "rim", "mặn ngọt"], "servings": 3,
+        "category": "mon_chinh", "tags": ["sườn heo", "rim", "mặn ngọt"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "suon_heo", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 30, "is_optional": True, "role": "seasoning"},
-            {"ingredient_id": "duong", "required_qty_g": 20, "is_optional": True, "role": "seasoning"},
-            {"ingredient_id": "hanh_tim", "required_qty_g": 15, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "suon_heo", "required_qty_g": 165, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 10, "is_optional": True, "role": "seasoning"},
+            {"ingredient_id": "duong", "required_qty_g": 7, "is_optional": True, "role": "seasoning"},
+            {"ingredient_id": "hanh_tim", "required_qty_g": 5, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Sườn heo chặt nhỏ, luộc sơ để khử mùi."},
@@ -40,12 +40,12 @@ RECIPES = [
         "recipe_id": "R003",
         "name": "Thịt heo xay chưng trứng",
         "description": "Món ăn mềm mại, giàu dinh dưỡng, phù hợp cho cả trẻ nhỏ.",
-        "category": "mon_chinh", "tags": ["thịt heo", "trứng", "hấp"], "servings": 2,
+        "category": "mon_chinh", "tags": ["thịt heo", "trứng", "hấp"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "thit_heo_xay", "required_qty_g": 200, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "trung_ga", "required_qty_g": 120, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"},
-            {"ingredient_id": "muoi", "required_qty_g": 5, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "thit_heo_xay", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "trung_ga", "required_qty_g": 60, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 5, "is_optional": True, "role": "garnish"},
+            {"ingredient_id": "muoi", "required_qty_g": 3, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Đập trứng vào bát thịt xay, nêm muối và hành lá rồi đánh tan."},
@@ -58,12 +58,12 @@ RECIPES = [
         "recipe_id": "R004",
         "name": "Thịt ba chỉ luộc",
         "description": "Thịt heo sáp luộc chín tới, trắng giòn, chấm nước mắm tỏi ớt.",
-        "category": "mon_chinh", "tags": ["thịt heo", "luộc", "truyền thống"], "servings": 3,
+        "category": "mon_chinh", "tags": ["thịt heo", "luộc", "truyền thống"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "heo_sap", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "gung", "required_qty_g": 10, "is_optional": True, "role": "cleaning"},
-            {"ingredient_id": "hanh_tim", "required_qty_g": 10, "is_optional": True, "role": "cleaning"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 20, "is_optional": True, "role": "dipping_sauce"}
+            {"ingredient_id": "heo_sap", "required_qty_g": 165, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "gung", "required_qty_g": 3, "is_optional": True, "role": "cleaning"},
+            {"ingredient_id": "hanh_tim", "required_qty_g": 3, "is_optional": True, "role": "cleaning"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 7, "is_optional": True, "role": "dipping_sauce"}
         ],
         "steps": [
             {"step": 1, "description": "Thịt ba chỉ rửa sạch. Đun nước sôi với gừng và hành tím đập dập."},
@@ -76,12 +76,12 @@ RECIPES = [
         "recipe_id": "R005",
         "name": "Cánh gà chiên nước mắm",
         "description": "Cánh gà giòn rụm bám đều lớp sốt mặn ngọt cay nhẹ.",
-        "category": "mon_chinh", "tags": ["gà", "chiên", "ăn chơi"], "servings": 2,
+        "category": "mon_chinh", "tags": ["gà", "chiên", "ăn chơi"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "canh_ga", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 40, "is_optional": True, "role": "seasoning"},
-            {"ingredient_id": "duong", "required_qty_g": 30, "is_optional": True, "role": "seasoning"},
-            {"ingredient_id": "toi", "required_qty_g": 15, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "canh_ga", "required_qty_g": 200, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 20, "is_optional": True, "role": "seasoning"},
+            {"ingredient_id": "duong", "required_qty_g": 15, "is_optional": True, "role": "seasoning"},
+            {"ingredient_id": "toi", "required_qty_g": 8, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Cánh gà rửa sạch, chiên vàng giòn các mặt."},
@@ -94,12 +94,12 @@ RECIPES = [
         "recipe_id": "R006",
         "name": "Canh khổ qua thịt bằm",
         "description": "Món canh thanh nhiệt giải độc, nước dùng ngọt thanh từ thịt xay.",
-        "category": "canh", "tags": ["khổ qua", "thịt heo", "thanh nhiệt"], "servings": 3,
+        "category": "canh", "tags": ["khổ qua", "thịt heo", "thanh nhiệt"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "kho_qua", "required_qty_g": 300, "is_optional": False, "role": "main_vegetable"},
-            {"ingredient_id": "thit_heo_xay", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"},
-            {"ingredient_id": "hat_nem", "required_qty_g": 10, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "kho_qua", "required_qty_g": 100, "is_optional": False, "role": "main_vegetable"},
+            {"ingredient_id": "thit_heo_xay", "required_qty_g": 50, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 3, "is_optional": True, "role": "garnish"},
+            {"ingredient_id": "hat_nem", "required_qty_g": 3, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Khổ qua bỏ ruột thái lát. Đun sôi nước."},
@@ -112,12 +112,12 @@ RECIPES = [
         "recipe_id": "R007",
         "name": "Cá lóc phi lê kho tộ",
         "description": "Cá lóc phi lê không xương, kho đậm đà trong niêu đất.",
-        "category": "mon_chinh", "tags": ["cá lóc", "kho", "miền tây"], "servings": 2,
+        "category": "mon_chinh", "tags": ["cá lóc", "kho", "miền tây"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_loc", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"},
-            {"ingredient_id": "ot_chuong", "required_qty_g": 50, "is_optional": True, "role": "vegetable"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 30, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "ca_loc", "required_qty_g": 200, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 5, "is_optional": True, "role": "garnish"},
+            {"ingredient_id": "ot_chuong", "required_qty_g": 25, "is_optional": True, "role": "vegetable"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 15, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Cá lóc ướp nước mắm, nước màu hành tím."},
@@ -130,12 +130,12 @@ RECIPES = [
         "recipe_id": "R008",
         "name": "Rau muống xào tỏi",
         "description": "Rau muống xanh mướt, giòn sần sật và thơm mùi tỏi đặc trưng.",
-        "category": "mon_phu", "tags": ["rau muống", "xào", "nhanh"], "servings": 2,
+        "category": "mon_phu", "tags": ["rau muống", "xào", "nhanh"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "rau_muong", "required_qty_g": 300, "is_optional": False, "role": "main_vegetable"},
-            {"ingredient_id": "toi", "required_qty_g": 30, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "dau_an", "required_qty_g": 20, "is_optional": True, "role": "cooking_fat"},
-            {"ingredient_id": "hat_nem", "required_qty_g": 5, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "rau_muong", "required_qty_g": 150, "is_optional": False, "role": "main_vegetable"},
+            {"ingredient_id": "toi", "required_qty_g": 15, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "dau_an", "required_qty_g": 10, "is_optional": True, "role": "cooking_fat"},
+            {"ingredient_id": "hat_nem", "required_qty_g": 3, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Rau muống nhặt sạch. Tỏi đập dập."},
@@ -148,12 +148,12 @@ RECIPES = [
         "recipe_id": "R009",
         "name": "Canh chua cá ba sa",
         "description": "Vị chua từ me, ngọt béo từ cá ba sa tạo nên món canh hấp dẫn.",
-        "category": "canh", "tags": ["cá ba sa", "canh chua", "đặc sản"], "servings": 3,
+        "category": "canh", "tags": ["cá ba sa", "canh chua", "đặc sản"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_ba_sa", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 100, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "me", "required_qty_g": 30, "is_optional": False, "role": "seasoning_base"},
-            {"ingredient_id": "khom", "required_qty_g": 100, "is_optional": True, "role": "vegetable"}
+            {"ingredient_id": "ca_ba_sa", "required_qty_g": 165, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 35, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "me", "required_qty_g": 10, "is_optional": False, "role": "seasoning_base"},
+            {"ingredient_id": "khom", "required_qty_g": 35, "is_optional": True, "role": "vegetable"}
         ],
         "steps": [
             {"step": 1, "description": "Cá ba sa rửa sạch, cà chua bổ múi cau, khóm thái miếng."},
@@ -166,11 +166,11 @@ RECIPES = [
         "recipe_id": "R010",
         "name": "Nghêu hấp sả",
         "description": "Nghêu tươi ngọt nước, mùi sả nồng nàn thơm phức.",
-        "category": "khai_vi", "tags": ["nghêu", "hải sản", "hấp"], "servings": 2,
+        "category": "khai_vi", "tags": ["nghêu", "hải sản", "hấp"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ngheu", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "sa", "required_qty_g": 30, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "tuong_ot", "required_qty_g": 10, "is_optional": True, "role": "dipping"}
+            {"ingredient_id": "ngheu", "required_qty_g": 250, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "sa", "required_qty_g": 15, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "tuong_ot", "required_qty_g": 5, "is_optional": True, "role": "dipping"}
         ],
         "steps": [
             {"step": 1, "description": "Nghêu ngâm rửa sạch. Sả đập dập cắt khúc."},
@@ -183,13 +183,13 @@ RECIPES = [
         "recipe_id": "R011",
         "name": "Phở bò truyền thống",
         "description": "Bánh phở tươi mềm mượt kết hợp với thịt bò thăn thái mỏng và nước dùng đậm đà.",
-        "category": "mon_chinh", "tags": ["phở", "thịt bò", "ăn sáng"], "servings": 2,
+        "category": "mon_chinh", "tags": ["phở", "thịt bò", "ăn sáng"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "banh_pho", "required_qty_g": 500, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "thit_bo", "required_qty_g": 200, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "nuoc_ham_xuong", "required_qty_g": 500, "is_optional": False, "role": "base_broth"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 20, "is_optional": True, "role": "garnish"},
-            {"ingredient_id": "gung", "required_qty_g": 10, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "banh_pho", "required_qty_g": 250, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "thit_bo", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "nuoc_ham_xuong", "required_qty_g": 250, "is_optional": False, "role": "base_broth"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"},
+            {"ingredient_id": "gung", "required_qty_g": 5, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Nấu sôi nước hầm xương với gừng nướng thơm."},
@@ -221,13 +221,13 @@ RECIPES = [
         "recipe_id": "R013",
         "name": "Bún tươi trộn tôm thịt",
         "description": "Món trộn thanh mát với bún gói, tôm sú và thịt heo sáp luộc.",
-        "category": "mon_chinh", "tags": ["bún", "tôm", "thanh mát"], "servings": 2,
+        "category": "mon_chinh", "tags": ["bún", "tôm", "thanh mát"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "bun_tuong", "required_qty_g": 400, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "tom", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "heo_sap", "required_qty_g": 100, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "rau_muong", "required_qty_g": 100, "is_optional": True, "role": "vegetable"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 20, "is_optional": True, "role": "dressing"}
+            {"ingredient_id": "bun_tuong", "required_qty_g": 200, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "tom", "required_qty_g": 75, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "heo_sap", "required_qty_g": 50, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "rau_muong", "required_qty_g": 50, "is_optional": True, "role": "vegetable"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 10, "is_optional": True, "role": "dressing"}
         ],
         "steps": [
             {"step": 1, "description": "Luộc chín tôm và thịt ba chỉ, tôm lột vỏ, thịt thái mỏng."},
@@ -240,13 +240,13 @@ RECIPES = [
         "recipe_id": "R014",
         "name": "Mì Ý sốt bò bằm cà chua",
         "description": "Mì Spaghetti dai ngon quyện trong sốt cà chua và thịt bò xay.",
-        "category": "mon_chinh", "tags": ["mì ý", "thịt bò", "trẻ em"], "servings": 2,
+        "category": "mon_chinh", "tags": ["mì ý", "thịt bò", "trẻ em"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "mi_y", "required_qty_g": 200, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "thit_heo_xay", "required_qty_g": 100, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "thit_bo", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 200, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "hanh_tay", "required_qty_g": 50, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "mi_y", "required_qty_g": 100, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "thit_heo_xay", "required_qty_g": 50, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "thit_bo", "required_qty_g": 50, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 100, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "hanh_tay", "required_qty_g": 25, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Luộc mì Ý theo thời gian trên bao bì. Thịt bò băm nhỏ trộn với thịt heo xay."},
@@ -259,12 +259,12 @@ RECIPES = [
         "recipe_id": "R015",
         "name": "Mực xào hành tây cần tỏi",
         "description": "Mực ống tươi giòn xào cùng hành tây, món nhắm hoặc ăn cơm đều ngon.",
-        "category": "mon_chinh", "tags": ["mực", "hải sản", "xào"], "servings": 2,
+        "category": "mon_chinh", "tags": ["mực", "hải sản", "xào"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "muc", "required_qty_g": 300, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "hanh_tay", "required_qty_g": 150, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "toi", "required_qty_g": 15, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"}
+            {"ingredient_id": "muc", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "hanh_tay", "required_qty_g": 75, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "toi", "required_qty_g": 8, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 5, "is_optional": True, "role": "garnish"}
         ],
         "steps": [
             {"step": 1, "description": "Mực làm sạch, khía hoa hoặc thái miếng vừa ăn. Hành tây cắt múi cau."},
@@ -277,12 +277,12 @@ RECIPES = [
         "recipe_id": "R016",
         "name": "Gà ta kho gừng",
         "description": "Thịt gà ta chắc ngọt, thơm nồng vị gừng tươi, rất ấm bụng.",
-        "category": "mon_chinh", "tags": ["gà ta", "kho", "gia đình"], "servings": 4,
+        "category": "mon_chinh", "tags": ["gà ta", "kho", "gia đình"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ga_nguyen_con", "required_qty_g": 1500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "gung", "required_qty_g": 50, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 50, "is_optional": True, "role": "seasoning"},
-            {"ingredient_id": "hanh_tim", "required_qty_g": 20, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "ga_nguyen_con", "required_qty_g": 375, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "gung", "required_qty_g": 13, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 13, "is_optional": True, "role": "seasoning"},
+            {"ingredient_id": "hanh_tim", "required_qty_g": 5, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Gà ta chặt miếng vừa ăn. Gừng thái sợi."},
@@ -295,12 +295,12 @@ RECIPES = [
         "recipe_id": "R017",
         "name": "Vịt kho sả ớt",
         "description": "Thịt vịt tươi kho với sả băm và sa tế cay nồng đậm đà.",
-        "category": "mon_chinh", "tags": ["thịt vịt", "kho", "cay"], "servings": 3,
+        "category": "mon_chinh", "tags": ["thịt vịt", "kho", "cay"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "thit_vit", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "sa", "required_qty_g": 50, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "sa_te", "required_qty_g": 20, "is_optional": True, "role": "spice"},
-            {"ingredient_id": "gung", "required_qty_g": 20, "is_optional": True, "role": "cleaning"}
+            {"ingredient_id": "thit_vit", "required_qty_g": 165, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "sa", "required_qty_g": 15, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "sa_te", "required_qty_g": 7, "is_optional": True, "role": "spice"},
+            {"ingredient_id": "gung", "required_qty_g": 7, "is_optional": True, "role": "cleaning"}
         ],
         "steps": [
             {"step": 1, "description": "Dùng gừng và rượu bóp thịt vịt để khử mùi, sau đó chặt miếng nhỏ."},
@@ -313,12 +313,12 @@ RECIPES = [
         "recipe_id": "R018",
         "name": "Cá rô phi chiên xù",
         "description": "Cá rô phi chiên vàng giòn lớp vỏ, thịt bên trong ngọt lịm.",
-        "category": "mon_chinh", "tags": ["cá rô phi", "chiên", "giòn"], "servings": 2,
+        "category": "mon_chinh", "tags": ["cá rô phi", "chiên", "giòn"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_ro", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "bot_mi", "required_qty_g": 100, "is_optional": True, "role": "coating"},
-            {"ingredient_id": "dau_an", "required_qty_g": 200, "is_optional": True, "role": "cooking_fat"},
-            {"ingredient_id": "chanh", "required_qty_g": 20, "is_optional": True, "role": "dipping"}
+            {"ingredient_id": "ca_ro", "required_qty_g": 250, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "bot_mi", "required_qty_g": 50, "is_optional": True, "role": "coating"},
+            {"ingredient_id": "dau_an", "required_qty_g": 100, "is_optional": True, "role": "cooking_fat"},
+            {"ingredient_id": "chanh", "required_qty_g": 10, "is_optional": True, "role": "dipping"}
         ],
         "steps": [
             {"step": 1, "description": "Cá rô phi làm sạch, để ráo nước. Có thể khứa nhẹ trên thân cá."},
@@ -331,12 +331,12 @@ RECIPES = [
         "recipe_id": "R019",
         "name": "Canh cá chép nấu dưa cải",
         "description": "Vị chua đặc trưng của dưa cải hòa quyện với vị ngọt của cá chép.",
-        "category": "canh", "tags": ["cá chép", "dưa cải", "canh chua"], "servings": 3,
+        "category": "canh", "tags": ["cá chép", "dưa cải", "canh chua"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_chep", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "dua_cai", "required_qty_g": 300, "is_optional": False, "role": "main_vegetable"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 100, "is_optional": True, "role": "vegetable"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"}
+            {"ingredient_id": "ca_chep", "required_qty_g": 165, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "dua_cai", "required_qty_g": 100, "is_optional": False, "role": "main_vegetable"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 35, "is_optional": True, "role": "vegetable"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 3, "is_optional": True, "role": "garnish"}
         ],
         "steps": [
             {"step": 1, "description": "Cá chép làm sạch, chiên sơ cho săn thịt. Dưa cải rửa qua nước cho bớt mặn."},
@@ -349,12 +349,12 @@ RECIPES = [
         "recipe_id": "R020",
         "name": "Cá hồng hấp xì dầu",
         "description": "Món hấp thanh tao, giữ trọn vị ngọt của cá hồng cùng hương vị xì dầu thơm đặc trưng.",
-        "category": "mon_chinh", "tags": ["cá hồng", "hấp", "thanh đạm"], "servings": 2,
+        "category": "mon_chinh", "tags": ["cá hồng", "hấp", "thanh đạm"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_hong", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "xi_dau", "required_qty_g": 50, "is_optional": False, "role": "seasoning_base"},
-            {"ingredient_id": "gung", "required_qty_g": 20, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 15, "is_optional": True, "role": "garnish"}
+            {"ingredient_id": "ca_hong", "required_qty_g": 200, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "xi_dau", "required_qty_g": 25, "is_optional": False, "role": "seasoning_base"},
+            {"ingredient_id": "gung", "required_qty_g": 10, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 8, "is_optional": True, "role": "garnish"}
         ],
         "steps": [
             {"step": 1, "description": "Cá hồng làm sạch, khứa nhẹ thân cá. Gừng và hành lá thái sợi."},
@@ -367,12 +367,12 @@ RECIPES = [
         "recipe_id": "R021",
         "name": "Lòng heo xào dưa cải chua",
         "description": "Lòng heo dai giòn xào cùng dưa cải chua thanh, món nhắm cực kỳ bắt miệng.",
-        "category": "mon_chinh", "tags": ["lòng heo", "dưa cải", "món nhắm"], "servings": 3,
+        "category": "mon_chinh", "tags": ["lòng heo", "dưa cải", "món nhắm"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "long_heo", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "dua_cai", "required_qty_g": 300, "is_optional": False, "role": "main_vegetable"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 100, "is_optional": True, "role": "vegetable"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"}
+            {"ingredient_id": "long_heo", "required_qty_g": 135, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "dua_cai", "required_qty_g": 100, "is_optional": False, "role": "main_vegetable"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 35, "is_optional": True, "role": "vegetable"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 3, "is_optional": True, "role": "garnish"}
         ],
         "steps": [
             {"step": 1, "description": "Lòng heo làm sạch, luộc sơ với gừng rồi thái miếng. Dưa cải cắt khúc."},
@@ -385,12 +385,12 @@ RECIPES = [
         "recipe_id": "R022",
         "name": "Canh giò heo hầm bí đỏ",
         "description": "Món canh bổ dưỡng, giò heo béo ngậy hầm cùng bí đỏ bùi ngọt.",
-        "category": "canh", "tags": ["giò heo", "bí đỏ", "bổ dưỡng"], "servings": 4,
+        "category": "canh", "tags": ["giò heo", "bí đỏ", "bổ dưỡng"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "gio_heo", "required_qty_g": 800, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "bi_do", "required_qty_g": 500, "is_optional": False, "role": "main_vegetable"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 15, "is_optional": True, "role": "garnish"},
-            {"ingredient_id": "hat_nem", "required_qty_g": 15, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "gio_heo", "required_qty_g": 200, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "bi_do", "required_qty_g": 125, "is_optional": False, "role": "main_vegetable"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 4, "is_optional": True, "role": "garnish"},
+            {"ingredient_id": "hat_nem", "required_qty_g": 4, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Giò heo chặt miếng, chần nước sôi. Bí đỏ gọt vỏ, cắt miếng vuông."},
@@ -403,11 +403,11 @@ RECIPES = [
         "recipe_id": "R023",
         "name": "Chả giò chiên giòn rụm",
         "description": "Chả giò đông lạnh tiện lợi, chiên vàng đều ăn kèm rau sống.",
-        "category": "mon_chinh", "tags": ["chả giò", "chiên", "nhanh"], "servings": 2,
+        "category": "mon_chinh", "tags": ["chả giò", "chiên", "nhanh"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "cha_gio", "required_qty_g": 300, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "dau_an", "required_qty_g": 200, "is_optional": False, "role": "cooking_fat"},
-            {"ingredient_id": "tuong_ot", "required_qty_g": 20, "is_optional": True, "role": "dipping"}
+            {"ingredient_id": "cha_gio", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "dau_an", "required_qty_g": 100, "is_optional": False, "role": "cooking_fat"},
+            {"ingredient_id": "tuong_ot", "required_qty_g": 10, "is_optional": True, "role": "dipping"}
         ],
         "steps": [
             {"step": 1, "description": "Để chả giò rã đông tự nhiên khoảng 5-10 phút."},
@@ -420,12 +420,12 @@ RECIPES = [
         "recipe_id": "R024",
         "name": "Bún đậu mắm tôm (Kiểu đơn giản)",
         "description": "Tận dụng bún đậu gói và đậu hũ trắng cùng thịt ba chỉ luộc.",
-        "category": "mon_chinh", "tags": ["bún đậu", "thịt heo", "đặc sản"], "servings": 2,
+        "category": "mon_chinh", "tags": ["bún đậu", "thịt heo", "đặc sản"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "bun_dau", "required_qty_g": 400, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "dau_hu", "required_qty_g": 300, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "heo_sap", "required_qty_g": 200, "is_optional": True, "role": "protein"},
-            {"ingredient_id": "chanh", "required_qty_g": 20, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "bun_dau", "required_qty_g": 200, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "dau_hu", "required_qty_g": 150, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "heo_sap", "required_qty_g": 100, "is_optional": True, "role": "protein"},
+            {"ingredient_id": "chanh", "required_qty_g": 10, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Đậu hũ cắt khối vuông, chiên vàng giòn các mặt."},
@@ -438,12 +438,12 @@ RECIPES = [
         "recipe_id": "R025",
         "name": "Gỏi bánh tráng trộn tôm thịt",
         "description": "Bánh tráng cuốn cắt nhỏ trộn cùng tôm, thịt và rau muống chẻ.",
-        "category": "khai_vi", "tags": ["bánh tráng", "tôm", "ăn chơi"], "servings": 2,
+        "category": "khai_vi", "tags": ["bánh tráng", "tôm", "ăn chơi"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "banh_trang", "required_qty_g": 100, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "tom", "required_qty_g": 100, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "rau_muong", "required_qty_g": 50, "is_optional": True, "role": "vegetable"},
-            {"ingredient_id": "sa_te", "required_qty_g": 10, "is_optional": True, "role": "spice"}
+            {"ingredient_id": "banh_trang", "required_qty_g": 50, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "tom", "required_qty_g": 50, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "rau_muong", "required_qty_g": 25, "is_optional": True, "role": "vegetable"},
+            {"ingredient_id": "sa_te", "required_qty_g": 5, "is_optional": True, "role": "spice"}
         ],
         "steps": [
             {"step": 1, "description": "Bánh tráng cắt sợi dài vừa ăn. Tôm luộc chín, bóc vỏ."},
@@ -456,12 +456,12 @@ RECIPES = [
         "recipe_id": "R026",
         "name": "Bún cá rô đồng",
         "description": "Thịt cá rô đồng ngọt thơm, nước dùng trong vắt, ăn kèm rau cải xanh.",
-        "category": "mon_an_sang", "tags": ["bún cá", "cá rô", "dân dã"], "servings": 4,
+        "category": "mon_an_sang", "tags": ["bún cá", "cá rô", "dân dã"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_ro", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "bun_tuong", "required_qty_g": 600, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "cai_xanh", "required_qty_g": 200, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "gung", "required_qty_g": 20, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "ca_ro", "required_qty_g": 125, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "bun_tuong", "required_qty_g": 150, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "cai_xanh", "required_qty_g": 50, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "gung", "required_qty_g": 5, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Cá rô làm sạch, luộc chín với gừng. Gỡ lấy thịt cá, phần xương giã nhỏ lọc lấy nước dùng."},
@@ -474,12 +474,12 @@ RECIPES = [
         "recipe_id": "R027",
         "name": "Cháo lòng heo",
         "description": "Cháo gạo tẻ nấu cùng lòng heo và tiết heo bổ dưỡng.",
-        "category": "mon_chinh", "tags": ["cháo", "lòng heo", "truyền thống"], "servings": 4,
+        "category": "mon_chinh", "tags": ["cháo", "lòng heo", "truyền thống"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "long_heo", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "thit_heo_xay", "required_qty_g": 100, "is_optional": True, "role": "protein"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 20, "is_optional": True, "role": "garnish"},
-            {"ingredient_id": "gung", "required_qty_g": 10, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "long_heo", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "thit_heo_xay", "required_qty_g": 25, "is_optional": True, "role": "protein"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 5, "is_optional": True, "role": "garnish"},
+            {"ingredient_id": "gung", "required_qty_g": 3, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Lòng heo làm sạch với muối và gừng, luộc chín rồi thái miếng vừa ăn."},
@@ -492,12 +492,12 @@ RECIPES = [
         "recipe_id": "R028",
         "name": "Bún bò Huế (Kiểu nhanh)",
         "description": "Hương vị cay nồng đặc trưng với bún tươi, bắp bò và sả.",
-        "category": "mon_chinh", "tags": ["bún bò", "cay", "đặc sản"], "servings": 4,
+        "category": "mon_chinh", "tags": ["bún bò", "cay", "đặc sản"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "thit_bo", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "bun_tuong", "required_qty_g": 600, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "sa", "required_qty_g": 100, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "sa_te", "required_qty_g": 20, "is_optional": True, "role": "spice"}
+            {"ingredient_id": "thit_bo", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "bun_tuong", "required_qty_g": 150, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "sa", "required_qty_g": 25, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "sa_te", "required_qty_g": 5, "is_optional": True, "role": "spice"}
         ],
         "steps": [
             {"step": 1, "description": "Thịt bò thái mỏng. Sả đập dập, một phần băm nhỏ."},
@@ -510,11 +510,11 @@ RECIPES = [
         "recipe_id": "R029",
         "name": "Canh cua đồng rau muống",
         "description": "Bát canh giải nhiệt với gạch cua béo ngậy và rau muống giòn.",
-        "category": "canh", "tags": ["canh cua", "rau muống", "giải nhiệt"], "servings": 3,
+        "category": "canh", "tags": ["canh cua", "rau muống", "giải nhiệt"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "cua_dong", "required_qty_g": 300, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "rau_muong", "required_qty_g": 200, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "hanh_tim", "required_qty_g": 10, "is_optional": True, "role": "aromatic"}
+            {"ingredient_id": "cua_dong", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "rau_muong", "required_qty_g": 65, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "hanh_tim", "required_qty_g": 3, "is_optional": True, "role": "aromatic"}
         ],
         "steps": [
             {"step": 1, "description": "Cua đồng xay lọc lấy nước, đun lửa nhỏ cho thịt cua kết tảng."},
@@ -527,12 +527,12 @@ RECIPES = [
         "recipe_id": "R030",
         "name": "Mì Ý hải sản (Tôm mực)",
         "description": "Sự kết hợp giữa mì Ý dai ngon với tôm và mực ống tươi.",
-        "category": "mon_chinh", "tags": ["mì ý", "hải sản", "hiện đại"], "servings": 2,
+        "category": "mon_chinh", "tags": ["mì ý", "hải sản", "hiện đại"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "mi_y", "required_qty_g": 200, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "tom", "required_qty_g": 100, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "muc", "required_qty_g": 100, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 150, "is_optional": False, "role": "sauce_base"}
+            {"ingredient_id": "mi_y", "required_qty_g": 100, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "tom", "required_qty_g": 50, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "muc", "required_qty_g": 50, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 75, "is_optional": False, "role": "sauce_base"}
         ],
         "steps": [
             {"step": 1, "description": "Luộc mì Ý. Tôm lột vỏ, mực thái khoanh tròn."},
@@ -545,13 +545,13 @@ RECIPES = [
         "recipe_id": "R031",
         "name": "Cá lóc kho tộ",
         "description": "Món cá kho đậm đà, màu sắc bắt mắt, vị mặn ngọt hài hòa đặc trưng miền Tây.",
-        "category": "mon_chinh", "tags": ["cá lóc", "kho", "gia đình"], "servings": 3,
+        "category": "mon_chinh", "tags": ["cá lóc", "kho", "gia đình"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_loc", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "heo_sap", "required_qty_g": 100, "is_optional": True, "role": "fat_source"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 40, "is_optional": True, "role": "seasoning"},
-            {"ingredient_id": "ot_chuong", "required_qty_g": 30, "is_optional": True, "role": "spice"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 15, "is_optional": True, "role": "garnish"}
+            {"ingredient_id": "ca_loc", "required_qty_g": 135, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "heo_sap", "required_qty_g": 35, "is_optional": True, "role": "fat_source"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 13, "is_optional": True, "role": "seasoning"},
+            {"ingredient_id": "ot_chuong", "required_qty_g": 10, "is_optional": True, "role": "spice"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 5, "is_optional": True, "role": "garnish"}
         ],
         "steps": [
             {"step": 1, "description": "Cá lóc làm sạch, cắt khoanh. Thịt ba chỉ (heo sáp) thái miếng nhỏ."},
@@ -564,13 +564,13 @@ RECIPES = [
         "recipe_id": "R032",
         "name": "Canh chua cá lóc",
         "description": "Món canh quốc hồn quốc túy với vị chua của me và vị ngọt của cá lóc phi lê.",
-        "category": "canh", "tags": ["cá lóc", "canh chua", "miền tây"], "servings": 4,
+        "category": "canh", "tags": ["cá lóc", "canh chua", "miền tây"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ca_loc", "required_qty_g": 400, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 100, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "khom", "required_qty_g": 150, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "me", "required_qty_g": 30, "is_optional": False, "role": "seasoning_base"},
-            {"ingredient_id": "bac_ha", "required_qty_g": 100, "is_optional": True, "role": "vegetable"}
+            {"ingredient_id": "ca_loc", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 25, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "khom", "required_qty_g": 40, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "me", "required_qty_g": 8, "is_optional": False, "role": "seasoning_base"},
+            {"ingredient_id": "bac_ha", "required_qty_g": 25, "is_optional": True, "role": "vegetable"}
         ],
         "steps": [
             {"step": 1, "description": "Cá lóc phi lê cắt miếng. Cà chua và khóm sơ chế vừa ăn."},
@@ -583,12 +583,12 @@ RECIPES = [
         "recipe_id": "R033",
         "name": "Sườn heo xào chua ngọt",
         "description": "Sườn non chiên vàng, thấm sốt cà chua và hành tây chua ngọt.",
-        "category": "mon_chinh", "tags": ["sườn heo", "chua ngọt", "trẻ em"], "servings": 3,
+        "category": "mon_chinh", "tags": ["sườn heo", "chua ngọt", "trẻ em"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "suon_heo", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 100, "is_optional": False, "role": "sauce_base"},
-            {"ingredient_id": "hanh_tay", "required_qty_g": 50, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "chanh", "required_qty_g": 10, "is_optional": True, "role": "acid_source"}
+            {"ingredient_id": "suon_heo", "required_qty_g": 165, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 35, "is_optional": False, "role": "sauce_base"},
+            {"ingredient_id": "hanh_tay", "required_qty_g": 15, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "chanh", "required_qty_g": 3, "is_optional": True, "role": "acid_source"}
         ],
         "steps": [
             {"step": 1, "description": "Sườn heo chặt nhỏ, luộc sơ rồi chiên vàng đều."},
@@ -601,12 +601,12 @@ RECIPES = [
         "recipe_id": "R034",
         "name": "Thịt kho tàu (Trứng vịt)",
         "description": "Thịt heo ba chỉ kho cùng trứng vịt và nước dừa đóng hộp thanh ngọt.",
-        "category": "mon_chinh", "tags": ["thịt heo", "trứng vịt", "tết"], "servings": 4,
+        "category": "mon_chinh", "tags": ["thịt heo", "trứng vịt", "tết"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "heo_sap", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "trung_vit", "required_qty_g": 4, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "nuoc_dua", "required_qty_g": 400, "is_optional": False, "role": "liquid"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 50, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "heo_sap", "required_qty_g": 125, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "trung_vit", "required_qty_g": 1, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "nuoc_dua", "required_qty_g": 100, "is_optional": False, "role": "liquid"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 13, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Thịt ba chỉ thái miếng vuông lớn. Trứng vịt luộc chín, bóc vỏ."},
@@ -619,12 +619,12 @@ RECIPES = [
         "recipe_id": "R035",
         "name": "Bún riêu cua đồng (Kiểu đơn giản)",
         "description": "Tận dụng cua đồng tươi nấu cùng cà chua và đậu hũ trắng.",
-        "category": "mon_chinh", "tags": ["bún riêu", "cua đồng", "dân dã"], "servings": 3,
+        "category": "mon_chinh", "tags": ["bún riêu", "cua đồng", "dân dã"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "cua_dong", "required_qty_g": 300, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "bun_tuong", "required_qty_g": 400, "is_optional": False, "role": "main_carb"},
-            {"ingredient_id": "dau_hu", "required_qty_g": 200, "is_optional": False, "role": "protein"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 150, "is_optional": True, "role": "vegetable"}
+            {"ingredient_id": "cua_dong", "required_qty_g": 100, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "bun_tuong", "required_qty_g": 135, "is_optional": False, "role": "main_carb"},
+            {"ingredient_id": "dau_hu", "required_qty_g": 65, "is_optional": False, "role": "protein"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 50, "is_optional": True, "role": "vegetable"}
         ],
         "steps": [
             {"step": 1, "description": "Cua đồng xay lọc lấy nước. Đậu hũ cắt nhỏ chiên vàng."},
@@ -637,12 +637,12 @@ RECIPES = [
         "recipe_id": "R036",
         "name": "Salad ức gà Healthy",
         "description": "Món ăn thanh nhẹ, giàu protein từ thịt gà công nghiệp và rau củ tươi.",
-        "category": "mon_phu", "tags": ["healthy", "ức gà", "salad"], "servings": 2,
+        "category": "mon_phu", "tags": ["healthy", "ức gà", "salad"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "ga_indonesia", "required_qty_g": 300, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "ca_chua", "required_qty_g": 100, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "dua_leo", "required_qty_g": 100, "is_optional": True, "role": "vegetable"},
-            {"ingredient_id": "chanh", "required_qty_g": 20, "is_optional": True, "role": "dressing_base"}
+            {"ingredient_id": "ga_indonesia", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "ca_chua", "required_qty_g": 50, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "dua_leo", "required_qty_g": 50, "is_optional": True, "role": "vegetable"},
+            {"ingredient_id": "chanh", "required_qty_g": 10, "is_optional": True, "role": "dressing_base"}
         ],
         "steps": [
             {"step": 1, "description": "Gà công nghiệp (lấy phần ức) luộc chín với chút muối, để nguội rồi xé phay hoặc thái miếng."},
@@ -655,12 +655,12 @@ RECIPES = [
         "recipe_id": "R037",
         "name": "Gà kho sả ớt",
         "description": "Thịt đùi gà dai giòn, thơm nồng mùi sả và vị cay của sa tế.",
-        "category": "mon_chinh", "tags": ["thịt gà", "kho", "cay"], "servings": 3,
+        "category": "mon_chinh", "tags": ["thịt gà", "kho", "cay"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "thit_ga", "required_qty_g": 500, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "sa", "required_qty_g": 50, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "sa_te", "required_qty_g": 15, "is_optional": True, "role": "spice"},
-            {"ingredient_id": "nuoc_mam", "required_qty_g": 30, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "thit_ga", "required_qty_g": 165, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "sa", "required_qty_g": 15, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "sa_te", "required_qty_g": 5, "is_optional": True, "role": "spice"},
+            {"ingredient_id": "nuoc_mam", "required_qty_g": 10, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Đùi gà góc tư chặt miếng nhỏ vừa ăn, ướp với sả băm, sa tế và nước mắm."},
@@ -673,11 +673,11 @@ RECIPES = [
         "recipe_id": "R038",
         "name": "Canh rau ngót thịt bằm",
         "description": "Món canh quốc dân thanh mát, dễ nấu với thịt heo xay.",
-        "category": "canh", "tags": ["thịt heo", "canh rau", "nhanh"], "servings": 3,
+        "category": "canh", "tags": ["thịt heo", "canh rau", "nhanh"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "thit_heo_xay", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "cai_xanh", "required_qty_g": 200, "is_optional": False, "role": "vegetable"},
-            {"ingredient_id": "hat_nem", "required_qty_g": 10, "is_optional": True, "role": "seasoning"}
+            {"ingredient_id": "thit_heo_xay", "required_qty_g": 50, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "cai_xanh", "required_qty_g": 65, "is_optional": False, "role": "vegetable"},
+            {"ingredient_id": "hat_nem", "required_qty_g": 3, "is_optional": True, "role": "seasoning"}
         ],
         "steps": [
             {"step": 1, "description": "Rau cải xanh (dùng thay rau ngót nếu không có) rửa sạch, vò nhẹ hoặc thái nhỏ."},
@@ -690,12 +690,12 @@ RECIPES = [
         "recipe_id": "R039",
         "name": "Bò bít tết đơn giản",
         "description": "Thịt thăn bò mềm mại áp chảo cùng tỏi, ăn kèm hành tây.",
-        "category": "mon_chinh", "tags": ["thịt bò", "áp chảo", "sang trọng"], "servings": 2,
+        "category": "mon_chinh", "tags": ["thịt bò", "áp chảo", "sang trọng"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "thit_bo", "required_qty_g": 300, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "toi", "required_qty_g": 20, "is_optional": True, "role": "aromatic"},
-            {"ingredient_id": "hanh_tay", "required_qty_g": 50, "is_optional": True, "role": "side_veg"},
-            {"ingredient_id": "dau_an", "required_qty_g": 20, "is_optional": True, "role": "cooking_fat"}
+            {"ingredient_id": "thit_bo", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "toi", "required_qty_g": 10, "is_optional": True, "role": "aromatic"},
+            {"ingredient_id": "hanh_tay", "required_qty_g": 25, "is_optional": True, "role": "side_veg"},
+            {"ingredient_id": "dau_an", "required_qty_g": 10, "is_optional": True, "role": "cooking_fat"}
         ],
         "steps": [
             {"step": 1, "description": "Thịt bò thăn thái miếng dày, dùng búa dần sơ cho mềm, ướp muối và tiêu đen."},
@@ -708,11 +708,11 @@ RECIPES = [
         "recipe_id": "R040",
         "name": "Canh bí đỏ thịt bằm",
         "description": "Bí đỏ bùi ngọt nấu cùng thịt heo xay, cung cấp nhiều vitamin A.",
-        "category": "canh", "tags": ["bí đỏ", "thịt heo", "bổ dưỡng"], "servings": 3,
+        "category": "canh", "tags": ["bí đỏ", "thịt heo", "bổ dưỡng"], "servings": 1,
         "ingredients": [
-            {"ingredient_id": "bi_do", "required_qty_g": 400, "is_optional": False, "role": "main_vegetable"},
-            {"ingredient_id": "thit_heo_xay", "required_qty_g": 150, "is_optional": False, "role": "main_protein"},
-            {"ingredient_id": "hanh_la", "required_qty_g": 10, "is_optional": True, "role": "garnish"}
+            {"ingredient_id": "bi_do", "required_qty_g": 135, "is_optional": False, "role": "main_vegetable"},
+            {"ingredient_id": "thit_heo_xay", "required_qty_g": 50, "is_optional": False, "role": "main_protein"},
+            {"ingredient_id": "hanh_la", "required_qty_g": 3, "is_optional": True, "role": "garnish"}
         ],
         "steps": [
             {"step": 1, "description": "Bí đỏ gọt vỏ, thái miếng vuông vừa ăn. Thịt heo xay ướp chút gia vị."},

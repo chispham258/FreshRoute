@@ -12,6 +12,30 @@
     "typical_shelf_life_days": 5
   },
   {
+    "sku_id": "SKU-M001P200",
+    "ingredient_id": "thit_heo",
+    "product_name": "Thịt heo nạc vai (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 34000,
+    "cost_price": 27000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M001P300",
+    "ingredient_id": "thit_heo",
+    "product_name": "Thịt heo nạc vai (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 51000,
+    "cost_price": 41000,
+    "typical_shelf_life_days": 5
+  },
+  {
     "sku_id": "SKU-M002",
     "ingredient_id": "thit_heo_xay",
     "product_name": "Thịt heo xay",
@@ -21,6 +45,30 @@
     "pack_size_g": 300,
     "retail_price": 55000,
     "cost_price": 44000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M002P200",
+    "ingredient_id": "thit_heo_xay",
+    "product_name": "Thịt heo xay (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 36500,
+    "cost_price": 29500,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M002P500",
+    "ingredient_id": "thit_heo_xay",
+    "product_name": "Thịt heo xay (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 91500,
+    "cost_price": 73500,
     "typical_shelf_life_days": 4
   },
   {
@@ -36,6 +84,30 @@
     "typical_shelf_life_days": 5
   },
   {
+    "sku_id": "SKU-M001AP200",
+    "ingredient_id": "nac_vai_heo",
+    "product_name": "Thịt heo nạc vai (cắt từng miếng) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 35000,
+    "cost_price": 28000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M001AP300",
+    "ingredient_id": "nac_vai_heo",
+    "product_name": "Thịt heo nạc vai (cắt từng miếng) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 53000,
+    "cost_price": 42000,
+    "typical_shelf_life_days": 5
+  },
+  {
     "sku_id": "SKU-M001B",
     "ingredient_id": "thit_nac_heo",
     "product_name": "Thịt heo nạc lưng",
@@ -45,6 +117,42 @@
     "pack_size_g": 400,
     "retail_price": 92000,
     "cost_price": 74000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M001BP200",
+    "ingredient_id": "thit_nac_heo",
+    "product_name": "Thịt heo nạc lưng (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 46000,
+    "cost_price": 37000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M001BP300",
+    "ingredient_id": "thit_nac_heo",
+    "product_name": "Thịt heo nạc lưng (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 69000,
+    "cost_price": 55500,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M001BP500",
+    "ingredient_id": "thit_nac_heo",
+    "product_name": "Thịt heo nạc lưng (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 115000,
+    "cost_price": 92500,
     "typical_shelf_life_days": 4
   },
   {
@@ -60,6 +168,30 @@
     "typical_shelf_life_days": 5
   },
   {
+    "sku_id": "SKU-M001CP200",
+    "ingredient_id": "thit_nai_heo",
+    "product_name": "Thịt heo nái (vai non) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 32000,
+    "cost_price": 25500,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M001CP300",
+    "ingredient_id": "thit_nai_heo",
+    "product_name": "Thịt heo nái (vai non) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 48000,
+    "cost_price": 38500,
+    "typical_shelf_life_days": 5
+  },
+  {
     "sku_id": "SKU-M005",
     "ingredient_id": "suon_heo",
     "product_name": "Sườn heo non",
@@ -69,6 +201,30 @@
     "pack_size_g": 500,
     "retail_price": 95000,
     "cost_price": 78000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M005P200",
+    "ingredient_id": "suon_heo",
+    "product_name": "Sườn heo non (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 38000,
+    "cost_price": 31000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M005P300",
+    "ingredient_id": "suon_heo",
+    "product_name": "Sườn heo non (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 57000,
+    "cost_price": 47000,
     "typical_shelf_life_days": 5
   },
   {
@@ -84,6 +240,42 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-M005AP200",
+    "ingredient_id": "suon_heo_nuong",
+    "product_name": "Sườn heo nướng (đã ướp) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 35000,
+    "cost_price": 28500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M005AP300",
+    "ingredient_id": "suon_heo_nuong",
+    "product_name": "Sườn heo nướng (đã ướp) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 52500,
+    "cost_price": 42500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M005AP500",
+    "ingredient_id": "suon_heo_nuong",
+    "product_name": "Sườn heo nướng (đã ướp) (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 87500,
+    "cost_price": 71000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-M006",
     "ingredient_id": "gio_heo",
     "product_name": "Giò heo (thịt cẳng)",
@@ -93,6 +285,42 @@
     "pack_size_g": 800,
     "retail_price": 75000,
     "cost_price": 58000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M006P300",
+    "ingredient_id": "gio_heo",
+    "product_name": "Giò heo (thịt cẳng) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 28000,
+    "cost_price": 22000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M006P500",
+    "ingredient_id": "gio_heo",
+    "product_name": "Giò heo (thịt cẳng) (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 47000,
+    "cost_price": 36000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M006P1000",
+    "ingredient_id": "gio_heo",
+    "product_name": "Giò heo (thịt cẳng) (1000g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 1000,
+    "retail_price": 94000,
+    "cost_price": 72500,
     "typical_shelf_life_days": 5
   },
   {
@@ -108,6 +336,42 @@
     "typical_shelf_life_days": 4
   },
   {
+    "sku_id": "SKU-M006AP200",
+    "ingredient_id": "canh_co_heo",
+    "product_name": "Cẳng heo (chân heo) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "piece",
+    "pack_size_g": 200,
+    "retail_price": 15000,
+    "cost_price": 11500,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M006AP300",
+    "ingredient_id": "canh_co_heo",
+    "product_name": "Cẳng heo (chân heo) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "piece",
+    "pack_size_g": 300,
+    "retail_price": 22500,
+    "cost_price": 17500,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M006AP500",
+    "ingredient_id": "canh_co_heo",
+    "product_name": "Cẳng heo (chân heo) (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "piece",
+    "pack_size_g": 500,
+    "retail_price": 37500,
+    "cost_price": 29000,
+    "typical_shelf_life_days": 4
+  },
+  {
     "sku_id": "SKU-M014",
     "ingredient_id": "heo_sap",
     "product_name": "Thịt heo sáp (ba chỉ)",
@@ -117,6 +381,30 @@
     "pack_size_g": 500,
     "retail_price": 92000,
     "cost_price": 75000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M014P200",
+    "ingredient_id": "heo_sap",
+    "product_name": "Thịt heo sáp (ba chỉ) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 37000,
+    "cost_price": 30000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M014P300",
+    "ingredient_id": "heo_sap",
+    "product_name": "Thịt heo sáp (ba chỉ) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 55000,
+    "cost_price": 45000,
     "typical_shelf_life_days": 5
   },
   {
@@ -132,6 +420,42 @@
     "typical_shelf_life_days": 5
   },
   {
+    "sku_id": "SKU-M014AP200",
+    "ingredient_id": "ba_chi_heo",
+    "product_name": "Ba chỉ heo (mỡ ba lớp) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 22500,
+    "cost_price": 18000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M014AP300",
+    "ingredient_id": "ba_chi_heo",
+    "product_name": "Ba chỉ heo (mỡ ba lớp) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 34000,
+    "cost_price": 27000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M014AP500",
+    "ingredient_id": "ba_chi_heo",
+    "product_name": "Ba chỉ heo (mỡ ba lớp) (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 56500,
+    "cost_price": 45000,
+    "typical_shelf_life_days": 5
+  },
+  {
     "sku_id": "SKU-M006B",
     "ingredient_id": "mong_heo",
     "product_name": "Móng heo (giò lợn)",
@@ -141,6 +465,30 @@
     "pack_size_g": 500,
     "retail_price": 35000,
     "cost_price": 25000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M006BP200",
+    "ingredient_id": "mong_heo",
+    "product_name": "Móng heo (giò lợn) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "piece",
+    "pack_size_g": 200,
+    "retail_price": 14000,
+    "cost_price": 10000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M006BP300",
+    "ingredient_id": "mong_heo",
+    "product_name": "Móng heo (giò lợn) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "piece",
+    "pack_size_g": 300,
+    "retail_price": 21000,
+    "cost_price": 15000,
     "typical_shelf_life_days": 3
   },
   {
@@ -156,6 +504,42 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-M008P200",
+    "ingredient_id": "long_heo",
+    "product_name": "Lòng heo (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 22500,
+    "cost_price": 16000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M008P300",
+    "ingredient_id": "long_heo",
+    "product_name": "Lòng heo (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 34000,
+    "cost_price": 24000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M008P500",
+    "ingredient_id": "long_heo",
+    "product_name": "Lòng heo (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 56000,
+    "cost_price": 40000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-M008A",
     "ingredient_id": "tim_heo",
     "product_name": "Tim heo",
@@ -165,6 +549,30 @@
     "pack_size_g": 200,
     "retail_price": 25000,
     "cost_price": 18000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-M008AP100",
+    "ingredient_id": "tim_heo",
+    "product_name": "Tim heo (100g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 12500,
+    "cost_price": 9000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-M008AP300",
+    "ingredient_id": "tim_heo",
+    "product_name": "Tim heo (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 37500,
+    "cost_price": 27000,
     "typical_shelf_life_days": 2
   },
   {
@@ -180,6 +588,30 @@
     "typical_shelf_life_days": 2
   },
   {
+    "sku_id": "SKU-M008BP200",
+    "ingredient_id": "that_lung_heo",
+    "product_name": "Thất lỏng heo (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 21500,
+    "cost_price": 15500,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-M008BP500",
+    "ingredient_id": "that_lung_heo",
+    "product_name": "Thất lỏng heo (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "pork",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 53500,
+    "cost_price": 38500,
+    "typical_shelf_life_days": 2
+  },
+  {
     "sku_id": "SKU-M003",
     "ingredient_id": "thit_ga",
     "product_name": "Đùi gà góc tư",
@@ -189,6 +621,30 @@
     "pack_size_g": 500,
     "retail_price": 65000,
     "cost_price": 50000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M003P200",
+    "ingredient_id": "thit_ga",
+    "product_name": "Đùi gà góc tư (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 26000,
+    "cost_price": 20000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M003P300",
+    "ingredient_id": "thit_ga",
+    "product_name": "Đùi gà góc tư (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 39000,
+    "cost_price": 30000,
     "typical_shelf_life_days": 5
   },
   {
@@ -204,6 +660,30 @@
     "typical_shelf_life_days": 5
   },
   {
+    "sku_id": "SKU-M007P200",
+    "ingredient_id": "canh_ga",
+    "product_name": "Cánh gà (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 22000,
+    "cost_price": 17000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M007P300",
+    "ingredient_id": "canh_ga",
+    "product_name": "Cánh gà (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 33000,
+    "cost_price": 25000,
+    "typical_shelf_life_days": 5
+  },
+  {
     "sku_id": "SKU-M003A",
     "ingredient_id": "ga_dui",
     "product_name": "Gà đùi (giò gà)",
@@ -213,6 +693,42 @@
     "pack_size_g": 400,
     "retail_price": 48000,
     "cost_price": 38000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M003AP200",
+    "ingredient_id": "ga_dui",
+    "product_name": "Gà đùi (giò gà) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 24000,
+    "cost_price": 19000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M003AP300",
+    "ingredient_id": "ga_dui",
+    "product_name": "Gà đùi (giò gà) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 36000,
+    "cost_price": 28500,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M003AP500",
+    "ingredient_id": "ga_dui",
+    "product_name": "Gà đùi (giò gà) (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 60000,
+    "cost_price": 47500,
     "typical_shelf_life_days": 5
   },
   {
@@ -228,6 +744,30 @@
     "typical_shelf_life_days": 5
   },
   {
+    "sku_id": "SKU-M012P500",
+    "ingredient_id": "ga_nguyen_con",
+    "product_name": "Gà ta nguyên con (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "piece",
+    "pack_size_g": 500,
+    "retail_price": 45000,
+    "cost_price": 35000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-M012P1000",
+    "ingredient_id": "ga_nguyen_con",
+    "product_name": "Gà ta nguyên con (1000g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "piece",
+    "pack_size_g": 1000,
+    "retail_price": 90000,
+    "cost_price": 70000,
+    "typical_shelf_life_days": 5
+  },
+  {
     "sku_id": "SKU-M015",
     "ingredient_id": "ga_indonesia",
     "product_name": "Gà công nghiệp",
@@ -237,6 +777,30 @@
     "pack_size_g": 1000,
     "retail_price": 48000,
     "cost_price": 38000,
+    "typical_shelf_life_days": 6
+  },
+  {
+    "sku_id": "SKU-M015P300",
+    "ingredient_id": "ga_indonesia",
+    "product_name": "Gà công nghiệp (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 14500,
+    "cost_price": 11500,
+    "typical_shelf_life_days": 6
+  },
+  {
+    "sku_id": "SKU-M015P500",
+    "ingredient_id": "ga_indonesia",
+    "product_name": "Gà công nghiệp (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "chicken",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 24000,
+    "cost_price": 19000,
     "typical_shelf_life_days": 6
   },
   {
@@ -252,6 +816,30 @@
     "typical_shelf_life_days": 4
   },
   {
+    "sku_id": "SKU-M004P200",
+    "ingredient_id": "thit_bo",
+    "product_name": "Thịt bò thăn (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "beef",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 120000,
+    "cost_price": 100000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M004P500",
+    "ingredient_id": "thit_bo",
+    "product_name": "Thịt bò thăn (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "beef",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 300000,
+    "cost_price": 250000,
+    "typical_shelf_life_days": 4
+  },
+  {
     "sku_id": "SKU-M013",
     "ingredient_id": "bo_xao",
     "product_name": "Thịt bò xào (thăn nội)",
@@ -261,6 +849,42 @@
     "pack_size_g": 250,
     "retail_price": 65000,
     "cost_price": 52000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M013P100",
+    "ingredient_id": "bo_xao",
+    "product_name": "Thịt bò xào (thăn nội) (100g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "beef",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 26000,
+    "cost_price": 21000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M013P200",
+    "ingredient_id": "bo_xao",
+    "product_name": "Thịt bò xào (thăn nội) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "beef",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 52000,
+    "cost_price": 41500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-M013P300",
+    "ingredient_id": "bo_xao",
+    "product_name": "Thịt bò xào (thăn nội) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "beef",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 78000,
+    "cost_price": 62500,
     "typical_shelf_life_days": 3
   },
   {
@@ -276,6 +900,30 @@
     "typical_shelf_life_days": 4
   },
   {
+    "sku_id": "SKU-M011P200",
+    "ingredient_id": "thit_vit",
+    "product_name": "Thịt vịt tươi (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "duck",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 38000,
+    "cost_price": 29000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-M011P300",
+    "ingredient_id": "thit_vit",
+    "product_name": "Thịt vịt tươi (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "duck",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 57000,
+    "cost_price": 43000,
+    "typical_shelf_life_days": 4
+  },
+  {
     "sku_id": "SKU-M009",
     "ingredient_id": "trung_ga",
     "product_name": "Trứng gà (10 quả)",
@@ -285,6 +933,42 @@
     "pack_size_g": 600,
     "retail_price": 32000,
     "cost_price": 24000,
+    "typical_shelf_life_days": 14
+  },
+  {
+    "sku_id": "SKU-M009P200",
+    "ingredient_id": "trung_ga",
+    "product_name": "Trứng gà (10 quả) (200g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "egg",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 10500,
+    "cost_price": 8000,
+    "typical_shelf_life_days": 14
+  },
+  {
+    "sku_id": "SKU-M009P300",
+    "ingredient_id": "trung_ga",
+    "product_name": "Trứng gà (10 quả) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "egg",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 16000,
+    "cost_price": 12000,
+    "typical_shelf_life_days": 14
+  },
+  {
+    "sku_id": "SKU-M009P500",
+    "ingredient_id": "trung_ga",
+    "product_name": "Trứng gà (10 quả) (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "egg",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 26500,
+    "cost_price": 20000,
     "typical_shelf_life_days": 14
   },
   {
@@ -300,6 +984,42 @@
     "typical_shelf_life_days": 14
   },
   {
+    "sku_id": "SKU-M010P300",
+    "ingredient_id": "trung_vit",
+    "product_name": "Trứng vịt (10 quả) (300g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "egg",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 15000,
+    "cost_price": 11000,
+    "typical_shelf_life_days": 14
+  },
+  {
+    "sku_id": "SKU-M010P500",
+    "ingredient_id": "trung_vit",
+    "product_name": "Trứng vịt (10 quả) (500g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "egg",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 25000,
+    "cost_price": 18500,
+    "typical_shelf_life_days": 14
+  },
+  {
+    "sku_id": "SKU-M010P1000",
+    "ingredient_id": "trung_vit",
+    "product_name": "Trứng vịt (10 quả) (1000g)",
+    "category_l1": "fresh_meat",
+    "category_l2": "egg",
+    "unit_type": "pack",
+    "pack_size_g": 1000,
+    "retail_price": 50000,
+    "cost_price": 37000,
+    "typical_shelf_life_days": 14
+  },
+  {
     "sku_id": "SKU-S001",
     "ingredient_id": "ca_loc",
     "product_name": "Cá lóc phi lê",
@@ -309,6 +1029,42 @@
     "pack_size_g": 400,
     "retail_price": 110000,
     "cost_price": 88000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S001P200",
+    "ingredient_id": "ca_loc",
+    "product_name": "Cá lóc phi lê (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 55000,
+    "cost_price": 44000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S001P300",
+    "ingredient_id": "ca_loc",
+    "product_name": "Cá lóc phi lê (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 82500,
+    "cost_price": 66000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S001P500",
+    "ingredient_id": "ca_loc",
+    "product_name": "Cá lóc phi lê (500g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 137500,
+    "cost_price": 110000,
     "typical_shelf_life_days": 3
   },
   {
@@ -324,6 +1080,30 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-S002P200",
+    "ingredient_id": "tom",
+    "product_name": "Tôm sú (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "shrimp",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 123500,
+    "cost_price": 100000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S002P500",
+    "ingredient_id": "tom",
+    "product_name": "Tôm sú (500g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "shrimp",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 308500,
+    "cost_price": 250000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-S003",
     "ingredient_id": "muc",
     "product_name": "Mực ống",
@@ -333,6 +1113,30 @@
     "pack_size_g": 300,
     "retail_price": 160000,
     "cost_price": 128000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S003P200",
+    "ingredient_id": "muc",
+    "product_name": "Mực ống (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "squid",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 106500,
+    "cost_price": 85500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S003P500",
+    "ingredient_id": "muc",
+    "product_name": "Mực ống (500g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "squid",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 266500,
+    "cost_price": 213500,
     "typical_shelf_life_days": 3
   },
   {
@@ -348,6 +1152,30 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-S004P200",
+    "ingredient_id": "ca_ro",
+    "product_name": "Cá rô phi (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 24000,
+    "cost_price": 18000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S004P300",
+    "ingredient_id": "ca_ro",
+    "product_name": "Cá rô phi (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 36000,
+    "cost_price": 27000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-S005",
     "ingredient_id": "ngheu",
     "product_name": "Nghêu lụa",
@@ -357,6 +1185,30 @@
     "pack_size_g": 500,
     "retail_price": 55000,
     "cost_price": 40000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-S005P200",
+    "ingredient_id": "ngheu",
+    "product_name": "Nghêu lụa (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "clam",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 22000,
+    "cost_price": 16000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-S005P300",
+    "ingredient_id": "ngheu",
+    "product_name": "Nghêu lụa (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "clam",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 33000,
+    "cost_price": 24000,
     "typical_shelf_life_days": 2
   },
   {
@@ -372,6 +1224,30 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-S006P200",
+    "ingredient_id": "ca_tram",
+    "product_name": "Cá trám (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 30000,
+    "cost_price": 23000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S006P300",
+    "ingredient_id": "ca_tram",
+    "product_name": "Cá trám (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 45000,
+    "cost_price": 35000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-S007",
     "ingredient_id": "ca_chep",
     "product_name": "Cá chép",
@@ -381,6 +1257,30 @@
     "pack_size_g": 500,
     "retail_price": 70000,
     "cost_price": 52000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S007P200",
+    "ingredient_id": "ca_chep",
+    "product_name": "Cá chép (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 28000,
+    "cost_price": 21000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S007P300",
+    "ingredient_id": "ca_chep",
+    "product_name": "Cá chép (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 42000,
+    "cost_price": 31000,
     "typical_shelf_life_days": 3
   },
   {
@@ -396,6 +1296,30 @@
     "typical_shelf_life_days": 4
   },
   {
+    "sku_id": "SKU-S008P200",
+    "ingredient_id": "ca_ba_sa",
+    "product_name": "Cá ba sa phi lê (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 26000,
+    "cost_price": 19000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-S008P300",
+    "ingredient_id": "ca_ba_sa",
+    "product_name": "Cá ba sa phi lê (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 39000,
+    "cost_price": 29000,
+    "typical_shelf_life_days": 4
+  },
+  {
     "sku_id": "SKU-S009",
     "ingredient_id": "tom_hum",
     "product_name": "Tôm hùm đất",
@@ -405,6 +1329,42 @@
     "pack_size_g": 400,
     "retail_price": 320000,
     "cost_price": 260000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-S009P200",
+    "ingredient_id": "tom_hum",
+    "product_name": "Tôm hùm đất (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "shrimp",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 160000,
+    "cost_price": 130000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-S009P300",
+    "ingredient_id": "tom_hum",
+    "product_name": "Tôm hùm đất (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "shrimp",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 240000,
+    "cost_price": 195000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-S009P500",
+    "ingredient_id": "tom_hum",
+    "product_name": "Tôm hùm đất (500g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "shrimp",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 400000,
+    "cost_price": 325000,
     "typical_shelf_life_days": 2
   },
   {
@@ -420,6 +1380,30 @@
     "typical_shelf_life_days": 2
   },
   {
+    "sku_id": "SKU-S010P200",
+    "ingredient_id": "cua",
+    "product_name": "Cua đồng (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "crab",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 34000,
+    "cost_price": 26000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-S010P300",
+    "ingredient_id": "cua",
+    "product_name": "Cua đồng (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "crab",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 51000,
+    "cost_price": 39000,
+    "typical_shelf_life_days": 2
+  },
+  {
     "sku_id": "SKU-S011",
     "ingredient_id": "ca_hong",
     "product_name": "Cá hồng",
@@ -429,6 +1413,42 @@
     "pack_size_g": 400,
     "retail_price": 95000,
     "cost_price": 72000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S011P200",
+    "ingredient_id": "ca_hong",
+    "product_name": "Cá hồng (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 47500,
+    "cost_price": 36000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S011P300",
+    "ingredient_id": "ca_hong",
+    "product_name": "Cá hồng (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 71000,
+    "cost_price": 54000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-S011P500",
+    "ingredient_id": "ca_hong",
+    "product_name": "Cá hồng (500g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "fish",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 119000,
+    "cost_price": 90000,
     "typical_shelf_life_days": 3
   },
   {
@@ -444,6 +1464,30 @@
     "typical_shelf_life_days": 2
   },
   {
+    "sku_id": "SKU-S012P200",
+    "ingredient_id": "so_huyet",
+    "product_name": "Sò huyết (200g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "shellfish",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 26000,
+    "cost_price": 19000,
+    "typical_shelf_life_days": 2
+  },
+  {
+    "sku_id": "SKU-S012P300",
+    "ingredient_id": "so_huyet",
+    "product_name": "Sò huyết (300g)",
+    "category_l1": "fresh_seafood",
+    "category_l2": "shellfish",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 39000,
+    "cost_price": 29000,
+    "typical_shelf_life_days": 2
+  },
+  {
     "sku_id": "SKU-V001",
     "ingredient_id": "rau_muong",
     "product_name": "Rau muống",
@@ -453,6 +1497,30 @@
     "pack_size_g": 300,
     "retail_price": 12000,
     "cost_price": 7000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V001P200",
+    "ingredient_id": "rau_muong",
+    "product_name": "Rau muống (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 8000,
+    "cost_price": 4500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V001P500",
+    "ingredient_id": "rau_muong",
+    "product_name": "Rau muống (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 500,
+    "retail_price": 20000,
+    "cost_price": 11500,
     "typical_shelf_life_days": 3
   },
   {
@@ -468,6 +1536,30 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-V002P200",
+    "ingredient_id": "cai_xanh",
+    "product_name": "Cải xanh (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 6500,
+    "cost_price": 4000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V002P500",
+    "ingredient_id": "cai_xanh",
+    "product_name": "Cải xanh (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 500,
+    "retail_price": 16500,
+    "cost_price": 10000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-V003",
     "ingredient_id": "ca_chua",
     "product_name": "Cà chua",
@@ -477,6 +1569,30 @@
     "pack_size_g": 500,
     "retail_price": 20000,
     "cost_price": 12000,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V003P200",
+    "ingredient_id": "ca_chua",
+    "product_name": "Cà chua (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 8000,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V003P300",
+    "ingredient_id": "ca_chua",
+    "product_name": "Cà chua (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 12000,
+    "cost_price": 7000,
     "typical_shelf_life_days": 7
   },
   {
@@ -492,6 +1608,30 @@
     "typical_shelf_life_days": 14
   },
   {
+    "sku_id": "SKU-V004P200",
+    "ingredient_id": "hanh_tay",
+    "product_name": "Hành tây (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 7000,
+    "cost_price": 4000,
+    "typical_shelf_life_days": 14
+  },
+  {
+    "sku_id": "SKU-V004P300",
+    "ingredient_id": "hanh_tay",
+    "product_name": "Hành tây (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 11000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 14
+  },
+  {
     "sku_id": "SKU-V005",
     "ingredient_id": "hanh_tim",
     "product_name": "Hành tím",
@@ -501,6 +1641,30 @@
     "pack_size_g": 200,
     "retail_price": 25000,
     "cost_price": 16000,
+    "typical_shelf_life_days": 21
+  },
+  {
+    "sku_id": "SKU-V005P100",
+    "ingredient_id": "hanh_tim",
+    "product_name": "Hành tím (100g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 100,
+    "retail_price": 12500,
+    "cost_price": 8000,
+    "typical_shelf_life_days": 21
+  },
+  {
+    "sku_id": "SKU-V005P300",
+    "ingredient_id": "hanh_tim",
+    "product_name": "Hành tím (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 37500,
+    "cost_price": 24000,
     "typical_shelf_life_days": 21
   },
   {
@@ -516,6 +1680,30 @@
     "typical_shelf_life_days": 30
   },
   {
+    "sku_id": "SKU-V006P100",
+    "ingredient_id": "toi",
+    "product_name": "Tỏi (100g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 100,
+    "retail_price": 20000,
+    "cost_price": 14000,
+    "typical_shelf_life_days": 30
+  },
+  {
+    "sku_id": "SKU-V006P300",
+    "ingredient_id": "toi",
+    "product_name": "Tỏi (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 60000,
+    "cost_price": 42000,
+    "typical_shelf_life_days": 30
+  },
+  {
     "sku_id": "SKU-V007",
     "ingredient_id": "gung",
     "product_name": "Gừng",
@@ -525,6 +1713,30 @@
     "pack_size_g": 200,
     "retail_price": 30000,
     "cost_price": 18000,
+    "typical_shelf_life_days": 21
+  },
+  {
+    "sku_id": "SKU-V007P100",
+    "ingredient_id": "gung",
+    "product_name": "Gừng (100g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 100,
+    "retail_price": 15000,
+    "cost_price": 9000,
+    "typical_shelf_life_days": 21
+  },
+  {
+    "sku_id": "SKU-V007P300",
+    "ingredient_id": "gung",
+    "product_name": "Gừng (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "root_veg",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 45000,
+    "cost_price": 27000,
     "typical_shelf_life_days": 21
   },
   {
@@ -540,6 +1752,30 @@
     "typical_shelf_life_days": 7
   },
   {
+    "sku_id": "SKU-V008P200",
+    "ingredient_id": "ot_chuong",
+    "product_name": "Ớt chuông (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 23500,
+    "cost_price": 14500,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V008P500",
+    "ingredient_id": "ot_chuong",
+    "product_name": "Ớt chuông (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "kg",
+    "pack_size_g": 500,
+    "retail_price": 58500,
+    "cost_price": 36500,
+    "typical_shelf_life_days": 7
+  },
+  {
     "sku_id": "SKU-V009",
     "ingredient_id": "kho_qua",
     "product_name": "Khổ qua",
@@ -549,6 +1785,30 @@
     "pack_size_g": 500,
     "retail_price": 22000,
     "cost_price": 14000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-V009P200",
+    "ingredient_id": "kho_qua",
+    "product_name": "Khổ qua (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 9000,
+    "cost_price": 5500,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-V009P300",
+    "ingredient_id": "kho_qua",
+    "product_name": "Khổ qua (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 13000,
+    "cost_price": 8500,
     "typical_shelf_life_days": 5
   },
   {
@@ -564,6 +1824,42 @@
     "typical_shelf_life_days": 7
   },
   {
+    "sku_id": "SKU-V010P300",
+    "ingredient_id": "bau",
+    "product_name": "Bầu (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "piece",
+    "pack_size_g": 300,
+    "retail_price": 5500,
+    "cost_price": 3000,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V010P500",
+    "ingredient_id": "bau",
+    "product_name": "Bầu (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "piece",
+    "pack_size_g": 500,
+    "retail_price": 9500,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V010P1000",
+    "ingredient_id": "bau",
+    "product_name": "Bầu (1000g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "piece",
+    "pack_size_g": 1000,
+    "retail_price": 19000,
+    "cost_price": 10000,
+    "typical_shelf_life_days": 7
+  },
+  {
     "sku_id": "SKU-V011",
     "ingredient_id": "hanh_la",
     "product_name": "Hành lá",
@@ -573,6 +1869,30 @@
     "pack_size_g": 100,
     "retail_price": 5000,
     "cost_price": 3000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V011P50",
+    "ingredient_id": "hanh_la",
+    "product_name": "Hành lá (50g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 50,
+    "retail_price": 2500,
+    "cost_price": 1500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V011P200",
+    "ingredient_id": "hanh_la",
+    "product_name": "Hành lá (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 10000,
+    "cost_price": 6000,
     "typical_shelf_life_days": 3
   },
   {
@@ -588,6 +1908,30 @@
     "typical_shelf_life_days": 7
   },
   {
+    "sku_id": "SKU-V012P50",
+    "ingredient_id": "sa",
+    "product_name": "Sả (50g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "herb",
+    "unit_type": "bag",
+    "pack_size_g": 50,
+    "retail_price": 2500,
+    "cost_price": 1500,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V012P200",
+    "ingredient_id": "sa",
+    "product_name": "Sả (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "herb",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 10000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 7
+  },
+  {
     "sku_id": "SKU-V013",
     "ingredient_id": "rau_ngo",
     "product_name": "Rau ngò",
@@ -597,6 +1941,30 @@
     "pack_size_g": 50,
     "retail_price": 3000,
     "cost_price": 1500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V013P100",
+    "ingredient_id": "rau_ngo",
+    "product_name": "Rau ngò (100g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "herb",
+    "unit_type": "bag",
+    "pack_size_g": 100,
+    "retail_price": 6000,
+    "cost_price": 3000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V013P200",
+    "ingredient_id": "rau_ngo",
+    "product_name": "Rau ngò (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "herb",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 12000,
+    "cost_price": 6000,
     "typical_shelf_life_days": 3
   },
   {
@@ -612,6 +1980,30 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-V014P200",
+    "ingredient_id": "cai_thia",
+    "product_name": "Cải thìa (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 6500,
+    "cost_price": 4000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V014P500",
+    "ingredient_id": "cai_thia",
+    "product_name": "Cải thìa (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 500,
+    "retail_price": 16500,
+    "cost_price": 10000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-V015",
     "ingredient_id": "ngo_gai",
     "product_name": "Ngò gai",
@@ -621,6 +2013,30 @@
     "pack_size_g": 50,
     "retail_price": 3000,
     "cost_price": 1500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V015P100",
+    "ingredient_id": "ngo_gai",
+    "product_name": "Ngò gai (100g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "herb",
+    "unit_type": "bag",
+    "pack_size_g": 100,
+    "retail_price": 6000,
+    "cost_price": 3000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-V015P200",
+    "ingredient_id": "ngo_gai",
+    "product_name": "Ngò gai (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "herb",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 12000,
+    "cost_price": 6000,
     "typical_shelf_life_days": 3
   },
   {
@@ -636,6 +2052,30 @@
     "typical_shelf_life_days": 5
   },
   {
+    "sku_id": "SKU-V016P300",
+    "ingredient_id": "khom",
+    "product_name": "Khóm (dứa) (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit",
+    "unit_type": "piece",
+    "pack_size_g": 300,
+    "retail_price": 5500,
+    "cost_price": 3000,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-V016P500",
+    "ingredient_id": "khom",
+    "product_name": "Khóm (dứa) (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit",
+    "unit_type": "piece",
+    "pack_size_g": 500,
+    "retail_price": 9000,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 5
+  },
+  {
     "sku_id": "SKU-V017",
     "ingredient_id": "chanh",
     "product_name": "Chanh tươi",
@@ -645,6 +2085,30 @@
     "pack_size_g": 200,
     "retail_price": 25000,
     "cost_price": 15000,
+    "typical_shelf_life_days": 10
+  },
+  {
+    "sku_id": "SKU-V017P100",
+    "ingredient_id": "chanh",
+    "product_name": "Chanh tươi (100g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit",
+    "unit_type": "kg",
+    "pack_size_g": 100,
+    "retail_price": 12500,
+    "cost_price": 7500,
+    "typical_shelf_life_days": 10
+  },
+  {
+    "sku_id": "SKU-V017P300",
+    "ingredient_id": "chanh",
+    "product_name": "Chanh tươi (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 37500,
+    "cost_price": 22500,
     "typical_shelf_life_days": 10
   },
   {
@@ -660,6 +2124,30 @@
     "typical_shelf_life_days": 7
   },
   {
+    "sku_id": "SKU-V018P200",
+    "ingredient_id": "xoai",
+    "product_name": "Xoài cát Hòa Lộc (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit",
+    "unit_type": "kg",
+    "pack_size_g": 200,
+    "retail_price": 18000,
+    "cost_price": 11000,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V018P300",
+    "ingredient_id": "xoai",
+    "product_name": "Xoài cát Hòa Lộc (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit",
+    "unit_type": "kg",
+    "pack_size_g": 300,
+    "retail_price": 27000,
+    "cost_price": 17000,
+    "typical_shelf_life_days": 7
+  },
+  {
     "sku_id": "SKU-V019",
     "ingredient_id": "rau_bin",
     "product_name": "Rau bina",
@@ -669,6 +2157,30 @@
     "pack_size_g": 200,
     "retail_price": 18000,
     "cost_price": 11000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-V019P100",
+    "ingredient_id": "rau_bin",
+    "product_name": "Rau bina (100g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 100,
+    "retail_price": 9000,
+    "cost_price": 5500,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-V019P300",
+    "ingredient_id": "rau_bin",
+    "product_name": "Rau bina (300g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "leafy_veg",
+    "unit_type": "bag",
+    "pack_size_g": 300,
+    "retail_price": 27000,
+    "cost_price": 16500,
     "typical_shelf_life_days": 4
   },
   {
@@ -684,6 +2196,30 @@
     "typical_shelf_life_days": 10
   },
   {
+    "sku_id": "SKU-V020P500",
+    "ingredient_id": "bi_do",
+    "product_name": "Bí đỏ (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "piece",
+    "pack_size_g": 500,
+    "retail_price": 7500,
+    "cost_price": 4500,
+    "typical_shelf_life_days": 10
+  },
+  {
+    "sku_id": "SKU-V020P1000",
+    "ingredient_id": "bi_do",
+    "product_name": "Bí đỏ (1000g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "fruit_veg",
+    "unit_type": "piece",
+    "pack_size_g": 1000,
+    "retail_price": 14500,
+    "cost_price": 9500,
+    "typical_shelf_life_days": 10
+  },
+  {
     "sku_id": "SKU-V021",
     "ingredient_id": "dua_cai",
     "product_name": "Dưa cải chua",
@@ -693,6 +2229,30 @@
     "pack_size_g": 300,
     "retail_price": 12000,
     "cost_price": 8000,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V021P200",
+    "ingredient_id": "dua_cai",
+    "product_name": "Dưa cải chua (200g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "pickled_veg",
+    "unit_type": "bag",
+    "pack_size_g": 200,
+    "retail_price": 8000,
+    "cost_price": 5500,
+    "typical_shelf_life_days": 7
+  },
+  {
+    "sku_id": "SKU-V021P500",
+    "ingredient_id": "dua_cai",
+    "product_name": "Dưa cải chua (500g)",
+    "category_l1": "fresh_produce",
+    "category_l2": "pickled_veg",
+    "unit_type": "bag",
+    "pack_size_g": 500,
+    "retail_price": 20000,
+    "cost_price": 13500,
     "typical_shelf_life_days": 7
   },
   {
@@ -708,6 +2268,30 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-P001P200",
+    "ingredient_id": "nuoc_mam",
+    "product_name": "Nước mắm Phú Quốc (200g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 200,
+    "retail_price": 14000,
+    "cost_price": 9500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P001P300",
+    "ingredient_id": "nuoc_mam",
+    "product_name": "Nước mắm Phú Quốc (300g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 300,
+    "retail_price": 21000,
+    "cost_price": 14500,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-P002",
     "ingredient_id": "xi_dau",
     "product_name": "Xì dầu Maggi",
@@ -717,6 +2301,30 @@
     "pack_size_g": 300,
     "retail_price": 18000,
     "cost_price": 12000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P002P200",
+    "ingredient_id": "xi_dau",
+    "product_name": "Xì dầu Maggi (200g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 200,
+    "retail_price": 12000,
+    "cost_price": 8000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P002P500",
+    "ingredient_id": "xi_dau",
+    "product_name": "Xì dầu Maggi (500g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 500,
+    "retail_price": 30000,
+    "cost_price": 20000,
     "typical_shelf_life_days": 365
   },
   {
@@ -732,6 +2340,42 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-P003P100",
+    "ingredient_id": "tuong",
+    "product_name": "Tương đen (100g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 100,
+    "retail_price": 6000,
+    "cost_price": 3500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P003P200",
+    "ingredient_id": "tuong",
+    "product_name": "Tương đen (200g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 200,
+    "retail_price": 12000,
+    "cost_price": 7000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P003P300",
+    "ingredient_id": "tuong",
+    "product_name": "Tương đen (300g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 300,
+    "retail_price": 18000,
+    "cost_price": 11000,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-P004",
     "ingredient_id": "tuong_chua_ngot",
     "product_name": "Tương ớt Chinsu",
@@ -741,6 +2385,30 @@
     "pack_size_g": 500,
     "retail_price": 22000,
     "cost_price": 15000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P004P200",
+    "ingredient_id": "tuong_chua_ngot",
+    "product_name": "Tương ớt Chinsu (200g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 200,
+    "retail_price": 9000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P004P300",
+    "ingredient_id": "tuong_chua_ngot",
+    "product_name": "Tương ớt Chinsu (300g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 300,
+    "retail_price": 13000,
+    "cost_price": 9000,
     "typical_shelf_life_days": 365
   },
   {
@@ -756,6 +2424,42 @@
     "typical_shelf_life_days": 180
   },
   {
+    "sku_id": "SKU-P005P200",
+    "ingredient_id": "nuoc_dua",
+    "product_name": "Nước dừa đóng hộp (200g)",
+    "category_l1": "processed",
+    "category_l2": "canned",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 10000,
+    "cost_price": 7000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-P005P300",
+    "ingredient_id": "nuoc_dua",
+    "product_name": "Nước dừa đóng hộp (300g)",
+    "category_l1": "processed",
+    "category_l2": "canned",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 15000,
+    "cost_price": 10500,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-P005P500",
+    "ingredient_id": "nuoc_dua",
+    "product_name": "Nước dừa đóng hộp (500g)",
+    "category_l1": "processed",
+    "category_l2": "canned",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 25000,
+    "cost_price": 17500,
+    "typical_shelf_life_days": 180
+  },
+  {
     "sku_id": "SKU-P006",
     "ingredient_id": "me",
     "product_name": "Me chín",
@@ -765,6 +2469,30 @@
     "pack_size_g": 200,
     "retail_price": 12000,
     "cost_price": 7000,
+    "typical_shelf_life_days": 90
+  },
+  {
+    "sku_id": "SKU-P006P100",
+    "ingredient_id": "me",
+    "product_name": "Me chín (100g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 6000,
+    "cost_price": 3500,
+    "typical_shelf_life_days": 90
+  },
+  {
+    "sku_id": "SKU-P006P300",
+    "ingredient_id": "me",
+    "product_name": "Me chín (300g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 18000,
+    "cost_price": 10500,
     "typical_shelf_life_days": 90
   },
   {
@@ -780,6 +2508,30 @@
     "typical_shelf_life_days": 30
   },
   {
+    "sku_id": "SKU-P007P50",
+    "ingredient_id": "nghe",
+    "product_name": "Nghệ tươi xay (50g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 50,
+    "retail_price": 5000,
+    "cost_price": 3000,
+    "typical_shelf_life_days": 30
+  },
+  {
+    "sku_id": "SKU-P007P200",
+    "ingredient_id": "nghe",
+    "product_name": "Nghệ tươi xay (200g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 20000,
+    "cost_price": 12000,
+    "typical_shelf_life_days": 30
+  },
+  {
     "sku_id": "SKU-P008",
     "ingredient_id": "nuoc_ham_xuong",
     "product_name": "Nước hầm xương Knorr",
@@ -789,6 +2541,30 @@
     "pack_size_g": 500,
     "retail_price": 25000,
     "cost_price": 17000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-P008P200",
+    "ingredient_id": "nuoc_ham_xuong",
+    "product_name": "Nước hầm xương Knorr (200g)",
+    "category_l1": "processed",
+    "category_l2": "broth",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 10000,
+    "cost_price": 7000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-P008P300",
+    "ingredient_id": "nuoc_ham_xuong",
+    "product_name": "Nước hầm xương Knorr (300g)",
+    "category_l1": "processed",
+    "category_l2": "broth",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 15000,
+    "cost_price": 10000,
     "typical_shelf_life_days": 180
   },
   {
@@ -804,6 +2580,30 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-P009P300",
+    "ingredient_id": "bot_mi",
+    "product_name": "Bột mì đa dụng (300g)",
+    "category_l1": "processed",
+    "category_l2": "flour",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 5500,
+    "cost_price": 3500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P009P500",
+    "ingredient_id": "bot_mi",
+    "product_name": "Bột mì đa dụng (500g)",
+    "category_l1": "processed",
+    "category_l2": "flour",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 9000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-P010",
     "ingredient_id": "nuoc_loc",
     "product_name": "Nước lọc Aquafina 5L",
@@ -813,6 +2613,42 @@
     "pack_size_g": 5000,
     "retail_price": 18000,
     "cost_price": 10000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P010P500",
+    "ingredient_id": "nuoc_loc",
+    "product_name": "Nước lọc Aquafina 5L (500g)",
+    "category_l1": "processed",
+    "category_l2": "water",
+    "unit_type": "bottle",
+    "pack_size_g": 500,
+    "retail_price": 2000,
+    "cost_price": 1000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P010P1000",
+    "ingredient_id": "nuoc_loc",
+    "product_name": "Nước lọc Aquafina 5L (1000g)",
+    "category_l1": "processed",
+    "category_l2": "water",
+    "unit_type": "bottle",
+    "pack_size_g": 1000,
+    "retail_price": 3500,
+    "cost_price": 2000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P010P1500",
+    "ingredient_id": "nuoc_loc",
+    "product_name": "Nước lọc Aquafina 5L (1500g)",
+    "category_l1": "processed",
+    "category_l2": "water",
+    "unit_type": "bottle",
+    "pack_size_g": 1500,
+    "retail_price": 5500,
+    "cost_price": 3000,
     "typical_shelf_life_days": 365
   },
   {
@@ -828,6 +2664,30 @@
     "typical_shelf_life_days": 180
   },
   {
+    "sku_id": "SKU-P011P100",
+    "ingredient_id": "mam_ruoc",
+    "product_name": "Mắm ruốc Huế (100g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 100,
+    "retail_price": 14000,
+    "cost_price": 9500,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-P011P300",
+    "ingredient_id": "mam_ruoc",
+    "product_name": "Mắm ruốc Huế (300g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 300,
+    "retail_price": 42000,
+    "cost_price": 28500,
+    "typical_shelf_life_days": 180
+  },
+  {
     "sku_id": "SKU-P012",
     "ingredient_id": "bot_ngot",
     "product_name": "Bột ngọt AJI-NO-MOTO",
@@ -837,6 +2697,42 @@
     "pack_size_g": 400,
     "retail_price": 15000,
     "cost_price": 11000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P012P200",
+    "ingredient_id": "bot_ngot",
+    "product_name": "Bột ngọt AJI-NO-MOTO (200g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 7500,
+    "cost_price": 5500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P012P300",
+    "ingredient_id": "bot_ngot",
+    "product_name": "Bột ngọt AJI-NO-MOTO (300g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 11000,
+    "cost_price": 8000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P012P500",
+    "ingredient_id": "bot_ngot",
+    "product_name": "Bột ngọt AJI-NO-MOTO (500g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 19000,
+    "cost_price": 14000,
     "typical_shelf_life_days": 365
   },
   {
@@ -852,6 +2748,30 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-P013P300",
+    "ingredient_id": "duong",
+    "product_name": "Đường cát trắng (300g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 6500,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P013P500",
+    "ingredient_id": "duong",
+    "product_name": "Đường cát trắng (500g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 11000,
+    "cost_price": 8000,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-P014",
     "ingredient_id": "dau_hu",
     "product_name": "Đậu hũ trắng (miếng)",
@@ -861,6 +2781,30 @@
     "pack_size_g": 300,
     "retail_price": 15000,
     "cost_price": 10000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-P014P200",
+    "ingredient_id": "dau_hu",
+    "product_name": "Đậu hũ trắng (miếng) (200g)",
+    "category_l1": "processed",
+    "category_l2": "soy_product",
+    "unit_type": "piece",
+    "pack_size_g": 200,
+    "retail_price": 10000,
+    "cost_price": 6500,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-P014P500",
+    "ingredient_id": "dau_hu",
+    "product_name": "Đậu hũ trắng (miếng) (500g)",
+    "category_l1": "processed",
+    "category_l2": "soy_product",
+    "unit_type": "piece",
+    "pack_size_g": 500,
+    "retail_price": 25000,
+    "cost_price": 16500,
     "typical_shelf_life_days": 3
   },
   {
@@ -876,6 +2820,30 @@
     "typical_shelf_life_days": 180
   },
   {
+    "sku_id": "SKU-P015P50",
+    "ingredient_id": "sa_te",
+    "product_name": "Sa tế tôm Chinsu (50g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "bottle",
+    "pack_size_g": 50,
+    "retail_price": 7500,
+    "cost_price": 5500,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-P015P200",
+    "ingredient_id": "sa_te",
+    "product_name": "Sa tế tôm Chinsu (200g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "bottle",
+    "pack_size_g": 200,
+    "retail_price": 30000,
+    "cost_price": 22000,
+    "typical_shelf_life_days": 180
+  },
+  {
     "sku_id": "SKU-P016",
     "ingredient_id": "muoi",
     "product_name": "Muối i-ốt Hải Thành",
@@ -885,6 +2853,30 @@
     "pack_size_g": 500,
     "retail_price": 8000,
     "cost_price": 5000,
+    "typical_shelf_life_days": 730
+  },
+  {
+    "sku_id": "SKU-P016P200",
+    "ingredient_id": "muoi",
+    "product_name": "Muối i-ốt Hải Thành (200g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 3000,
+    "cost_price": 2000,
+    "typical_shelf_life_days": 730
+  },
+  {
+    "sku_id": "SKU-P016P300",
+    "ingredient_id": "muoi",
+    "product_name": "Muối i-ốt Hải Thành (300g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 5000,
+    "cost_price": 3000,
     "typical_shelf_life_days": 730
   },
   {
@@ -900,6 +2892,30 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-P017P100",
+    "ingredient_id": "tieu",
+    "product_name": "Tiêu đen xay (100g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 36000,
+    "cost_price": 24000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P017P200",
+    "ingredient_id": "tieu",
+    "product_name": "Tiêu đen xay (200g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 72000,
+    "cost_price": 48000,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-P018",
     "ingredient_id": "dau_an",
     "product_name": "Dầu ăn Simply 1L",
@@ -909,6 +2925,42 @@
     "pack_size_g": 900,
     "retail_price": 55000,
     "cost_price": 45000,
+    "typical_shelf_life_days": 730
+  },
+  {
+    "sku_id": "SKU-P018P300",
+    "ingredient_id": "dau_an",
+    "product_name": "Dầu ăn Simply 1L (300g)",
+    "category_l1": "processed",
+    "category_l2": "oil",
+    "unit_type": "bottle",
+    "pack_size_g": 300,
+    "retail_price": 18500,
+    "cost_price": 15000,
+    "typical_shelf_life_days": 730
+  },
+  {
+    "sku_id": "SKU-P018P500",
+    "ingredient_id": "dau_an",
+    "product_name": "Dầu ăn Simply 1L (500g)",
+    "category_l1": "processed",
+    "category_l2": "oil",
+    "unit_type": "bottle",
+    "pack_size_g": 500,
+    "retail_price": 30500,
+    "cost_price": 25000,
+    "typical_shelf_life_days": 730
+  },
+  {
+    "sku_id": "SKU-P018P1000",
+    "ingredient_id": "dau_an",
+    "product_name": "Dầu ăn Simply 1L (1000g)",
+    "category_l1": "processed",
+    "category_l2": "oil",
+    "unit_type": "bottle",
+    "pack_size_g": 1000,
+    "retail_price": 61000,
+    "cost_price": 50000,
     "typical_shelf_life_days": 730
   },
   {
@@ -924,6 +2976,42 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-P019P200",
+    "ingredient_id": "hat_nem",
+    "product_name": "Hạt nêm Knorr (200g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 19000,
+    "cost_price": 15000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P019P300",
+    "ingredient_id": "hat_nem",
+    "product_name": "Hạt nêm Knorr (300g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 28500,
+    "cost_price": 22500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P019P500",
+    "ingredient_id": "hat_nem",
+    "product_name": "Hạt nêm Knorr (500g)",
+    "category_l1": "processed",
+    "category_l2": "spice",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 47500,
+    "cost_price": 37500,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-P020",
     "ingredient_id": "tuong_ot",
     "product_name": "Tương ớt Chinsu (chai nhỏ)",
@@ -933,6 +3021,42 @@
     "pack_size_g": 250,
     "retail_price": 12000,
     "cost_price": 8500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P020P100",
+    "ingredient_id": "tuong_ot",
+    "product_name": "Tương ớt Chinsu (chai nhỏ) (100g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 100,
+    "retail_price": 5000,
+    "cost_price": 3500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P020P200",
+    "ingredient_id": "tuong_ot",
+    "product_name": "Tương ớt Chinsu (chai nhỏ) (200g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 200,
+    "retail_price": 9500,
+    "cost_price": 7000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-P020P300",
+    "ingredient_id": "tuong_ot",
+    "product_name": "Tương ớt Chinsu (chai nhỏ) (300g)",
+    "category_l1": "processed",
+    "category_l2": "sauce",
+    "unit_type": "bottle",
+    "pack_size_g": 300,
+    "retail_price": 14500,
+    "cost_price": 10000,
     "typical_shelf_life_days": 365
   },
   {
@@ -948,6 +3072,42 @@
     "typical_shelf_life_days": 3
   },
   {
+    "sku_id": "SKU-D001P200",
+    "ingredient_id": "bun_tuong",
+    "product_name": "Bún tươi (gói) (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 9000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-D001P300",
+    "ingredient_id": "bun_tuong",
+    "product_name": "Bún tươi (gói) (300g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 13500,
+    "cost_price": 9000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-D001P500",
+    "ingredient_id": "bun_tuong",
+    "product_name": "Bún tươi (gói) (500g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 22500,
+    "cost_price": 15000,
+    "typical_shelf_life_days": 3
+  },
+  {
     "sku_id": "SKU-D002",
     "ingredient_id": "pho_kho",
     "product_name": "Phở khô (gói)",
@@ -957,6 +3117,30 @@
     "pack_size_g": 500,
     "retail_price": 22000,
     "cost_price": 14000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D002P200",
+    "ingredient_id": "pho_kho",
+    "product_name": "Phở khô (gói) (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 9000,
+    "cost_price": 5500,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D002P300",
+    "ingredient_id": "pho_kho",
+    "product_name": "Phở khô (gói) (300g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 13000,
+    "cost_price": 8500,
     "typical_shelf_life_days": 180
   },
   {
@@ -972,6 +3156,42 @@
     "typical_shelf_life_days": 180
   },
   {
+    "sku_id": "SKU-D003P50",
+    "ingredient_id": "mi_goi",
+    "product_name": "Mì gói Omachi (50g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 50,
+    "retail_price": 5000,
+    "cost_price": 3000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D003P100",
+    "ingredient_id": "mi_goi",
+    "product_name": "Mì gói Omachi (100g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 10000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D003P200",
+    "ingredient_id": "mi_goi",
+    "product_name": "Mì gói Omachi (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 20000,
+    "cost_price": 12500,
+    "typical_shelf_life_days": 180
+  },
+  {
     "sku_id": "SKU-D004",
     "ingredient_id": "mi_soi",
     "product_name": "Mì sợi tươi",
@@ -981,6 +3201,30 @@
     "pack_size_g": 300,
     "retail_price": 15000,
     "cost_price": 9500,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-D004P200",
+    "ingredient_id": "mi_soi",
+    "product_name": "Mì sợi tươi (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 10000,
+    "cost_price": 6500,
+    "typical_shelf_life_days": 5
+  },
+  {
+    "sku_id": "SKU-D004P500",
+    "ingredient_id": "mi_soi",
+    "product_name": "Mì sợi tươi (500g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 25000,
+    "cost_price": 16000,
     "typical_shelf_life_days": 5
   },
   {
@@ -996,6 +3240,42 @@
     "typical_shelf_life_days": 4
   },
   {
+    "sku_id": "SKU-D005P200",
+    "ingredient_id": "bun_dau",
+    "product_name": "Bún đậu (gói) (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 8000,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-D005P300",
+    "ingredient_id": "bun_dau",
+    "product_name": "Bún đậu (gói) (300g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 12000,
+    "cost_price": 8000,
+    "typical_shelf_life_days": 4
+  },
+  {
+    "sku_id": "SKU-D005P500",
+    "ingredient_id": "bun_dau",
+    "product_name": "Bún đậu (gói) (500g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 20000,
+    "cost_price": 13000,
+    "typical_shelf_life_days": 4
+  },
+  {
     "sku_id": "SKU-D006",
     "ingredient_id": "hu_tieu",
     "product_name": "Hủ tiếu khô",
@@ -1005,6 +3285,30 @@
     "pack_size_g": 500,
     "retail_price": 25000,
     "cost_price": 16000,
+    "typical_shelf_life_days": 240
+  },
+  {
+    "sku_id": "SKU-D006P200",
+    "ingredient_id": "hu_tieu",
+    "product_name": "Hủ tiếu khô (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 10000,
+    "cost_price": 6500,
+    "typical_shelf_life_days": 240
+  },
+  {
+    "sku_id": "SKU-D006P300",
+    "ingredient_id": "hu_tieu",
+    "product_name": "Hủ tiếu khô (300g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 15000,
+    "cost_price": 9500,
     "typical_shelf_life_days": 240
   },
   {
@@ -1020,6 +3324,42 @@
     "typical_shelf_life_days": 180
   },
   {
+    "sku_id": "SKU-D007P50",
+    "ingredient_id": "mi_chay",
+    "product_name": "Mì chay ăn liền (50g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 50,
+    "retail_price": 4500,
+    "cost_price": 3000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D007P100",
+    "ingredient_id": "mi_chay",
+    "product_name": "Mì chay ăn liền (100g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 9500,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D007P200",
+    "ingredient_id": "mi_chay",
+    "product_name": "Mì chay ăn liền (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 18500,
+    "cost_price": 12000,
+    "typical_shelf_life_days": 180
+  },
+  {
     "sku_id": "SKU-D008",
     "ingredient_id": "banh_pho",
     "product_name": "Bánh phở tươi",
@@ -1029,6 +3369,30 @@
     "pack_size_g": 500,
     "retail_price": 20000,
     "cost_price": 13000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-D008P200",
+    "ingredient_id": "banh_pho",
+    "product_name": "Bánh phở tươi (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 8000,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 3
+  },
+  {
+    "sku_id": "SKU-D008P300",
+    "ingredient_id": "banh_pho",
+    "product_name": "Bánh phở tươi (300g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 12000,
+    "cost_price": 8000,
     "typical_shelf_life_days": 3
   },
   {
@@ -1044,6 +3408,42 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-D009P200",
+    "ingredient_id": "vermicelli",
+    "product_name": "Bún khô (vermicelli) (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 9000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-D009P300",
+    "ingredient_id": "vermicelli",
+    "product_name": "Bún khô (vermicelli) (300g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 13500,
+    "cost_price": 8500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-D009P500",
+    "ingredient_id": "vermicelli",
+    "product_name": "Bún khô (vermicelli) (500g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 22500,
+    "cost_price": 14500,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-D010",
     "ingredient_id": "mi_y",
     "product_name": "Mì ý spaghetti",
@@ -1053,6 +3453,30 @@
     "pack_size_g": 500,
     "retail_price": 28000,
     "cost_price": 19000,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-D010P200",
+    "ingredient_id": "mi_y",
+    "product_name": "Mì ý spaghetti (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 11000,
+    "cost_price": 7500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-D010P300",
+    "ingredient_id": "mi_y",
+    "product_name": "Mì ý spaghetti (300g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 17000,
+    "cost_price": 11500,
     "typical_shelf_life_days": 365
   },
   {
@@ -1068,6 +3492,30 @@
     "typical_shelf_life_days": 365
   },
   {
+    "sku_id": "SKU-D011P300",
+    "ingredient_id": "bot_gao",
+    "product_name": "Bột gạo (300g)",
+    "category_l1": "processed",
+    "category_l2": "flour",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 6500,
+    "cost_price": 4500,
+    "typical_shelf_life_days": 365
+  },
+  {
+    "sku_id": "SKU-D011P500",
+    "ingredient_id": "bot_gao",
+    "product_name": "Bột gạo (500g)",
+    "category_l1": "processed",
+    "category_l2": "flour",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 11000,
+    "cost_price": 8000,
+    "typical_shelf_life_days": 365
+  },
+  {
     "sku_id": "SKU-D012",
     "ingredient_id": "keo_gao",
     "product_name": "Kẹo gạo lứt",
@@ -1077,6 +3525,30 @@
     "pack_size_g": 200,
     "retail_price": 15000,
     "cost_price": 9500,
+    "typical_shelf_life_days": 90
+  },
+  {
+    "sku_id": "SKU-D012P100",
+    "ingredient_id": "keo_gao",
+    "product_name": "Kẹo gạo lứt (100g)",
+    "category_l1": "processed",
+    "category_l2": "snack",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 7500,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 90
+  },
+  {
+    "sku_id": "SKU-D012P300",
+    "ingredient_id": "keo_gao",
+    "product_name": "Kẹo gạo lứt (300g)",
+    "category_l1": "processed",
+    "category_l2": "snack",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 22500,
+    "cost_price": 14000,
     "typical_shelf_life_days": 90
   },
   {
@@ -1092,6 +3564,30 @@
     "typical_shelf_life_days": 30
   },
   {
+    "sku_id": "SKU-D013P200",
+    "ingredient_id": "cha_gio",
+    "product_name": "Chả giò đông lạnh (200g)",
+    "category_l1": "processed",
+    "category_l2": "frozen",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 30000,
+    "cost_price": 21500,
+    "typical_shelf_life_days": 30
+  },
+  {
+    "sku_id": "SKU-D013P500",
+    "ingredient_id": "cha_gio",
+    "product_name": "Chả giò đông lạnh (500g)",
+    "category_l1": "processed",
+    "category_l2": "frozen",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 75000,
+    "cost_price": 53500,
+    "typical_shelf_life_days": 30
+  },
+  {
     "sku_id": "SKU-D014",
     "ingredient_id": "banh_trang",
     "product_name": "Bánh tráng cuốn",
@@ -1104,6 +3600,42 @@
     "typical_shelf_life_days": 180
   },
   {
+    "sku_id": "SKU-D014P200",
+    "ingredient_id": "banh_trang",
+    "product_name": "Bánh tráng cuốn (200g)",
+    "category_l1": "processed",
+    "category_l2": "rice_paper",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 9000,
+    "cost_price": 6000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D014P300",
+    "ingredient_id": "banh_trang",
+    "product_name": "Bánh tráng cuốn (300g)",
+    "category_l1": "processed",
+    "category_l2": "rice_paper",
+    "unit_type": "pack",
+    "pack_size_g": 300,
+    "retail_price": 13500,
+    "cost_price": 9000,
+    "typical_shelf_life_days": 180
+  },
+  {
+    "sku_id": "SKU-D014P500",
+    "ingredient_id": "banh_trang",
+    "product_name": "Bánh tráng cuốn (500g)",
+    "category_l1": "processed",
+    "category_l2": "rice_paper",
+    "unit_type": "pack",
+    "pack_size_g": 500,
+    "retail_price": 22500,
+    "cost_price": 15000,
+    "typical_shelf_life_days": 180
+  },
+  {
     "sku_id": "SKU-D015",
     "ingredient_id": "mi_inst",
     "product_name": "Mì ăn liền Hảo Hảo",
@@ -1113,6 +3645,42 @@
     "pack_size_g": 75,
     "retail_price": 6000,
     "cost_price": 3800,
+    "typical_shelf_life_days": 240
+  },
+  {
+    "sku_id": "SKU-D015P50",
+    "ingredient_id": "mi_inst",
+    "product_name": "Mì ăn liền Hảo Hảo (50g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 50,
+    "retail_price": 4000,
+    "cost_price": 2500,
+    "typical_shelf_life_days": 240
+  },
+  {
+    "sku_id": "SKU-D015P100",
+    "ingredient_id": "mi_inst",
+    "product_name": "Mì ăn liền Hảo Hảo (100g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 100,
+    "retail_price": 8000,
+    "cost_price": 5000,
+    "typical_shelf_life_days": 240
+  },
+  {
+    "sku_id": "SKU-D015P200",
+    "ingredient_id": "mi_inst",
+    "product_name": "Mì ăn liền Hảo Hảo (200g)",
+    "category_l1": "processed",
+    "category_l2": "noodle",
+    "unit_type": "pack",
+    "pack_size_g": 200,
+    "retail_price": 16000,
+    "cost_price": 10000,
     "typical_shelf_life_days": 240
   }
 ]
