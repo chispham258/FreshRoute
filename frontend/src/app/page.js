@@ -50,10 +50,6 @@ export default function Home() {
           Nền tảng AI thông minh biến đổi hàng tồn kho sắp hết hạn thành bộ bữa
           ăn đặc biệt
         </p>
-        <div className="inline-flex items-center justify-center mt-6 px-4 py-1.5 bg-green-100 text-green-700 rounded-full text-sm font-bold shadow-sm border border-green-200">
-          <span className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
-          Powered by Gemini AI
-        </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full max-w-250 px-4 lg:px-0">

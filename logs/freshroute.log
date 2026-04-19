@@ -20,3 +20,699 @@
 2026-04-18 21:51:53,637 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
 2026-04-18 21:51:53,638 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
 2026-04-18 21:51:53,638 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:51,218 - app.agent.b2b.graph - INFO - [graph.py:209] - === Starting B2B Agent for store BHX-HCM001, top_k=10 ===
+2026-04-19 09:38:51,334 - app.agent.b2b.graph - INFO - [graph.py:213] - Found 25 urgent batches
+2026-04-19 09:38:53,376 - app.agent.b2b.graph - DEBUG - [graph.py:261] - B2B graph initialized
+2026-04-19 09:38:53,388 - app.agent.b2b.graph - INFO - [graph.py:209] - === Starting B2B Agent for store BHX-HCM001, top_k=10 ===
+2026-04-19 09:38:53,389 - app.agent.b2b.graph - INFO - [graph.py:213] - Found 25 urgent batches
+2026-04-19 09:38:53,390 - app.agent.b2b.graph - DEBUG - [graph.py:261] - B2B graph initialized
+2026-04-19 09:38:53,956 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:38:53,957 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.started host='mkp-api.fptcloud.com' port=443 local_address=None timeout=None socket_options=None
+2026-04-19 09:38:53,959 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:38:53,959 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.started host='mkp-api.fptcloud.com' port=443 local_address=None timeout=None socket_options=None
+2026-04-19 09:38:54,139 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A1412BE120>
+2026-04-19 09:38:54,140 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A1411EFB10>
+2026-04-19 09:38:54,140 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002A1408BF250> server_hostname='mkp-api.fptcloud.com' timeout=None
+2026-04-19 09:38:54,141 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002A1408BF250> server_hostname='mkp-api.fptcloud.com' timeout=None
+2026-04-19 09:38:54,296 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A1411EF9D0>
+2026-04-19 09:38:54,297 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:54,298 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A140B73820>
+2026-04-19 09:38:54,298 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:38:54,299 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:54,299 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:38:54,300 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:38:54,301 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:38:54,301 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:38:54,301 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:54,302 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:38:54,302 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:56,987 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:38:57 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'2c8f0e0b-8f23-4f02-ac37-c3a4297906fd'), (b'x-usage-completion-tokens', b'511'), (b'x-usage-prompt-tokens', b'2804'), (b'x-usage-total-tokens', b'3315'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2436'), (b'x-kong-proxy-latency', b'7'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'bc61437112db2574df4d5d5fd8ff9466'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889280aaf3e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:38:56,989 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:38:57,001 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:38:57,005 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:38:57,006 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:38:57,006 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:38:57,007 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:38:57 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '2c8f0e0b-8f23-4f02-ac37-c3a4297906fd', 'x-usage-completion-tokens': '511', 'x-usage-prompt-tokens': '2804', 'x-usage-total-tokens': '3315', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2436', 'x-kong-proxy-latency': '7', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'bc61437112db2574df4d5d5fd8ff9466', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889280aaf3e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:38:57,007 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 2c8f0e0b-8f23-4f02-ac37-c3a4297906fd
+2026-04-19 09:38:57,045 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {
+  "ingredient_ids": [
+    "mong_heo",
+    "nac_vai_heo",
+    "thit_ga",
+    "canh_co_heo",
+    "ba_chi_heo",
+    "gio_heo",
+    "so_huyet",
+    "ca_tram",
+    "ca_loc",
+    "ca_hong",
+    "long_heo",
+    "bo_xao",
+    "thit_vit",
+    "cua",
+    "thit_bo",
+    "heo_sap",
+    "suon_heo",
+    "tom"
+  ],
+  "ingredient_urgency": {
+    "mong_heo": 0.934,
+    "nac_vai_heo": 0.9283,
+    "thit_ga": 0.9144,
+    "canh_co_heo": 0.9,
+    "ba_chi_heo": 0.8926,
+    "gio_heo": 0.8999,
+    "so_huyet": 0.8999,
+
+2026-04-19 09:38:57,045 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:38:57 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'75abe7d3-d40a-4758-a6f1-7db96face5e9'), (b'x-usage-completion-tokens', b'507'), (b'x-usage-prompt-tokens', b'2804'), (b'x-usage-total-tokens', b'3311'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2544'), (b'x-kong-proxy-latency', b'51'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'aabb7f1e0f8f3555853b022912ba2640'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889284a963ded-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:38:57,048 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'search_recipes_from_ingredients' from text content
+2026-04-19 09:38:57,049 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:38:57,051 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:38:57,050 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] search_recipes_from_ingredients  args_keys=['ingredient_ids', 'ingredient_urgency', 'top_k']
+2026-04-19 09:38:57,053 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:38:57,053 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:38:57,054 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:38:57,055 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:38:57 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '75abe7d3-d40a-4758-a6f1-7db96face5e9', 'x-usage-completion-tokens': '507', 'x-usage-prompt-tokens': '2804', 'x-usage-total-tokens': '3311', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2544', 'x-kong-proxy-latency': '51', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'aabb7f1e0f8f3555853b022912ba2640', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889284a963ded-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:38:57,056 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 75abe7d3-d40a-4758-a6f1-7db96face5e9
+2026-04-19 09:38:57,058 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {
+  "ingredient_ids": [
+    "mong_heo",
+    "nac_vai_heo",
+    "thit_ga",
+    "canh_co_heo",
+    "ba_chi_heo",
+    "gio_heo",
+    "so_huyet",
+    "ca_tram",
+    "ca_loc",
+    "ca_hong",
+    "long_heo",
+    "bo_xao",
+    "thit_vit",
+    "cua",
+    "thit_bo",
+    "heo_sap",
+    "suon_heo",
+    "tom"
+  ],
+  "ingredient_urgency": {
+    "mong_heo": 0.934,
+    "nac_vai_heo": 0.9283,
+    "thit_ga": 0.9144,
+    "canh_co_heo": 0.9,
+    "ba_chi_heo": 0.8926,
+    "gio_heo": 0.8999,
+    "so_huyet": 0.8999,
+
+2026-04-19 09:38:57,060 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'search_recipes_from_ingredients' from text content
+2026-04-19 09:38:57,061 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] search_recipes_from_ingredients  args_keys=['ingredient_ids', 'ingredient_urgency', 'top_k']
+2026-04-19 09:38:57,163 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:38:57,182 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:38:57,184 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:57,185 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:57,185 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:38:57,186 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:38:57,186 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:38:57,186 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:38:57,187 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:38:57,187 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:57,188 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:38:57,188 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:59,445 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:38:59 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'4fadedc1-9861-4553-9646-70e993e48068'), (b'x-usage-completion-tokens', b'333'), (b'x-usage-prompt-tokens', b'5279'), (b'x-usage-total-tokens', b'5612'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2039'), (b'x-kong-proxy-latency', b'9'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'794e0418deb3674af2575d480978ea05'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee8893a0f8e3ded-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:38:59,447 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:38:59 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'5a017d40-7ba7-464d-9b77-700f10f73c6a'), (b'x-usage-completion-tokens', b'338'), (b'x-usage-prompt-tokens', b'5279'), (b'x-usage-total-tokens', b'5617'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2061'), (b'x-kong-proxy-latency', b'10'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'f0db96659091cc3d617d2820ed12e92e'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee8893a0c403e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:38:59,446 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:38:59,448 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:38:59,449 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:38:59,449 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:38:59,450 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:38:59,451 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:38:59,451 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:38:59,451 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:38:59,452 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:38:59,452 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:38:59,452 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:38:59 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '4fadedc1-9861-4553-9646-70e993e48068', 'x-usage-completion-tokens': '333', 'x-usage-prompt-tokens': '5279', 'x-usage-total-tokens': '5612', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2039', 'x-kong-proxy-latency': '9', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '794e0418deb3674af2575d480978ea05', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee8893a0f8e3ded-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:38:59,453 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 4fadedc1-9861-4553-9646-70e993e48068
+2026-04-19 09:38:59,452 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:38:59 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '5a017d40-7ba7-464d-9b77-700f10f73c6a', 'x-usage-completion-tokens': '338', 'x-usage-prompt-tokens': '5279', 'x-usage-total-tokens': '5617', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2061', 'x-kong-proxy-latency': '10', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'f0db96659091cc3d617d2820ed12e92e', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee8893a0c403e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:38:59,454 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 5a017d40-7ba7-464d-9b77-700f10f73c6a
+2026-04-19 09:38:59,474 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:38:59,514 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:38:59,515 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:38:59,517 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:38:59,642 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:38:59,666 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:38:59,667 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:59,668 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:59,670 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:38:59,670 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:38:59,670 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:38:59,671 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:38:59,672 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:38:59,672 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:38:59,672 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:38:59,673 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:01,589 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:01 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'760ee986-c644-4d95-83a2-7ac255fb7097'), (b'x-usage-completion-tokens', b'322'), (b'x-usage-prompt-tokens', b'6299'), (b'x-usage-total-tokens', b'6621'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1728'), (b'x-kong-proxy-latency', b'22'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'a073fd20a72dda7207ca5e5531674219'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889499c613e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:01,590 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:01 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'bfdc472b-7a36-43b2-ad3b-273bf86ef174'), (b'x-usage-completion-tokens', b'322'), (b'x-usage-prompt-tokens', b'6299'), (b'x-usage-total-tokens', b'6621'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1699'), (b'x-kong-proxy-latency', b'16'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'8e99af445fe29b0527bf094d81a9de42'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889499b043ded-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:01,591 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:01,592 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:01,592 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:01,594 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:01,594 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:01,595 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:01,595 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:01,596 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:01,596 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:01 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '760ee986-c644-4d95-83a2-7ac255fb7097', 'x-usage-completion-tokens': '322', 'x-usage-prompt-tokens': '6299', 'x-usage-total-tokens': '6621', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1728', 'x-kong-proxy-latency': '22', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'a073fd20a72dda7207ca5e5531674219', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889499c613e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:01,597 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 760ee986-c644-4d95-83a2-7ac255fb7097
+2026-04-19 09:39:01,596 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:01,599 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:01,611 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:01,612 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:01 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'bfdc472b-7a36-43b2-ad3b-273bf86ef174', 'x-usage-completion-tokens': '322', 'x-usage-prompt-tokens': '6299', 'x-usage-total-tokens': '6621', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1699', 'x-kong-proxy-latency': '16', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '8e99af445fe29b0527bf094d81a9de42', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889499b043ded-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:01,613 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:01,614 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: bfdc472b-7a36-43b2-ad3b-273bf86ef174
+2026-04-19 09:39:01,647 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:01,648 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:01,705 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:01,722 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:01,726 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:01,726 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:01,728 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:01,728 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:01,729 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:01,729 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:01,730 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:01,731 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:01,731 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:01,731 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:03,385 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:03 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'd5c9d0b2-9c7b-40de-8d53-48c2d7d45034'), (b'x-usage-completion-tokens', b'271'), (b'x-usage-prompt-tokens', b'7329'), (b'x-usage-total-tokens', b'7600'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1493'), (b'x-kong-proxy-latency', b'66'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'82b15d6d015a6d2c22c6f2324310073b'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889567cbb3e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:03,386 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:03,389 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:03,389 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:03,389 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:03,390 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:03,390 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:03 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'd5c9d0b2-9c7b-40de-8d53-48c2d7d45034', 'x-usage-completion-tokens': '271', 'x-usage-prompt-tokens': '7329', 'x-usage-total-tokens': '7600', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1493', 'x-kong-proxy-latency': '66', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '82b15d6d015a6d2c22c6f2324310073b', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889567cbb3e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:03,391 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: d5c9d0b2-9c7b-40de-8d53-48c2d7d45034
+2026-04-19 09:39:03,410 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:03,411 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:03,463 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:03,464 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:03,465 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:03,466 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:03,466 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:03,466 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:03,532 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:03 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'fac38a7d-111b-4b9b-931f-09852e602ec3'), (b'x-usage-completion-tokens', b'277'), (b'x-usage-prompt-tokens', b'7329'), (b'x-usage-total-tokens', b'7606'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1635'), (b'x-kong-proxy-latency', b'40'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'f971ac2d9205fa694f6d9b754ede1770'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889567bf53ded-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:03,533 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:03,534 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:03,535 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:03,535 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:03,535 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:03,536 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:03 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'fac38a7d-111b-4b9b-931f-09852e602ec3', 'x-usage-completion-tokens': '277', 'x-usage-prompt-tokens': '7329', 'x-usage-total-tokens': '7606', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1635', 'x-kong-proxy-latency': '40', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'f971ac2d9205fa694f6d9b754ede1770', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889567bf53ded-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:03,536 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: fac38a7d-111b-4b9b-931f-09852e602ec3
+2026-04-19 09:39:03,549 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:03,551 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:03,602 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:03,602 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:03,603 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:03,604 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:03,604 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:03,605 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:05,279 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:05 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'df3485e1-9626-4930-a798-b72dee69dedb'), (b'x-usage-completion-tokens', b'276'), (b'x-usage-prompt-tokens', b'8190'), (b'x-usage-total-tokens', b'8466'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1472'), (b'x-kong-proxy-latency', b'78'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'2a6b0b77de9aca5aae6f4407afa88529'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889622bc63ded-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:05,279 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:05,280 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:05,281 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:05,282 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:05,282 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:05,282 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:05 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'df3485e1-9626-4930-a798-b72dee69dedb', 'x-usage-completion-tokens': '276', 'x-usage-prompt-tokens': '8190', 'x-usage-total-tokens': '8466', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1472', 'x-kong-proxy-latency': '78', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '2a6b0b77de9aca5aae6f4407afa88529', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889622bc63ded-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:05,282 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: df3485e1-9626-4930-a798-b72dee69dedb
+2026-04-19 09:39:05,294 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:05,295 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:05,348 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:05,348 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:05,349 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:05,350 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:05,350 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:05,350 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:05,410 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:05 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'c57c0fc1-981d-44bf-bab2-6c356341412d'), (b'x-usage-completion-tokens', b'294'), (b'x-usage-prompt-tokens', b'8190'), (b'x-usage-total-tokens', b'8484'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1822'), (b'x-kong-proxy-latency', b'28'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'4ff7927528aa0a72ebf7c31d1f002e71'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889614c283e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:05,411 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:05,412 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:05,412 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:05,412 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:05,413 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:05,413 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:05 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'c57c0fc1-981d-44bf-bab2-6c356341412d', 'x-usage-completion-tokens': '294', 'x-usage-prompt-tokens': '8190', 'x-usage-total-tokens': '8484', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1822', 'x-kong-proxy-latency': '28', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '4ff7927528aa0a72ebf7c31d1f002e71', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889614c283e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:05,413 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: c57c0fc1-981d-44bf-bab2-6c356341412d
+2026-04-19 09:39:05,426 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:05,427 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:05,480 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:05,480 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:05,481 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:05,481 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:05,482 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:05,483 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:07,435 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:07 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'a5abeced-45cb-41cf-a13b-7c7ea866b082'), (b'x-usage-completion-tokens', b'287'), (b'x-usage-prompt-tokens', b'9039'), (b'x-usage-total-tokens', b'9326'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1940'), (b'x-kong-proxy-latency', b'39'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'6eac37791993232eecfb55038e97c129'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee8896d1ac13ded-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:07,435 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:07 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'9e66b06a-c7b4-4a82-b536-3e938530956d'), (b'x-usage-completion-tokens', b'287'), (b'x-usage-prompt-tokens', b'9039'), (b'x-usage-total-tokens', b'9326'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1799'), (b'x-kong-proxy-latency', b'7'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'8a55384ff91fa3178c4d965461e62231'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee8896e0cb83e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:07,436 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:07,437 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:07,438 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:07,439 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:07,440 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:07,441 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:07,441 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:07,441 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:07,442 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:07,442 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:07 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '9e66b06a-c7b4-4a82-b536-3e938530956d', 'x-usage-completion-tokens': '287', 'x-usage-prompt-tokens': '9039', 'x-usage-total-tokens': '9326', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1799', 'x-kong-proxy-latency': '7', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '8a55384ff91fa3178c4d965461e62231', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee8896e0cb83e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:07,443 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:07,444 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 9e66b06a-c7b4-4a82-b536-3e938530956d
+2026-04-19 09:39:07,444 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:07 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'a5abeced-45cb-41cf-a13b-7c7ea866b082', 'x-usage-completion-tokens': '287', 'x-usage-prompt-tokens': '9039', 'x-usage-total-tokens': '9326', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1940', 'x-kong-proxy-latency': '39', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '6eac37791993232eecfb55038e97c129', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee8896d1ac13ded-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:07,446 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: a5abeced-45cb-41cf-a13b-7c7ea866b082
+2026-04-19 09:39:07,458 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:07,460 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:07,470 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:07,473 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:07,557 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:07,577 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:07,578 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:07,579 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:07,580 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:07,580 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:07,581 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:07,581 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:07,582 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:07,582 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:07,582 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:07,583 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:08,981 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:09 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'13057833-9920-47b0-9255-7fa99d618ba9'), (b'x-usage-completion-tokens', b'170'), (b'x-usage-prompt-tokens', b'9858'), (b'x-usage-total-tokens', b'10028'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1184'), (b'x-kong-proxy-latency', b'38'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'2f73a15a6c9ed508b1080c318ce62208'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee8897b0c1f3ded-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:08,982 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:08,983 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:08,984 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:08,984 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:08,984 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:08,984 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:09 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '13057833-9920-47b0-9255-7fa99d618ba9', 'x-usage-completion-tokens': '170', 'x-usage-prompt-tokens': '9858', 'x-usage-total-tokens': '10028', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1184', 'x-kong-proxy-latency': '38', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '2f73a15a6c9ed508b1080c318ce62208', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee8897b0c1f3ded-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:08,985 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 13057833-9920-47b0-9255-7fa99d618ba9
+2026-04-19 09:39:08,986 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {"recipe_ids": ["R031", "R013", "R037", "R022", "R017"], "store_id": "BHX-HCM001", "top_k": 10}
+2026-04-19 09:39:08,992 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'finalize_bundles' from text content
+2026-04-19 09:39:08,993 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] finalize_bundles  args_keys=['recipe_ids', 'store_id', 'top_k']
+2026-04-19 09:39:08,999 - app.agent.b2b.tools - INFO - [tools.py:67] - finalize_bundles called: recipe_ids=['R031', 'R013', 'R037', 'R022', 'R017'], store_id=BHX-HCM001, top_k=10
+2026-04-19 09:39:09,014 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R031: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:39:09,025 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R013: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:39:09,035 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R037: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:39:09,047 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R022: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:39:09,058 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R017: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:39:09,058 - app.agent.b2b.tools - INFO - [tools.py:133] - finalize_bundles: 5/5 recipes passed allocation
+2026-04-19 09:39:09,100 - app.agent.b2b.tools - INFO - [tools.py:158] - finalize_bundles: returning 5 bundles
+2026-04-19 09:39:09,104 - app.agent.b2b.graph - INFO - [graph.py:145] - finalize_bundles completed — terminating agent loop
+2026-04-19 09:39:09,107 - app.agent.b2b.graph - INFO - [graph.py:267] - Agent completed with 15 messages
+2026-04-19 09:39:09,107 - app.agent.b2b.graph - INFO - [graph.py:281] - Tool calls: ['search_recipes_from_ingredients', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'finalize_bundles']
+2026-04-19 09:39:09,109 - app.agent.b2b.graph - INFO - [graph.py:303] - finalize_bundles_called=True, bundles=5
+2026-04-19 09:39:09,110 - app.api.admin - INFO - [admin.py:156] - Agent returned 5 bundles for BHX-HCM001
+2026-04-19 09:39:09,665 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:10 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'2dfefcb6-b0f5-4c6f-b19f-ba9f618ff055'), (b'x-usage-completion-tokens', b'333'), (b'x-usage-prompt-tokens', b'9858'), (b'x-usage-total-tokens', b'10191'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1952'), (b'x-kong-proxy-latency', b'8'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'001b5507d7dc4b6312e8c81205e37d37'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee8897b0e003e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:09,666 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:09,667 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:09,668 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:09,668 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:09,668 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:09,669 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:10 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '2dfefcb6-b0f5-4c6f-b19f-ba9f618ff055', 'x-usage-completion-tokens': '333', 'x-usage-prompt-tokens': '9858', 'x-usage-total-tokens': '10191', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1952', 'x-kong-proxy-latency': '8', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '001b5507d7dc4b6312e8c81205e37d37', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee8897b0e003e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:09,669 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 2dfefcb6-b0f5-4c6f-b19f-ba9f618ff055
+2026-04-19 09:39:09,678 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:39:09,679 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:39:09,732 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:39:09,733 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:09,734 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:39:09,734 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:39:09,735 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:39:09,735 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:39:10,847 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:39:11 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'47fb6db3-7750-46c2-8dc9-2b1d0fdc66a6'), (b'x-usage-completion-tokens', b'151'), (b'x-usage-prompt-tokens', b'10855'), (b'x-usage-total-tokens', b'11006'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'952'), (b'x-kong-proxy-latency', b'34'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'2eda8c3bc0bc5a3861976b30a7b45637'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee889887f433e42-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:39:10,848 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:39:10,848 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:39:10,849 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:39:10,849 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:39:10,849 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:39:10,849 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:39:11 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '47fb6db3-7750-46c2-8dc9-2b1d0fdc66a6', 'x-usage-completion-tokens': '151', 'x-usage-prompt-tokens': '10855', 'x-usage-total-tokens': '11006', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '952', 'x-kong-proxy-latency': '34', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '2eda8c3bc0bc5a3861976b30a7b45637', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee889887f433e42-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:39:10,850 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 47fb6db3-7750-46c2-8dc9-2b1d0fdc66a6
+2026-04-19 09:39:10,851 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {
+    "recipe_ids": ["R031", "R013", "R037", "R022", "R017", "R001"],
+    "store_id": "BHX-HCM001",
+    "top_k": 10
+}
+2026-04-19 09:39:10,855 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'finalize_bundles' from text content
+2026-04-19 09:39:10,856 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] finalize_bundles  args_keys=['recipe_ids', 'store_id', 'top_k']
+2026-04-19 09:39:10,864 - app.agent.b2b.tools - INFO - [tools.py:67] - finalize_bundles called: recipe_ids=['R031', 'R013', 'R037', 'R022', 'R017', 'R001'], store_id=BHX-HCM001, top_k=10
+2026-04-19 09:39:10,878 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R031: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:39:10,888 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R013: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:39:10,898 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R037: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:39:10,910 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R022: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:39:10,920 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R017: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:39:10,930 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R001: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:39:10,930 - app.agent.b2b.tools - INFO - [tools.py:133] - finalize_bundles: 6/6 recipes passed allocation
+2026-04-19 09:39:10,933 - app.agent.b2b.tools - INFO - [tools.py:158] - finalize_bundles: returning 6 bundles
+2026-04-19 09:39:10,937 - app.agent.b2b.graph - INFO - [graph.py:145] - finalize_bundles completed — terminating agent loop
+2026-04-19 09:39:10,939 - app.agent.b2b.graph - INFO - [graph.py:267] - Agent completed with 17 messages
+2026-04-19 09:39:10,940 - app.agent.b2b.graph - INFO - [graph.py:281] - Tool calls: ['search_recipes_from_ingredients', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'finalize_bundles']
+2026-04-19 09:39:10,941 - app.agent.b2b.graph - INFO - [graph.py:303] - finalize_bundles_called=True, bundles=6
+2026-04-19 09:39:10,942 - app.api.admin - INFO - [admin.py:156] - Agent returned 6 bundles for BHX-HCM001
+2026-04-19 09:48:04,904 - app.agent.b2b.graph - INFO - [graph.py:209] - === Starting B2B Agent for store BHX-HCM001, top_k=10 ===
+2026-04-19 09:48:04,904 - app.agent.b2b.graph - INFO - [graph.py:213] - Found 25 urgent batches
+2026-04-19 09:48:04,905 - app.agent.b2b.graph - DEBUG - [graph.py:261] - B2B graph initialized
+2026-04-19 09:48:04,924 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:04,925 - httpcore.connection - DEBUG - [_trace.py:47] - close.started
+2026-04-19 09:48:04,935 - httpcore.connection - DEBUG - [_trace.py:47] - close.complete
+2026-04-19 09:48:04,936 - httpcore.connection - DEBUG - [_trace.py:47] - close.started
+2026-04-19 09:48:04,936 - httpcore.connection - DEBUG - [_trace.py:47] - close.complete
+2026-04-19 09:48:04,936 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.started host='mkp-api.fptcloud.com' port=443 local_address=None timeout=None socket_options=None
+2026-04-19 09:48:05,441 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A14071A780>
+2026-04-19 09:48:05,441 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002A1408BF250> server_hostname='mkp-api.fptcloud.com' timeout=None
+2026-04-19 09:48:05,496 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A1407F27B0>
+2026-04-19 09:48:05,496 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:05,496 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:05,496 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:05,496 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:05,497 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:08,225 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:08 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'4caadc2a-6ae4-4de0-9e8f-5a73e249a22a'), (b'x-usage-completion-tokens', b'507'), (b'x-usage-prompt-tokens', b'2804'), (b'x-usage-total-tokens', b'3311'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2611'), (b'x-kong-proxy-latency', b'5'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'7fa9807dac0a082dabe40429fff8494a'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee8969cfea08223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:08,226 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:08,226 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:08,227 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:08,227 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:08,227 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:08,227 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:08 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '4caadc2a-6ae4-4de0-9e8f-5a73e249a22a', 'x-usage-completion-tokens': '507', 'x-usage-prompt-tokens': '2804', 'x-usage-total-tokens': '3311', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2611', 'x-kong-proxy-latency': '5', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '7fa9807dac0a082dabe40429fff8494a', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee8969cfea08223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:08,227 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 4caadc2a-6ae4-4de0-9e8f-5a73e249a22a
+2026-04-19 09:48:08,228 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {
+  "ingredient_ids": [
+    "mong_heo",
+    "nac_vai_heo",
+    "thit_ga",
+    "canh_co_heo",
+    "ba_chi_heo",
+    "gio_heo",
+    "so_huyet",
+    "ca_tram",
+    "ca_loc",
+    "ca_hong",
+    "long_heo",
+    "bo_xao",
+    "thit_vit",
+    "cua",
+    "thit_bo",
+    "heo_sap",
+    "suon_heo",
+    "tom"
+  ],
+  "ingredient_urgency": {
+    "mong_heo": 0.934,
+    "nac_vai_heo": 0.9283,
+    "thit_ga": 0.9144,
+    "canh_co_heo": 0.9,
+    "ba_chi_heo": 0.8926,
+    "gio_heo": 0.8999,
+    "so_huyet": 0.8999,
+
+2026-04-19 09:48:08,230 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'search_recipes_from_ingredients' from text content
+2026-04-19 09:48:08,231 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] search_recipes_from_ingredients  args_keys=['ingredient_ids', 'ingredient_urgency', 'top_k']
+2026-04-19 09:48:08,247 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:08,248 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:08,248 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:08,248 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:08,248 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:08,249 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:10,362 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:10 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'eeffa1f2-f043-4f29-9612-36edcd2a14c4'), (b'x-usage-completion-tokens', b'331'), (b'x-usage-prompt-tokens', b'5279'), (b'x-usage-total-tokens', b'5610'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1929'), (b'x-kong-proxy-latency', b'14'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'046cbf0fe69259255d84e603504ce229'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee896ae291c8223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:10,363 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:10,364 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:10,365 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:10,365 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:10,365 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:10,365 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:10 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'eeffa1f2-f043-4f29-9612-36edcd2a14c4', 'x-usage-completion-tokens': '331', 'x-usage-prompt-tokens': '5279', 'x-usage-total-tokens': '5610', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1929', 'x-kong-proxy-latency': '14', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '046cbf0fe69259255d84e603504ce229', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee896ae291c8223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:10,365 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: eeffa1f2-f043-4f29-9612-36edcd2a14c4
+2026-04-19 09:48:10,390 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:48:10,391 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:48:10,419 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:10,419 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:10,420 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:10,420 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:10,420 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:10,420 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:12,471 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:12 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'5fb6b7d0-ec4d-4db5-a8f6-774ce119f908'), (b'x-usage-completion-tokens', b'322'), (b'x-usage-prompt-tokens', b'6299'), (b'x-usage-total-tokens', b'6621'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1917'), (b'x-kong-proxy-latency', b'10'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'3f3a5760e5bf18054f7f546fb9d56b23'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee896bbb9628223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:12,471 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:12,472 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:12,473 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:12,473 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:12,473 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:12,473 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:12 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '5fb6b7d0-ec4d-4db5-a8f6-774ce119f908', 'x-usage-completion-tokens': '322', 'x-usage-prompt-tokens': '6299', 'x-usage-total-tokens': '6621', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1917', 'x-kong-proxy-latency': '10', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '3f3a5760e5bf18054f7f546fb9d56b23', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee896bbb9628223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:12,473 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 5fb6b7d0-ec4d-4db5-a8f6-774ce119f908
+2026-04-19 09:48:12,479 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:48:12,480 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:48:12,503 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:12,503 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:12,503 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:12,503 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:12,504 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:12,504 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:14,458 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:14 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'd7f869e1-c15f-45d5-acf8-d75c898d3fd0'), (b'x-usage-completion-tokens', b'281'), (b'x-usage-prompt-tokens', b'7329'), (b'x-usage-total-tokens', b'7610'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1676'), (b'x-kong-proxy-latency', b'90'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'6ea0eb567edf2968ee67f301f181d900'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee896c8b9d18223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:14,459 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:14,460 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:14,460 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:14,460 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:14,460 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:14,460 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:14 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'd7f869e1-c15f-45d5-acf8-d75c898d3fd0', 'x-usage-completion-tokens': '281', 'x-usage-prompt-tokens': '7329', 'x-usage-total-tokens': '7610', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1676', 'x-kong-proxy-latency': '90', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '6ea0eb567edf2968ee67f301f181d900', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee896c8b9d18223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:14,460 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: d7f869e1-c15f-45d5-acf8-d75c898d3fd0
+2026-04-19 09:48:14,466 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:48:14,466 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:48:14,489 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:14,489 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:14,490 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:14,490 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:14,490 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:14,490 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:16,616 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:16 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'9dee4200-d1ed-408b-84c0-83fb9cce0e2d'), (b'x-usage-completion-tokens', b'276'), (b'x-usage-prompt-tokens', b'8190'), (b'x-usage-total-tokens', b'8466'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1893'), (b'x-kong-proxy-latency', b'11'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'5f837e3a359eb35bdf3d042dc8f94556'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee896d52aa38223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:16,617 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:16,617 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:16,618 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:16,618 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:16,618 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:16,618 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:16 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '9dee4200-d1ed-408b-84c0-83fb9cce0e2d', 'x-usage-completion-tokens': '276', 'x-usage-prompt-tokens': '8190', 'x-usage-total-tokens': '8466', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1893', 'x-kong-proxy-latency': '11', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '5f837e3a359eb35bdf3d042dc8f94556', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee896d52aa38223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:16,618 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 9dee4200-d1ed-408b-84c0-83fb9cce0e2d
+2026-04-19 09:48:16,624 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:48:16,625 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:48:16,650 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:16,650 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:16,651 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:16,651 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:16,651 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:16,651 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:18,506 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:18 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'e73029d7-b109-433d-b897-050a16ac0500'), (b'x-usage-completion-tokens', b'288'), (b'x-usage-prompt-tokens', b'9039'), (b'x-usage-total-tokens', b'9327'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1738'), (b'x-kong-proxy-latency', b'8'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'939366767030ad59f9e682117f355c46'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee896e2ab498223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:18,507 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:18,507 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:18,507 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:18,507 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:18,508 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:18,508 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:18 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'e73029d7-b109-433d-b897-050a16ac0500', 'x-usage-completion-tokens': '288', 'x-usage-prompt-tokens': '9039', 'x-usage-total-tokens': '9327', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1738', 'x-kong-proxy-latency': '8', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '939366767030ad59f9e682117f355c46', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee896e2ab498223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:18,508 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: e73029d7-b109-433d-b897-050a16ac0500
+2026-04-19 09:48:18,513 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:48:18,513 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:48:18,539 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:18,539 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:18,540 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:18,540 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:18,540 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:18,541 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:21,216 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:21 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'a0ee719d-806b-4933-8828-319d8d40e1bb'), (b'x-usage-completion-tokens', b'350'), (b'x-usage-prompt-tokens', b'9858'), (b'x-usage-total-tokens', b'10208'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2392'), (b'x-kong-proxy-latency', b'67'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'6572cb1a8901f53e5b4412795901655d'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee896ee7b7c8223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:21,217 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:21,217 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:21,217 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:21,218 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:21,218 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:21,218 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:21 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'a0ee719d-806b-4933-8828-319d8d40e1bb', 'x-usage-completion-tokens': '350', 'x-usage-prompt-tokens': '9858', 'x-usage-total-tokens': '10208', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2392', 'x-kong-proxy-latency': '67', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '6572cb1a8901f53e5b4412795901655d', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee896ee7b7c8223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:21,218 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: a0ee719d-806b-4933-8828-319d8d40e1bb
+2026-04-19 09:48:21,222 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:48:21,223 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:48:21,246 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:48:21,247 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:21,247 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:48:21,248 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:48:21,248 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:48:21,248 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:48:22,445 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:48:22 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'841648cd-ea0b-4d56-8419-82d461a2f3f7'), (b'x-usage-completion-tokens', b'141'), (b'x-usage-prompt-tokens', b'10855'), (b'x-usage-total-tokens', b'10996'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1023'), (b'x-kong-proxy-latency', b'19'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'6c4d860f19c2d226e3ab9a13f79f280f'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee896ff58718223-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:48:22,446 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:48:22,446 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:48:22,447 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:48:22,447 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:48:22,447 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:48:22,447 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:48:22 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '841648cd-ea0b-4d56-8419-82d461a2f3f7', 'x-usage-completion-tokens': '141', 'x-usage-prompt-tokens': '10855', 'x-usage-total-tokens': '10996', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1023', 'x-kong-proxy-latency': '19', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '6c4d860f19c2d226e3ab9a13f79f280f', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee896ff58718223-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:48:22,447 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 841648cd-ea0b-4d56-8419-82d461a2f3f7
+2026-04-19 09:48:22,448 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {"recipe_ids": ["R031", "R013", "R037", "R022", "R017", "R001"], "store_id": "BHX-HCM001", "top_k": 10}
+2026-04-19 09:48:22,450 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'finalize_bundles' from text content
+2026-04-19 09:48:22,450 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] finalize_bundles  args_keys=['recipe_ids', 'store_id', 'top_k']
+2026-04-19 09:48:22,454 - app.agent.b2b.tools - INFO - [tools.py:67] - finalize_bundles called: recipe_ids=['R031', 'R013', 'R037', 'R022', 'R017', 'R001'], store_id=BHX-HCM001, top_k=10
+2026-04-19 09:48:22,460 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R031: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:48:22,465 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R013: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:48:22,470 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R037: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:48:22,475 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R022: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:48:22,480 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R017: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:48:22,485 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R001: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:48:22,485 - app.agent.b2b.tools - INFO - [tools.py:133] - finalize_bundles: 6/6 recipes passed allocation
+2026-04-19 09:48:22,487 - app.agent.b2b.tools - INFO - [tools.py:158] - finalize_bundles: returning 6 bundles
+2026-04-19 09:48:22,489 - app.agent.b2b.graph - INFO - [graph.py:145] - finalize_bundles completed — terminating agent loop
+2026-04-19 09:48:22,490 - app.agent.b2b.graph - INFO - [graph.py:267] - Agent completed with 17 messages
+2026-04-19 09:48:22,490 - app.agent.b2b.graph - INFO - [graph.py:281] - Tool calls: ['search_recipes_from_ingredients', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'finalize_bundles']
+2026-04-19 09:48:22,491 - app.agent.b2b.graph - INFO - [graph.py:303] - finalize_bundles_called=True, bundles=6
+2026-04-19 09:48:22,492 - app.api.admin - INFO - [admin.py:156] - Agent returned 6 bundles for BHX-HCM001
+2026-04-19 09:52:27,822 - app.agent.b2b.graph - INFO - [graph.py:209] - === Starting B2B Agent for store BHX-HCM001, top_k=10 ===
+2026-04-19 09:52:27,823 - app.agent.b2b.graph - INFO - [graph.py:213] - Found 25 urgent batches
+2026-04-19 09:52:27,826 - app.agent.b2b.graph - DEBUG - [graph.py:261] - B2B graph initialized
+2026-04-19 09:52:27,883 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:52:27,884 - httpcore.connection - DEBUG - [_trace.py:47] - close.started
+2026-04-19 09:52:27,885 - httpcore.connection - DEBUG - [_trace.py:47] - close.complete
+2026-04-19 09:52:27,886 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.started host='mkp-api.fptcloud.com' port=443 local_address=None timeout=None socket_options=None
+2026-04-19 09:52:27,931 - httpcore.connection - DEBUG - [_trace.py:47] - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A1407F8C00>
+2026-04-19 09:52:27,931 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002A1408BF250> server_hostname='mkp-api.fptcloud.com' timeout=None
+2026-04-19 09:52:27,995 - httpcore.connection - DEBUG - [_trace.py:47] - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002A1407F9150>
+2026-04-19 09:52:27,996 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:27,996 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:52:27,997 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:52:27,997 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:52:27,998 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:31,160 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:52:31 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'5a9aa8b7-ff9b-47f4-8e19-97d43e4f44b3'), (b'x-usage-completion-tokens', b'513'), (b'x-usage-prompt-tokens', b'2804'), (b'x-usage-total-tokens', b'3317'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2919'), (b'x-kong-proxy-latency', b'8'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'76706a3d0814266a6e67db68ee16162d'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee89d059c253f4a-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:52:31,161 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:52:31,162 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:52:31,163 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:52:31,163 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:52:31,163 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:52:31,164 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:52:31 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '5a9aa8b7-ff9b-47f4-8e19-97d43e4f44b3', 'x-usage-completion-tokens': '513', 'x-usage-prompt-tokens': '2804', 'x-usage-total-tokens': '3317', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2919', 'x-kong-proxy-latency': '8', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '76706a3d0814266a6e67db68ee16162d', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee89d059c253f4a-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:52:31,164 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 5a9aa8b7-ff9b-47f4-8e19-97d43e4f44b3
+2026-04-19 09:52:31,166 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {
+  "ingredient_ids": [
+    "mong_heo",
+    "nac_vai_heo",
+    "thit_ga",
+    "canh_co_heo",
+    "ba_chi_heo",
+    "gio_heo",
+    "so_huyet",
+    "ca_tram",
+    "ca_loc",
+    "ca_hong",
+    "long_heo",
+    "bo_xao",
+    "thit_vit",
+    "cua",
+    "thit_bo",
+    "heo_sap",
+    "suon_heo",
+    "tom"
+  ],
+  "ingredient_urgency": {
+    "mong_heo": 0.934,
+    "nac_vai_heo": 0.9283,
+    "thit_ga": 0.9144,
+    "canh_co_heo": 0.9,
+    "ba_chi_heo": 0.8926,
+    "gio_heo": 0.8999,
+    "so_huyet": 0.8999,
+
+2026-04-19 09:52:31,168 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'search_recipes_from_ingredients' from text content
+2026-04-19 09:52:31,169 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] search_recipes_from_ingredients  args_keys=['ingredient_ids', 'ingredient_urgency', 'top_k']
+2026-04-19 09:52:31,210 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:52:31,210 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:31,211 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:52:31,211 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:52:31,212 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:52:31,212 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:33,332 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:52:33 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'de7089c2-f9f5-440d-84e0-9bfe421137c7'), (b'x-usage-completion-tokens', b'331'), (b'x-usage-prompt-tokens', b'5279'), (b'x-usage-total-tokens', b'5610'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'2011'), (b'x-kong-proxy-latency', b'7'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'bb6cac0d615e82657fda4f23f604ea6d'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee89d19af9e3f4a-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:52:33,333 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:52:33,334 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:52:33,334 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:52:33,335 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:52:33,335 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:52:33,335 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:52:33 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'de7089c2-f9f5-440d-84e0-9bfe421137c7', 'x-usage-completion-tokens': '331', 'x-usage-prompt-tokens': '5279', 'x-usage-total-tokens': '5610', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '2011', 'x-kong-proxy-latency': '7', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'bb6cac0d615e82657fda4f23f604ea6d', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee89d19af9e3f4a-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:52:33,335 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: de7089c2-f9f5-440d-84e0-9bfe421137c7
+2026-04-19 09:52:33,346 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:52:33,347 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:52:33,396 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:52:33,396 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:33,397 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:52:33,398 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:52:33,399 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:52:33,399 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:35,206 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:52:35 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'4f6f29da-59c4-4fd9-8b97-66f5b9e7642b'), (b'x-usage-completion-tokens', b'322'), (b'x-usage-prompt-tokens', b'6299'), (b'x-usage-total-tokens', b'6621'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1685'), (b'x-kong-proxy-latency', b'19'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'37e8847047b75323f70783566db01d0c'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee89d274a523f4a-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:52:35,207 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:52:35,208 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:52:35,209 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:52:35,209 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:52:35,209 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:52:35,209 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:52:35 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '4f6f29da-59c4-4fd9-8b97-66f5b9e7642b', 'x-usage-completion-tokens': '322', 'x-usage-prompt-tokens': '6299', 'x-usage-total-tokens': '6621', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1685', 'x-kong-proxy-latency': '19', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '37e8847047b75323f70783566db01d0c', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee89d274a523f4a-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:52:35,209 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 4f6f29da-59c4-4fd9-8b97-66f5b9e7642b
+2026-04-19 09:52:35,227 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:52:35,230 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:52:35,308 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:52:35,309 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:35,310 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:52:35,310 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:52:35,311 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:52:35,311 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:37,053 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:52:37 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'dcdcbb6c-8d43-4543-87c4-437fe60e71ff'), (b'x-usage-completion-tokens', b'273'), (b'x-usage-prompt-tokens', b'7329'), (b'x-usage-total-tokens', b'7602'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1601'), (b'x-kong-proxy-latency', b'9'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'd84997067dfce708c47a8f2868bfb661'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee89d334cc23f4a-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:52:37,054 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:52:37,055 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:52:37,055 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:52:37,055 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:52:37,056 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:52:37,056 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:52:37 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'dcdcbb6c-8d43-4543-87c4-437fe60e71ff', 'x-usage-completion-tokens': '273', 'x-usage-prompt-tokens': '7329', 'x-usage-total-tokens': '7602', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1601', 'x-kong-proxy-latency': '9', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'd84997067dfce708c47a8f2868bfb661', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee89d334cc23f4a-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:52:37,056 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: dcdcbb6c-8d43-4543-87c4-437fe60e71ff
+2026-04-19 09:52:37,069 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:52:37,070 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:52:37,122 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:52:37,123 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:37,123 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:52:37,124 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:52:37,124 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:52:37,124 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:38,764 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:52:39 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'50d82ddf-4a00-4655-b2ce-7a66cea4b260'), (b'x-usage-completion-tokens', b'276'), (b'x-usage-prompt-tokens', b'8190'), (b'x-usage-total-tokens', b'8466'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1517'), (b'x-kong-proxy-latency', b'7'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'f466873985f2da183434f536c7a65153'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee89d3e9f803f4a-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:52:38,765 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:52:38,766 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:52:38,767 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:52:38,767 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:52:38,767 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:52:38,767 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:52:39 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': '50d82ddf-4a00-4655-b2ce-7a66cea4b260', 'x-usage-completion-tokens': '276', 'x-usage-prompt-tokens': '8190', 'x-usage-total-tokens': '8466', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1517', 'x-kong-proxy-latency': '7', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'f466873985f2da183434f536c7a65153', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee89d3e9f803f4a-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:52:38,768 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: 50d82ddf-4a00-4655-b2ce-7a66cea4b260
+2026-04-19 09:52:38,781 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:52:38,782 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:52:38,837 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:52:38,838 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:38,839 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:52:38,839 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:52:38,840 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:52:38,840 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:40,740 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:52:41 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'f3060f3e-ace3-4e03-88da-1a8f30c918cc'), (b'x-usage-completion-tokens', b'287'), (b'x-usage-prompt-tokens', b'9039'), (b'x-usage-total-tokens', b'9326'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1761'), (b'x-kong-proxy-latency', b'8'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'87e6ff45d18c1f58d3aa463bbda66651'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee89d49596b3f4a-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:52:40,740 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:52:40,741 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:52:40,742 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:52:40,742 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:52:40,742 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:52:40,742 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:52:41 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'f3060f3e-ace3-4e03-88da-1a8f30c918cc', 'x-usage-completion-tokens': '287', 'x-usage-prompt-tokens': '9039', 'x-usage-total-tokens': '9326', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1761', 'x-kong-proxy-latency': '8', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': '87e6ff45d18c1f58d3aa463bbda66651', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee89d49596b3f4a-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:52:40,742 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: f3060f3e-ace3-4e03-88da-1a8f30c918cc
+2026-04-19 09:52:40,758 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'check_feasibility_and_substitute' from text content
+2026-04-19 09:52:40,759 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] check_feasibility_and_substitute  args_keys=['recipe', 'store_id']
+2026-04-19 09:52:40,815 - openai._base_client - DEBUG - [_base_client.py:978] - Sending HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions
+2026-04-19 09:52:40,815 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:40,816 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_headers.complete
+2026-04-19 09:52:40,817 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.started request=<Request [b'POST']>
+2026-04-19 09:52:40,818 - httpcore.http11 - DEBUG - [_trace.py:47] - send_request_body.complete
+2026-04-19 09:52:40,818 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.started request=<Request [b'POST']>
+2026-04-19 09:52:42,152 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sun, 19 Apr 2026 02:52:42 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'x-model', b'gpt-oss-120b'), (b'x-request-id', b'dabb35ba-0ee5-4d69-b774-8fa39271800c'), (b'x-usage-completion-tokens', b'179'), (b'x-usage-prompt-tokens', b'9858'), (b'x-usage-total-tokens', b'10037'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID'), (b'x-frame-options', b'DENY'), (b'x-content-type-options', b'nosniff'), (b'x-xss-protection', b'1; mode=block'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains'), (b'referrer-policy', b'strict-origin-when-cross-origin'), (b'x-kong-upstream-latency', b'1051'), (b'x-kong-proxy-latency', b'77'), (b'via', b'1.1 kong/3.9.1'), (b'x-kong-request-id', b'c42b654b03ebbc1b6b262069a37c3374'), (b'cf-cache-status', b'DYNAMIC'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'9ee89d55ab843f4a-SIN'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-04-19 09:52:42,153 - httpx - INFO - [_client.py:1025] - HTTP Request: POST https://mkp-api.fptcloud.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-19 09:52:42,154 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.started request=<Request [b'POST']>
+2026-04-19 09:52:42,155 - httpcore.http11 - DEBUG - [_trace.py:47] - receive_response_body.complete
+2026-04-19 09:52:42,155 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.started
+2026-04-19 09:52:42,155 - httpcore.http11 - DEBUG - [_trace.py:47] - response_closed.complete
+2026-04-19 09:52:42,155 - openai._base_client - DEBUG - [_base_client.py:1016] - HTTP Response: POST https://mkp-api.fptcloud.com/v1/chat/completions "200 OK" Headers({'date': 'Sun, 19 Apr 2026 02:52:42 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'server': 'cloudflare', 'x-model': 'gpt-oss-120b', 'x-request-id': 'dabb35ba-0ee5-4d69-b774-8fa39271800c', 'x-usage-completion-tokens': '179', 'x-usage-prompt-tokens': '9858', 'x-usage-total-tokens': '10037', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-RateLimit-Limit,X-RateLimit-Remaining,X-Tenant-ID', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'referrer-policy': 'strict-origin-when-cross-origin', 'x-kong-upstream-latency': '1051', 'x-kong-proxy-latency': '77', 'via': '1.1 kong/3.9.1', 'x-kong-request-id': 'c42b654b03ebbc1b6b262069a37c3374', 'cf-cache-status': 'DYNAMIC', 'content-encoding': 'gzip', 'cf-ray': '9ee89d55ab843f4a-SIN', 'alt-svc': 'h3=":443"; ma=86400'})
+2026-04-19 09:52:42,156 - openai._base_client - DEBUG - [_base_client.py:1024] - request_id: dabb35ba-0ee5-4d69-b774-8fa39271800c
+2026-04-19 09:52:42,157 - app.agent.b2b.graph - DEBUG - [graph.py:122] - [llm_think] {"recipe_ids": ["R031", "R013", "R037", "R022", "R017"], "store_id": "BHX-HCM001", "top_k": 10}
+2026-04-19 09:52:42,163 - app.agent.b2b.graph - WARNING - [graph.py:91] - [fallback] Recovering tool call 'finalize_bundles' from text content
+2026-04-19 09:52:42,164 - app.agent.b2b.graph - INFO - [graph.py:130] - [llm_calls] finalize_bundles  args_keys=['recipe_ids', 'store_id', 'top_k']
+2026-04-19 09:52:42,173 - app.agent.b2b.tools - INFO - [tools.py:67] - finalize_bundles called: recipe_ids=['R031', 'R013', 'R037', 'R022', 'R017'], store_id=BHX-HCM001, top_k=10
+2026-04-19 09:52:42,190 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R031: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:52:42,204 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R013: feasible=True, completeness=1.0, ingredient_status_count=5
+2026-04-19 09:52:42,217 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R037: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:52:42,229 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R022: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:52:42,241 - app.agent.b2b.tools - DEBUG - [tools.py:97] -   R017: feasible=True, completeness=1.0, ingredient_status_count=4
+2026-04-19 09:52:42,242 - app.agent.b2b.tools - INFO - [tools.py:133] - finalize_bundles: 5/5 recipes passed allocation
+2026-04-19 09:52:42,244 - app.agent.b2b.tools - INFO - [tools.py:158] - finalize_bundles: returning 5 bundles
+2026-04-19 09:52:42,249 - app.agent.b2b.graph - INFO - [graph.py:145] - finalize_bundles completed — terminating agent loop
+2026-04-19 09:52:42,252 - app.agent.b2b.graph - INFO - [graph.py:267] - Agent completed with 15 messages
+2026-04-19 09:52:42,252 - app.agent.b2b.graph - INFO - [graph.py:281] - Tool calls: ['search_recipes_from_ingredients', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'check_feasibility_and_substitute', 'finalize_bundles']
+2026-04-19 09:52:42,253 - app.agent.b2b.graph - INFO - [graph.py:303] - finalize_bundles_called=True, bundles=5
+2026-04-19 09:52:42,254 - app.api.admin - INFO - [admin.py:156] - Agent returned 5 bundles for BHX-HCM001

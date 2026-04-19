@@ -22,9 +22,77 @@ import {
 } from "@/lib/adminApi";
 import { formatVnd } from "@/lib/currency";
 
-const STORE_OPTIONS = [
-  { id: "BHX-HCM001", label: "BHX-HCM001" },
-];
+const STORE_OPTIONS = [{ id: "BHX-HCM001", label: "BHX-HCM001" }];
+const ADMIN_COMBO_CACHE_KEY = "freshroute_admin_combo_cache_v1";
+
+function getLocalDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function readAdminComboCache(storeId) {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const raw = localStorage.getItem(ADMIN_COMBO_CACHE_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw);
+    const entry = parsed?.[storeId];
+
+    if (!entry) return null;
+    if (entry.dateKey !== getLocalDateKey()) return null;
+    if (!Array.isArray(entry.combos)) return null;
+
+    return {
+      combos: entry.combos,
+      analyzedAt: entry.analyzedAt || null,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function writeAdminComboCache(storeId, combos, analyzedAt) {
+  if (typeof window === "undefined") return analyzedAt;
+
+  const safeAnalyzedAt = analyzedAt || new Date().toISOString();
+
+  try {
+    const raw = localStorage.getItem(ADMIN_COMBO_CACHE_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+
+    parsed[storeId] = {
+      dateKey: getLocalDateKey(),
+      analyzedAt: safeAnalyzedAt,
+      combos: Array.isArray(combos) ? combos : [],
+    };
+
+    localStorage.setItem(ADMIN_COMBO_CACHE_KEY, JSON.stringify(parsed));
+  } catch {
+    // Ignore cache write failures and keep UI functional.
+  }
+
+  return safeAnalyzedAt;
+}
+
+function formatAnalyzedAt(value) {
+  if (!value) return "Chưa có dữ liệu";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Chưa có dữ liệu";
+
+  return date.toLocaleString("vi-VN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
 
 function toProgressWidth(item) {
   const denominator = Math.max(item.limit || 1, 1);
@@ -43,6 +111,10 @@ export default function AdminPage() {
   const [reloadToken, setReloadToken] = useState(0);
   const [combos, setCombos] = useState([]);
   const [inventory, setInventory] = useState([]);
+  const [comboAnalyzedAt, setComboAnalyzedAt] = useState(null);
+  const [comboDataSource, setComboDataSource] = useState("");
+  const [recallingCombos, setRecallingCombos] = useState(false);
+  const [combosApiLoading, setCombosApiLoading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -53,13 +125,53 @@ export default function AdminPage() {
       setWarning("");
 
       try {
+        const cachedComboEntry = readAdminComboCache(storeId);
+
         const [comboResult, inventoryResult] = await Promise.allSettled([
-          fetchAdminCombos({ storeId, limit: 10 }),
+          cachedComboEntry
+            ? Promise.resolve({
+                combos: cachedComboEntry.combos,
+                analyzedAt: cachedComboEntry.analyzedAt,
+                source: "cache",
+              })
+            : (async () => {
+                if (!cancelled) {
+                  setCombosApiLoading(true);
+                }
+
+                try {
+                  const comboData = await fetchAdminCombos({
+                    storeId,
+                    limit: 10,
+                  });
+                  const analyzedAt = writeAdminComboCache(
+                    storeId,
+                    comboData,
+                    new Date().toISOString(),
+                  );
+
+                  return {
+                    combos: comboData,
+                    analyzedAt,
+                    source: "api",
+                  };
+                } finally {
+                  if (!cancelled) {
+                    setCombosApiLoading(false);
+                  }
+                }
+              })(),
           fetchAdminInventory({ storeId, daysThreshold: 14 }),
         ]);
 
         const comboData =
-          comboResult.status === "fulfilled" ? comboResult.value : [];
+          comboResult.status === "fulfilled" ? comboResult.value.combos : [];
+        const analyzedAt =
+          comboResult.status === "fulfilled"
+            ? comboResult.value.analyzedAt || null
+            : null;
+        const comboSource =
+          comboResult.status === "fulfilled" ? comboResult.value.source : "";
         const inventoryData =
           inventoryResult.status === "fulfilled" ? inventoryResult.value : [];
 
@@ -78,6 +190,8 @@ export default function AdminPage() {
         if (!cancelled) {
           setCombos(comboData);
           setInventory(inventoryData);
+          setComboAnalyzedAt(analyzedAt);
+          setComboDataSource(comboSource);
           setSelectedCombo(null);
 
           if (failures.length === 2) {
@@ -115,7 +229,11 @@ export default function AdminPage() {
     try {
       await acceptAdminCombo({ comboId: id, storeId, combo });
       alert("Đã chuyển Combo qua site Customer thành công!");
-      setCombos((prev) => prev.filter((c) => c.id !== id));
+      setCombos((prev) => {
+        const next = prev.filter((c) => c.id !== id);
+        writeAdminComboCache(storeId, next, comboAnalyzedAt);
+        return next;
+      });
       setSelectedCombo(null);
     } catch (actionError) {
       alert(actionError.message || "Có lỗi xảy ra khi gọi API");
@@ -127,7 +245,11 @@ export default function AdminPage() {
 
     try {
       await rejectAdminCombo({ comboId: id, storeId });
-      setCombos((prev) => prev.filter((combo) => combo.id !== id));
+      setCombos((prev) => {
+        const next = prev.filter((combo) => combo.id !== id);
+        writeAdminComboCache(storeId, next, comboAnalyzedAt);
+        return next;
+      });
       if (selectedCombo?.id === id) {
         setSelectedCombo(null);
       }
@@ -136,8 +258,47 @@ export default function AdminPage() {
     }
   };
 
+  const handleRecallCombos = async () => {
+    setRecallingCombos(true);
+    setCombosApiLoading(true);
+    setWarning("");
+
+    try {
+      const comboData = await fetchAdminCombos({ storeId, limit: 10 });
+      const analyzedAt = writeAdminComboCache(
+        storeId,
+        comboData,
+        new Date().toISOString(),
+      );
+
+      setCombos(comboData);
+      setComboAnalyzedAt(analyzedAt);
+      setComboDataSource("api");
+      setSelectedCombo(null);
+    } catch (recallError) {
+      setWarning(`Combo: ${recallError.message || "không rõ lỗi"}`);
+    } finally {
+      setRecallingCombos(false);
+      setCombosApiLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f9fc] pb-10">
+      {combosApiLoading && (
+        <div className="fixed inset-0 z-[100] bg-black/35 backdrop-blur-[1px] flex items-center justify-center px-4">
+          <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 px-6 py-5 w-full max-w-sm text-center">
+            <div className="mx-auto mb-3 h-9 w-9 rounded-full border-4 border-gray-200 border-t-[#00b14f] animate-spin" />
+            <p className="text-gray-900 font-extrabold text-base">
+              AI đang phân tích combo
+            </p>
+            <p className="text-gray-500 text-sm mt-1 font-medium">
+              Vui lòng chờ trong giây lát...
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Navbar */}
       <nav className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 flex flex-wrap gap-y-4 items-center justify-between sticky top-0 z-10 w-full shadow-sm">
         <div className="flex items-center space-x-2 shrink-0">
@@ -235,16 +396,37 @@ export default function AdminPage() {
                     <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 sm:p-6 relative overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-green-400 to-[#00b14f]"></div>
 
-                      <div className="flex justify-between items-center mb-6">
-                        <div className="flex items-center space-x-2 text-[#00b14f]">
-                          <HiOutlineSparkles className="text-2xl" />
-                          <h3 className="text-lg font-extrabold text-gray-800 tracking-tight">
-                            Combo Đề Xuất Từ AI
-                          </h3>
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-6">
+                        <div>
+                          <div className="flex items-center space-x-2 text-[#00b14f]">
+                            <HiOutlineSparkles className="text-2xl" />
+                            <h3 className="text-lg font-extrabold text-gray-800 tracking-tight">
+                              Combo Đề Xuất Từ AI
+                            </h3>
+                          </div>
+                          <p className="text-[12px] text-gray-500 mt-1 font-medium">
+                            Lần phân tích gần nhất:{" "}
+                            {formatAnalyzedAt(comboAnalyzedAt)}
+                            {comboDataSource === "cache"
+                              ? " (từ bộ nhớ trình duyệt)"
+                              : ""}
+                          </p>
                         </div>
-                        <span className="bg-[#00b14f] text-white text-xs font-bold px-3 py-1 rounded-md shadow-sm">
-                          {combos.length} Sẵn Sàng
-                        </span>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={handleRecallCombos}
+                            disabled={recallingCombos}
+                            className="bg-white border border-[#00b14f] text-[#00b14f] hover:bg-green-50 disabled:opacity-60 disabled:cursor-not-allowed px-3 py-1.5 rounded-md text-xs font-bold transition-colors"
+                          >
+                            {recallingCombos
+                              ? "Đang phân tích..."
+                              : "Phân tích lại"}
+                          </button>
+                          <span className="bg-[#00b14f] text-white text-xs font-bold px-3 py-1 rounded-md shadow-sm whitespace-nowrap">
+                            {combos.length} Sẵn Sàng
+                          </span>
+                        </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
