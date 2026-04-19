@@ -22,11 +22,21 @@ const COMBO_LIMIT = 12;
 export default function CustomerPage() {
   const [combos, setCombos] = useState([]);
 
-  const [cart, setCart] = useState(() => loadCart());
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [reloadToken, setReloadToken] = useState(0);
   const [selectedCombo, setSelectedCombo] = useState(null);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setCart(loadCart());
+    }, 0);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -374,7 +384,6 @@ export default function CustomerPage() {
           </div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }

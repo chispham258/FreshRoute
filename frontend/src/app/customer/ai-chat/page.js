@@ -16,7 +16,6 @@ import { sendConsumerChat } from "@/lib/customerApi";
 import { addItemToCart } from "@/lib/cart";
 import { formatVnd } from "@/lib/currency";
 
-
 const CHIPS = [
   { id: "today", icon: "🎯", label: "Gợi ý món ăn hôm nay" },
   { id: "inventory", icon: "🧑‍🍳", label: "Nấu với nguyên liệu sẵn có" },
@@ -78,33 +77,46 @@ function RecipeSuggestionCard({ suggestion }) {
       onClick={() => setExpanded((v) => !v)}
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="font-semibold text-gray-800 text-sm">{suggestion.name}</span>
+        <span className="font-semibold text-gray-800 text-sm">
+          {suggestion.name}
+        </span>
         <HiChevronDown
           className={`text-gray-400 shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`}
         />
       </div>
-      {expanded && (
-        suggestion.ingredients?.length > 0 ? (
+      {expanded &&
+        (suggestion.ingredients?.length > 0 ? (
           <ul className="mt-2 space-y-1">
             {suggestion.ingredients.map((ing, i) => (
               <li key={i} className="flex items-center gap-1.5 text-xs">
-                <span className={ing.have ? "text-emerald-500" : "text-gray-300"}>●</span>
-                <span className={ing.have ? "text-gray-700 font-medium" : "text-gray-500"}>
+                <span
+                  className={ing.have ? "text-emerald-500" : "text-gray-300"}
+                >
+                  ●
+                </span>
+                <span
+                  className={
+                    ing.have ? "text-gray-700 font-medium" : "text-gray-500"
+                  }
+                >
                   {ing.name}
                 </span>
                 {ing.optional && (
                   <span className="text-gray-400">(tùy chọn)</span>
                 )}
                 {!ing.have && !ing.optional && (
-                  <span className="ml-auto text-indigo-500 font-semibold">cần mua</span>
+                  <span className="ml-auto text-indigo-500 font-semibold">
+                    cần mua
+                  </span>
                 )}
               </li>
             ))}
           </ul>
         ) : (
-          <p className="mt-2 text-xs text-gray-400 italic">Đang tải danh sách nguyên liệu...</p>
-        )
-      )}
+          <p className="mt-2 text-xs text-gray-400 italic">
+            Đang tải danh sách nguyên liệu...
+          </p>
+        ))}
     </div>
   );
 }
@@ -192,21 +204,37 @@ function TypingIndicator() {
 
 function ShoppingListPanel({ items, allergies = [] }) {
   const [added, setAdded] = useState(false);
-  const [selected, setSelected] = useState(() => new Set(items?.map((i) => i.ingredient_id) ?? []));
-
-  const isAllergen = (item) =>
-    allergies.some((a) => (item.name || "").toLowerCase().includes(a.toLowerCase()));
+  const [selected, setSelected] = useState(
+    () => new Set(items?.map((i) => i.ingredient_id) ?? []),
+  );
 
   useEffect(() => {
     if (allergies.length === 0) return;
-    setSelected((prev) => {
-      const next = new Set(prev);
-      items?.forEach((item) => {
-        if (isAllergen(item)) next.delete(item.ingredient_id);
+    const timeoutId = setTimeout(() => {
+      setSelected((prev) => {
+        const next = new Set(prev);
+        items?.forEach((item) => {
+          const hasAllergen = allergies.some((a) =>
+            (item.name || "").toLowerCase().includes(a.toLowerCase()),
+          );
+
+          if (hasAllergen) {
+            next.delete(item.ingredient_id);
+          }
+        });
+        return next;
       });
-      return next;
-    });
-  }, [allergies]);
+    }, 0);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [allergies, items]);
+
+  const isAllergen = (item) =>
+    allergies.some((a) =>
+      (item.name || "").toLowerCase().includes(a.toLowerCase()),
+    );
 
   if (!items || items.length === 0) return null;
 
@@ -252,7 +280,9 @@ function ShoppingListPanel({ items, allergies = [] }) {
               onChange={() => toggleItem(item.ingredient_id)}
               className="accent-indigo-600 shrink-0"
             />
-            <span className={`flex-1 font-medium ${selected.has(item.ingredient_id) ? "text-gray-800" : "text-gray-400 line-through"}`}>
+            <span
+              className={`flex-1 font-medium ${selected.has(item.ingredient_id) ? "text-gray-800" : "text-gray-400 line-through"}`}
+            >
               {item.name}
               {item.is_optional && (
                 <span className="ml-1 text-xs text-gray-400 font-normal">
@@ -285,7 +315,8 @@ function ShoppingListPanel({ items, allergies = [] }) {
           disabled={selected.size === 0}
           className="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-sm font-bold transition-colors"
         >
-          Thêm {selected.size > 0 ? `${selected.size} nguyên liệu` : ""} vào giỏ hàng
+          Thêm {selected.size > 0 ? `${selected.size} nguyên liệu` : ""} vào giỏ
+          hàng
         </button>
       )}
     </div>
@@ -319,7 +350,7 @@ export default function AIChatPage() {
   };
 
   const bottomRef = useRef(null);
-  const threadIdRef = useRef(`customer-chat-${Date.now()}`);
+  const threadIdRef = useRef("customer-chat");
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -337,7 +368,6 @@ export default function AIChatPage() {
     setInputStr("");
     setMessages((prev) => [...prev, { id: Date.now(), type: "user", text }]);
     setIsThinking(true);
-
 
     try {
       const response = await sendConsumerChat({
@@ -427,7 +457,12 @@ export default function AIChatPage() {
               {messages.map((msg) => (
                 <div key={msg.id} className="w-full relative">
                   {msg.type === "bot" ? (
-                    <BotMessage text={msg.text} shoppingList={msg.shoppingList} recipeSuggestions={msg.recipeSuggestions} allergies={allergies} />
+                    <BotMessage
+                      text={msg.text}
+                      shoppingList={msg.shoppingList}
+                      recipeSuggestions={msg.recipeSuggestions}
+                      allergies={allergies}
+                    />
                   ) : (
                     <UserMessage text={msg.text} />
                   )}
@@ -443,7 +478,9 @@ export default function AIChatPage() {
       <footer className="bg-white border-t border-gray-200 px-4 py-4 pb-6 sm:pb-8 w-full shrink-0 shadow-[0_-4px_20px_-10px_rgba(0,0,0,0.05)] z-20">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center gap-1.5 mb-3 flex-wrap min-h-[22px]">
-            <span className="text-[11px] text-gray-400 font-semibold shrink-0">Dị ứng:</span>
+            <span className="text-[11px] text-gray-400 font-semibold shrink-0">
+              Dị ứng:
+            </span>
             {allergies.map((a) => (
               <span
                 key={a}
@@ -462,7 +499,8 @@ export default function AIChatPage() {
               value={allergyInput}
               onChange={(e) => setAllergyInput(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" && allergyInput.trim()) addAllergy(allergyInput);
+                if (e.key === "Enter" && allergyInput.trim())
+                  addAllergy(allergyInput);
               }}
               placeholder="Thêm..."
               className="text-[11px] text-gray-600 placeholder-gray-300 outline-none bg-transparent w-14 border-b border-gray-200 focus:border-red-300"

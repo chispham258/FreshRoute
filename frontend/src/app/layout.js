@@ -15,7 +15,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="vi" className="h-full antialiased">
-      <body className={`${inter.className} min-h-full flex flex-col`}>
+      <body
+        suppressHydrationWarning
+        className={`${inter.className} min-h-full flex flex-col`}
+      >
         {children}
       </body>
     </html>
