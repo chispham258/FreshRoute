@@ -15,6 +15,7 @@ import { HiOutlineSparkles } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchCustomerCombos } from "@/lib/customerApi";
 import { loadCart, addItemToCart } from "@/lib/cart";
+import { formatVnd } from "@/lib/currency";
 
 const DEFAULT_STORE_ID = "BHX-HCM001";
 const COMBO_LIMIT = 12;
@@ -146,16 +147,6 @@ export default function CustomerPage() {
             Combo Đề Xuất Hôm Nay{" "}
             <HiOutlineSparkles className="text-orange-500" />
           </h2>
-          <div className="flex gap-2 pb-2 overflow-x-auto no-scrollbar">
-            {["Tất cả", "Thịt cá", "Rau củ", "Siêu rẻ"].map((cat) => (
-              <button
-                key={cat}
-                className="px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap bg-white border border-gray-200 text-gray-600 shadow-sm hover:border-orange-500 hover:text-orange-600 transition-colors focus:bg-orange-50 focus:text-orange-600 focus:border-orange-500"
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
         </div>
 
         {loading ? (
@@ -221,10 +212,10 @@ export default function CustomerPage() {
                     <div className="flex items-end justify-between mt-auto">
                       <div>
                         <div className="text-xs text-gray-400 line-through font-medium mb-0.5">
-                          {combo.originalPrice.toLocaleString("vi-VN")} đ
+                          {formatVnd(combo.originalPrice)}
                         </div>
                         <div className="text-lg font-black text-orange-500">
-                          {combo.newPrice.toLocaleString("vi-VN")} đ
+                          {formatVnd(combo.newPrice)}
                         </div>
                       </div>
 
@@ -311,6 +302,21 @@ export default function CustomerPage() {
                   {selectedCombo.description}
                 </p>
 
+                {selectedCombo.time && (
+                  <div className="mb-6">
+                    {selectedCombo.time && (
+                      <div className="bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-sm inline-flex items-center gap-2">
+                        <p className="text-[11px] uppercase tracking-wide text-gray-500 font-bold">
+                          Thời gian chế biến
+                        </p>
+                        <p className="text-sm font-bold text-gray-800">
+                          {selectedCombo.time.totalMinutes} phút
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <div className="space-y-6">
                   {/* Ingredients */}
                   <div>
@@ -322,17 +328,30 @@ export default function CustomerPage() {
                       {selectedCombo.ingredients?.map((ing, idx) => (
                         <div
                           key={idx}
-                          className="flex justify-between items-center text-sm bg-white p-3 rounded-xl border border-gray-200 shadow-sm"
+                          className="flex justify-between items-center text-sm bg-white p-3 rounded-xl border border-gray-200 shadow-sm gap-3"
                         >
-                          <span className="flex items-center gap-2 font-medium text-gray-700">
-                            <FaCheckCircle className="text-emerald-500" />{" "}
-                            {ing.name}
-                          </span>
-                          {ing.status === "warning" && (
-                            <span className="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full border border-red-100">
-                              Cận Date
+                          <div>
+                            <span className="flex items-center gap-2 font-medium text-gray-700">
+                              <FaCheckCircle className="text-emerald-500" />
+                              {ing.name}
                             </span>
-                          )}
+                            <p className="text-xs text-gray-500 mt-1 ml-6">
+                              {ing.quantity > 0
+                                ? `${ing.quantity}${ing.unit}`
+                                : "Định lượng theo công thức"}
+                              {ing.retailPrice > 0
+                                ? ` · ${formatVnd(ing.retailPrice)}`
+                                : ""}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            {ing.status === "warning" && (
+                              <span className="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full border border-red-100">
+                                Cận Date
+                              </span>
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -344,21 +363,27 @@ export default function CustomerPage() {
                       <MdOutlineFastfood className="text-blue-500 text-lg" />{" "}
                       Các bước nấu ăn
                     </h4>
-                    <ul className="space-y-3 bg-white p-4 border border-gray-200 rounded-xl shadow-sm">
-                      {selectedCombo.instructions?.map((inst, idx) => (
-                        <li
-                          key={idx}
-                          className="flex gap-3 text-sm text-gray-600"
-                        >
-                          <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-extrabold shrink-0 mt-0.5">
-                            {idx + 1}
-                          </span>
-                          <span className="leading-snug font-medium">
-                            {inst}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                    {selectedCombo.instructions?.length ? (
+                      <ul className="space-y-3 bg-white p-4 border border-gray-200 rounded-xl shadow-sm">
+                        {selectedCombo.instructions.map((inst, idx) => (
+                          <li
+                            key={idx}
+                            className="flex gap-3 text-sm text-gray-600"
+                          >
+                            <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-extrabold shrink-0 mt-0.5">
+                              {idx + 1}
+                            </span>
+                            <span className="leading-snug font-medium">
+                              {inst}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="bg-white p-4 border border-gray-200 rounded-xl shadow-sm text-sm text-gray-500 font-medium">
+                        Chưa có hướng dẫn chi tiết cho combo này.
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -366,11 +391,10 @@ export default function CustomerPage() {
               <div className="p-4 sm:p-5 bg-white border-t border-gray-100 flex items-center justify-between shrink-0 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
                 <div>
                   <div className="text-xs text-gray-500 line-through font-semibold mb-0.5">
-                    {selectedCombo.originalPrice.toLocaleString("vi-VN")} VNĐ
+                    {formatVnd(selectedCombo.originalPrice)}
                   </div>
                   <div className="text-2xl font-black text-orange-600">
-                    {selectedCombo.newPrice.toLocaleString("vi-VN")}{" "}
-                    <span className="text-sm font-bold text-gray-500">VNĐ</span>
+                    {formatVnd(selectedCombo.newPrice)}
                   </div>
                 </div>
                 <button

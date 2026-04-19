@@ -63,8 +63,8 @@ export default function ComboDetailModal({ combo, onClose, onAccept }) {
                       </span>
                     </div>
                     <div className="font-bold text-gray-800 text-[14px] shrink-0 text-right whitespace-nowrap">
-                      {typeof ing.price === "number"
-                        ? formatVnd(ing.price)
+                      {typeof ing.retailPrice === "number"
+                        ? formatVnd(ing.retailPrice)
                         : "-"}
                     </div>
                   </div>

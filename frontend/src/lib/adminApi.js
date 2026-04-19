@@ -60,14 +60,45 @@ function mapComboFromBackend(combo) {
     ? combo.ingredients
     : [];
 
+  const mappedInstructions = Array.isArray(combo?.instructions)
+    ? combo.instructions.filter(
+        (step) => typeof step === "string" && step.length > 0,
+      )
+    : [];
+
+  const mappedTime =
+    combo?.time && typeof combo.time === "object"
+      ? {
+          prepMinutes: Math.max(
+            0,
+            Math.round(toNumber(combo.time.prepMinutes)),
+          ),
+          cookMinutes: Math.max(
+            0,
+            Math.round(toNumber(combo.time.cookMinutes)),
+          ),
+          totalMinutes: Math.max(
+            0,
+            Math.round(toNumber(combo.time.totalMinutes)),
+          ),
+        }
+      : null;
+
   return {
     id: combo?.id || "",
     name: combo?.name || "Combo chưa đặt tên",
+    tags: Array.isArray(combo?.tags) ? combo.tags : [],
+    description: combo?.description || null,
+    instructions: mappedInstructions,
+    time: mappedTime,
     discount: Math.round(toNumber(combo?.discount)),
     confidence: Math.round(toNumber(combo?.confidence)),
     ingredients: ingredients.map((ing) => ing?.name || "Nguyên liệu"),
     ingredientsDetail: ingredients.map((ing) => ({
       name: ing?.name || "Nguyên liệu",
+      quantity: toNumber(ing?.quantity),
+      unit: ing?.unit || "g",
+      retailPrice: toNumber(ing?.retailPrice),
       weight: `${toNumber(ing?.quantity)}${ing?.unit || ""}`,
       status: ing?.status || "Bình Thường",
     })),
@@ -103,6 +134,24 @@ export async function fetchAdminInventory({ storeId, daysThreshold = 14 }) {
 }
 
 export async function acceptAdminCombo({ comboId, storeId, combo }) {
+  const normalizedIngredients = Array.isArray(combo?.ingredientsDetail)
+    ? combo.ingredientsDetail.map((ing) => {
+        const fallbackQuantity = parseFloat(ing?.weight) || 0;
+        const fallbackUnit =
+          typeof ing?.weight === "string"
+            ? ing.weight.replace(/[\d.]/g, "") || "g"
+            : "g";
+
+        return {
+          name: ing?.name,
+          status: ing?.status,
+          quantity: toNumber(ing?.quantity, fallbackQuantity),
+          unit: ing?.unit || fallbackUnit,
+          retailPrice: toNumber(ing?.retailPrice),
+        };
+      })
+    : [];
+
   return requestJson(
     `/api/admin/combos/${encodeURIComponent(comboId)}/accept`,
     {
@@ -114,12 +163,13 @@ export async function acceptAdminCombo({ comboId, storeId, combo }) {
           name: combo.name,
           discount: combo.discount,
           confidence: combo.confidence,
-          ingredients: combo.ingredientsDetail.map((ing) => ({
-            name: ing.name,
-            status: ing.status,
-            quantity: parseFloat(ing.weight) || 0,
-            unit: ing.weight.replace(/[\d.]/g, "") || "g",
-          })),
+          tags: Array.isArray(combo?.tags) ? combo.tags : [],
+          description: combo?.description || null,
+          instructions: Array.isArray(combo?.instructions)
+            ? combo.instructions
+            : [],
+          time: combo?.time || null,
+          ingredients: normalizedIngredients,
           originalPrice: combo.originalPrice,
           newPrice: combo.newPrice,
           aiReasoning: combo.aiReason,

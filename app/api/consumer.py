@@ -142,6 +142,16 @@ class CustomerComboIngredient(BaseModel):
     """Ingredient in a combo for customer view."""
     name: str
     status: str  # e.g., "Normal", "Sắp hết"
+    quantity: float = 0.0
+    unit: str = "g"
+    retailPrice: float = 0.0
+
+
+class CustomerComboTime(BaseModel):
+    """Recipe timing metadata for customer view."""
+    prepMinutes: int
+    cookMinutes: int
+    totalMinutes: int
 
 
 class CustomerComboResponse(BaseModel):
@@ -150,12 +160,15 @@ class CustomerComboResponse(BaseModel):
     name: str
     description: Optional[str] = None
     discount: float  # Discount percentage (0-100)
+    confidence: float = 0.0
     originalPrice: float
     newPrice: float
     tags: List[str] = []
     image: Optional[str] = None
     ingredients: List[CustomerComboIngredient]
     instructions: List[str] = []
+    time: Optional[CustomerComboTime] = None
+    aiReasoning: Optional[str] = None
 
 
 @router.get("/api/customer/combos", response_model=List[CustomerComboResponse])
@@ -179,6 +192,9 @@ async def get_customer_combos(
             CustomerComboIngredient(
                 name=ing.name,
                 status="Sắp hết" if ing.status == "Khẩn Cấp" else "Bình thường",
+                quantity=ing.quantity,
+                unit=ing.unit,
+                retailPrice=ing.retailPrice,
             )
             for ing in combo.ingredients
         ]
@@ -186,17 +202,20 @@ async def get_customer_combos(
         combos.append(CustomerComboResponse(
             id=combo.id,
             name=combo.name,
-            description=f"Công thức làm {combo.name} từ hàng sẵn có",
+            description=combo.description or f"Công thức làm {combo.name} từ hàng sẵn có",
             discount=combo.discount,
+            confidence=combo.confidence,
             originalPrice=combo.originalPrice,
             newPrice=combo.newPrice,
-            tags=["Khuyến mại", "Bền vững"],
+            tags=combo.tags or ["Khuyến mại", "Bền vững"],
             ingredients=ingredients,
-            instructions=[
+            instructions=combo.instructions or [
                 "Chuẩn bị các nguyên liệu",
                 "Nấu theo công thức",
                 "Dùng nóng",
             ],
+            time=CustomerComboTime.model_validate(combo.time.model_dump()) if combo.time else None,
+            aiReasoning=combo.aiReasoning,
         ))
 
     return combos
