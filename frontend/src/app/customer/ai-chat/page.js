@@ -489,11 +489,6 @@ export default function AIChatPage() {
               <FaPaperPlane className="-ml-1 text-lg" />
             </motion.button>
           </div>
-
-          <p className="text-center text-[10px] text-gray-400 mt-4 flex items-center justify-center gap-1.5 font-semibold uppercase tracking-wider">
-            <FaCheckCircle className="text-emerald-500 text-xs" /> Tối ưu nguyên
-            liệu - Giảm lãng phí thực phẩm
-          </p>
         </div>
       </footer>
     </div>

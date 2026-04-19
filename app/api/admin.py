@@ -47,6 +47,14 @@ class ComboIngredient(BaseModel):
     status: str  # e.g., "Normal" or "Khẩn Cấp" (Urgent)
     quantity: float
     unit: str
+    retailPrice: float = 0.0
+
+
+class ComboTime(BaseModel):
+    """Recipe timing metadata for a combo."""
+    prepMinutes: int
+    cookMinutes: int
+    totalMinutes: int
 
 
 class ComboResponse(BaseModel):
@@ -55,6 +63,10 @@ class ComboResponse(BaseModel):
     name: str  # recipe_name
     discount: float  # discount_rate as percentage (0-100)
     confidence: float  # final_score as percentage (0-100)
+    tags: List[str] = []
+    description: Optional[str] = None
+    instructions: List[str] = []
+    time: Optional[ComboTime] = None
     ingredients: List[ComboIngredient]
     originalPrice: float
     newPrice: float
@@ -83,6 +95,10 @@ class ComboAcceptData(BaseModel):
     name: str
     discount: float
     confidence: float
+    tags: List[str] = []
+    description: Optional[str] = None
+    instructions: List[str] = []
+    time: Optional[ComboTime] = None
     ingredients: List[ComboIngredient]
     originalPrice: float
     newPrice: float
@@ -120,14 +136,39 @@ def _bundle_to_combo(bundle) -> ComboResponse:
             status=_STATUS_MAP.get(ing.urgency_flag, "Bình Thường"),
             quantity=ing.qty_taken_g,
             unit="g",
+            retailPrice=ing.item_retail_price,
         )
         for ing in bundle.ingredients
     ]
+
+    recipe = DataRepository.get().recipe_lookup().get(bundle.recipe_id, {})
+    tags = recipe.get("tags") if isinstance(recipe.get("tags"), list) else []
+    instructions = [
+        s.get("description")
+        for s in recipe.get("steps", [])
+        if isinstance(s, dict) and s.get("description")
+    ]
+
+    prep_minutes = recipe.get("prep_time_minutes")
+    cook_minutes = recipe.get("cook_time_minutes")
+    total_minutes = recipe.get("total_time_minutes")
+    time = None
+    if isinstance(prep_minutes, (int, float)) and isinstance(cook_minutes, (int, float)) and isinstance(total_minutes, (int, float)):
+        time = ComboTime(
+            prepMinutes=int(prep_minutes),
+            cookMinutes=int(cook_minutes),
+            totalMinutes=int(total_minutes),
+        )
+
     return ComboResponse(
         id=bundle.bundle_id,
         name=bundle.recipe_name,
         discount=round(bundle.discount_rate * 100, 2),
         confidence=round(bundle.final_score * 100, 2),
+        tags=tags,
+        description=recipe.get("description"),
+        instructions=instructions,
+        time=time,
         ingredients=ingredients,
         originalPrice=bundle.original_price,
         newPrice=bundle.final_price,
@@ -354,6 +395,10 @@ async def accept_combo(
             name=req.combo.name,
             discount=req.combo.discount,
             confidence=req.combo.confidence,
+            tags=req.combo.tags,
+            description=req.combo.description,
+            instructions=req.combo.instructions,
+            time=req.combo.time,
             ingredients=req.combo.ingredients,
             originalPrice=req.combo.originalPrice,
             newPrice=req.combo.newPrice,

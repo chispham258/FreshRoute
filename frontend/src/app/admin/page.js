@@ -652,13 +652,13 @@ export default function AdminPage() {
                               onClick={() => setInventorySortMode("expiry")}
                               className={`flex-1 text-[12px] font-bold rounded-md px-2 py-1.5 transition-colors ${inventorySortMode === "expiry" ? "bg-white text-orange-600 border border-orange-200" : "text-gray-500 hover:text-gray-800"}`}
                             >
-                              Gần hết hạn
+                              HSD
                             </button>
                             <button
                               onClick={() => setInventorySortMode("name")}
                               className={`flex-1 text-[12px] font-bold rounded-md px-2 py-1.5 transition-colors ${inventorySortMode === "name" ? "bg-white text-blue-600 border border-blue-200" : "text-gray-500 hover:text-gray-800"}`}
                             >
-                              Tên A-Z
+                              A-Z
                             </button>
                           </div>
                         </div>
