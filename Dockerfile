@@ -1,4 +1,4 @@
-FROM python:3.13-slim AS base
+FROM python:3.13-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl supervisor nodejs npm \
@@ -6,19 +6,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
+# Backend
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
 COPY app/ ./app/
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Install frontend deps
+# Frontend
 COPY frontend/package.json frontend/package-lock.json ./frontend/
 RUN cd frontend && npm ci
-
 COPY frontend/ ./frontend/
 RUN cd frontend && npm run build
 
-EXPOSE 8000 3000
+# Supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# IMPORTANT → only one port
+EXPOSE 8000
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
