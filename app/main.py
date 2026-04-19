@@ -48,17 +48,18 @@ app = FastAPI(
     version="0.1.0",
 )
 
-origins = [
-    "http://localhost:3000",    # Next.js/React
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",    # Alternate local frontend port
-    "http://127.0.0.1:3001",
-]
+# origins = [
+#     "http://localhost:3000",    # Next.js/React
+#     "http://127.0.0.1:3000",
+#     "http://localhost:3001",    # Alternate local frontend port
+#     "http://127.0.0.1:3001",
+#     "https://freshroute.onrender.com"
+# ]
 
 from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,       # Cho phép các nguồn này truy cập
+    allow_origins=["*"],       # Cho phép các nguồn này truy cập
     allow_credentials=True,
     allow_methods=["*"],         # Cho phép GET, POST, OPTIONS, PUT, DELETE...
     allow_headers=["*"],         # Cho phép tất cả các Headers (Content-Type, Authorization...)
