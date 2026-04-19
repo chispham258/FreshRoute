@@ -20,9 +20,3 @@ services:
     rootDir: frontend
     buildCommand: npm install && npm run build
     startCommand: npm start -- -p $PORT
-    envVars:
-      - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: freshroute-backend
-          property: url

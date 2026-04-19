@@ -20,7 +20,6 @@ RUN cd frontend && npm run build
 # Supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# IMPORTANT → only one port
-EXPOSE 8000
+EXPOSE 8001 3000
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

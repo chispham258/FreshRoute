@@ -1,9 +1,5 @@
-const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-).replace(/\/$/, "");
-
 function buildUrl(path, query = {}) {
-  const url = new URL(`${API_BASE_URL}${path}`);
+  const url = new URL(path, window.location.origin);
   Object.entries(query).forEach(([key, value]) => {
     if (value === undefined || value === null || value === "") return;
     url.searchParams.set(key, String(value));

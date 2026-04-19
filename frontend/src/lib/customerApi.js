@@ -6,10 +6,6 @@ import R024Image from "@/images/R024.jpg";
 import R026Image from "@/images/R026.jpg";
 import R035Image from "@/images/R035.jpg";
 
-const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-).replace(/\/$/, "");
-
 const DEFAULT_COMBO_IMAGE =
   "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop";
 
@@ -23,7 +19,7 @@ const LOCAL_COMBO_IMAGE_BY_RECIPE_ID = {
 };
 
 function buildUrl(path, query = {}) {
-  const url = new URL(`${API_BASE_URL}${path}`);
+  const url = new URL(path, window.location.origin);
   Object.entries(query).forEach(([key, value]) => {
     if (value === undefined || value === null || value === "") return;
     url.searchParams.set(key, String(value));
