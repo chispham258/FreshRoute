@@ -50,6 +50,16 @@ def compute_bundle_prices(
             sku_id = batch_used["sku_id"]
             sku = sku_lookup.get(sku_id)
             if not sku:
+                items.append({
+                    "ingredient_id": status["ingredient_id"],
+                    "sku_id": sku_id,
+                    "product_name": status["ingredient_id"],
+                    "qty_taken_g": batch_used["qty_taken_g"],
+                    "item_retail_price": 0.0,
+                    "is_substitute": status["status"] == "substitute",
+                    "substitute_id": status.get("substitute_id"),
+                    "urgency_flag": p1_ingredient_lookup.get(status["ingredient_id"]),
+                })
                 continue
 
             pack_size_g = sku.get("pack_size_g") or 1

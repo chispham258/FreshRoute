@@ -27,12 +27,33 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
+def _parse_python_call_args(text: str) -> dict | None:
+    """Parse Python-style kwargs string using the AST.
+
+    Handles both double- and single-quoted strings, nested dicts/lists, and
+    multiline calls — far more robust than regex-based JSON conversion.
+    """
+    import ast
+    try:
+        tree = ast.parse(f"_f({text})", mode="eval")
+        call = tree.body
+        if not isinstance(call, ast.Call):
+            return None
+        result = {}
+        for kw in call.keywords:
+            result[kw.arg] = ast.literal_eval(kw.value)
+        return result or None
+    except Exception:
+        return None
+
+
 def _recover_tool_call_from_text(response, tools):
     """Fallback: FPT model may return tool args as JSON text instead of tool_calls.
 
     Handles two formats the model may produce:
       1. Raw JSON dict: {"recipe_ids": [...], "store_id": "...", "top_k": 10}
       2. Python call syntax: finalize_bundles(recipe_ids=[...], store_id="...", top_k=10)
+         (handles both single- and double-quoted string values via AST)
 
     Reconstructs a proper AIMessage with tool_calls so the graph routes to ToolNode.
     """
@@ -68,27 +89,28 @@ def _recover_tool_call_from_text(response, tools):
                 call_name = m.group(1)
                 for t in tools:
                     if t.name == call_name:
-                        # Extract body between outermost parens
                         body_match = re.search(r"\((.*)\)\s*$", stripped, re.DOTALL)
                         if body_match:
                             body = body_match.group(1).strip()
-                            # Convert  key=value  →  "key": value  for JSON parsing
-                            json_body = re.sub(
-                                r'(\w+)\s*=\s*',
-                                r'"\1": ',
-                                body,
-                            )
-                            try:
-                                candidate = json.loads("{" + json_body + "}")
-                                if isinstance(candidate, dict):
-                                    args = candidate
-                                    matched_tool = t
-                            except Exception:
-                                pass
+
+                            # Try AST first (handles single/double quotes, nested structures)
+                            candidate = _parse_python_call_args(body)
+
+                            # Fallback: regex-based JSON conversion (simple cases only)
+                            if candidate is None:
+                                json_body = re.sub(r'(\w+)\s*=\s*', r'"\1": ', body)
+                                try:
+                                    candidate = json.loads("{" + json_body + "}")
+                                except Exception:
+                                    pass
+
+                            if isinstance(candidate, dict):
+                                args = candidate
+                                matched_tool = t
                         break
 
         if args is not None and matched_tool is not None:
-            logger.warning(f"[fallback] Recovering tool call '{matched_tool.name}' from text content")
+            logger.warning(f"[b2b][fallback] Recovering tool call '{matched_tool.name}' from text content")
             return AIMessage(
                 content="",
                 tool_calls=[{

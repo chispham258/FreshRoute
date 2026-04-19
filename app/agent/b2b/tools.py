@@ -101,6 +101,12 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
                 f"ingredient_status_count={len(result.get('ingredient_status', []))}"
             )
 
+            if not result.get("feasible", False):
+                logger.info(
+                    f"  {recipe_id}: skipped — completeness={result.get('completeness_score', 0):.2f} < 0.70"
+                )
+                continue
+
             enriched = result["recipe"].copy()
             enriched["ingredient_status"] = result["ingredient_status"]
             enriched["completeness_score"] = result["completeness_score"]

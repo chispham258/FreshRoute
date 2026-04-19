@@ -298,10 +298,10 @@ def check_feasibility_and_substitute(
 
         if batches:
             allocation = allocate_fefo(batches, required_g=needed, strategy="best")
-            if allocation.feasible:
+            if allocation.allocated_g >= needed:
                 status = "fulfilled"
             else:
-                # Primary infeasible — try ontology substitutes
+                # Not enough stock — try ontology substitutes
                 subs = query_ontology(ing_id, relation="substitute")
                 status = "missing"
                 for sub_id in subs.get("substitutes", []):
@@ -309,7 +309,7 @@ def check_feasibility_and_substitute(
                     if not sub_batches:
                         continue
                     sub_alloc = allocate_fefo(sub_batches, required_g=needed, strategy="best")
-                    if sub_alloc.feasible:
+                    if sub_alloc.allocated_g >= needed:
                         status = "substitute"
                         chosen_sub = sub_id
                         allocation = sub_alloc
@@ -323,7 +323,7 @@ def check_feasibility_and_substitute(
                 if not sub_batches:
                     continue
                 sub_alloc = allocate_fefo(sub_batches, required_g=needed, strategy="best")
-                if sub_alloc.feasible:
+                if sub_alloc.allocated_g >= needed:
                     status = "substitute"
                     chosen_sub = sub_id
                     allocation = sub_alloc
@@ -433,7 +433,22 @@ def find_recipes_for_consumer(
     available_ids = {item["ingredient_id"] for item in available_ingredients}
     urgent_ids = {item["ingredient_id"] for item in urgent_ingredients}
 
-    recipes = DataRepository.get().recipes()
+    repo = DataRepository.get()
+    recipes = repo.recipes()
+
+    # Build expanded sets via reverse ontology lookup:
+    # If user has ingredient X and recipe needs Y where X ∈ subs_map[Y], count as match.
+    subs_map = repo.substitute_groups()
+    def _expand_via_ontology(user_ids: set) -> set:
+        """Find recipe ingredient IDs that user's ingredients can substitute for."""
+        expanded = set()
+        for target, subs_list in subs_map.items():
+            if user_ids & set(subs_list):
+                expanded.add(target)
+        return expanded
+
+    sub_targets_available = _expand_via_ontology(available_ids) - available_ids
+    sub_targets_urgent = _expand_via_ontology(urgent_ids) - urgent_ids
 
     scored = []
     for recipe in recipes:
@@ -460,20 +475,29 @@ def find_recipes_for_consumer(
             if not can_substitute_all:
                 continue
 
-        # Score: urgent matches worth 3x
+        # Direct matches (exact ingredient_id)
         urgent_matches = recipe_ing_set & urgent_ids
         normal_matches = (recipe_ing_set & available_ids) - urgent_ids
-        score = len(urgent_matches) * 3 + len(normal_matches)
 
-        if score > 0:
+        # Ontology-expanded matches (user ingredient can substitute for recipe ingredient)
+        sub_urgent = (recipe_ing_set & sub_targets_urgent) - urgent_matches - normal_matches
+        sub_normal = (recipe_ing_set & sub_targets_available) - urgent_matches - normal_matches - sub_urgent
+
+        # Score: direct urgent=3, direct normal=1, substitute matches=1
+        score = len(urgent_matches) * 3 + len(normal_matches) + len(sub_urgent) * 3 + len(sub_normal)
+
+        # Require at least one direct match — substitute-only recipes (e.g. chicken when user has beef)
+        # have a score but shouldn't appear since the user doesn't actually have the primary ingredient.
+        direct_score = len(urgent_matches) * 3 + len(normal_matches)
+        if score > 0 and direct_score > 0:
             scored.append({
                 "recipe_id": recipe["recipe_id"],
                 "name": recipe["name"],
                 "category": recipe.get("category"),
                 "servings": recipe.get("servings"),
                 "score": score,
-                "urgent_used": list(urgent_matches),
-                "available_used": list(normal_matches),
+                "urgent_used": list(urgent_matches) + list(sub_urgent),
+                "available_used": list(normal_matches) + list(sub_normal),
                 "total_ingredients": len(recipe_ings),
                 "ingredients": recipe["ingredients"],
             })
@@ -627,6 +651,8 @@ def get_recipe_by_name(recipe_name: str) -> Optional[dict]:
 def get_remaining_ingredients(
     recipe_id: str,
     available_ingredients: List[str],
+    allergies: Optional[List[str]] = None,
+    substitutions: Optional[dict] = None,
 ) -> Optional[dict]:
     """
     Compute what ingredients user needs to buy for a specific recipe.
@@ -640,6 +666,9 @@ def get_remaining_ingredients(
     Args:
         recipe_id: Recipe ID (e.g., "R022")
         available_ingredients: List of ingredient_ids user has (e.g., ["thit_heo", "ca_chua"])
+        allergies: List of ingredient_ids user is allergic to — these are excluded from to_buy.
+        substitutions: Dict mapping original ingredient_id → substitute ingredient_id
+                       (e.g., {"ot_chuong": "hanh_tim"} means buy hanh_tim instead of ot_chuong).
 
     Returns:
         Dict with:
@@ -663,6 +692,8 @@ def get_remaining_ingredients(
         return None
 
     available_set = set(available_ingredients)
+    allergy_set = set(allergies or [])
+    sub_map = substitutions or {}
     to_buy = []
     available = []
     substitutable = []
@@ -673,33 +704,40 @@ def get_remaining_ingredients(
         required_qty = ing.get("required_qty_g", 100)
         is_optional = ing.get("is_optional", False)
 
-        if ing_id in available_set:
+        if ing_id in allergy_set:
+            continue
+
+        # Apply explicit substitution: swap the ingredient before any other logic.
+        effective_id = sub_map.get(ing_id, ing_id)
+        effective_name = get_ingredient_display_name(effective_id)
+
+        if effective_id in available_set:
             available.append({
-                "ingredient_id": ing_id,
-                "name": get_ingredient_display_name(ing_id),
+                "ingredient_id": effective_id,
+                "name": effective_name,
                 "status": "available",
                 "required_qty_g": required_qty,
             })
         else:
-            # Check if substitutes exist in user's inventory
-            subs = query_ontology(ing_id, relation="substitute").get("substitutes", [])
+            # Check if substitutes exist in user's inventory (ontology-based)
+            subs = query_ontology(effective_id, relation="substitute").get("substitutes", [])
             available_subs = [s for s in subs if s in available_set]
             if available_subs:
                 available.append({
-                    "ingredient_id": ing_id,
-                    "name": get_ingredient_display_name(ing_id),
+                    "ingredient_id": effective_id,
+                    "name": effective_name,
                     "status": "substitutable",
                     "available_substitute": available_subs[0],
                     "required_qty_g": required_qty,
                 })
             else:
                 # Need to buy
-                sku = sku_lookup.get(ing_id)
+                sku = sku_lookup.get(effective_id)
                 unit_price = sku.get("retail_price", 0) if sku else 0
 
                 to_buy.append({
-                    "ingredient_id": ing_id,
-                    "name": get_ingredient_display_name(ing_id),
+                    "ingredient_id": effective_id,
+                    "name": effective_name,
                     "required_qty_g": required_qty,
                     "unit": "g",
                     "is_optional": is_optional,

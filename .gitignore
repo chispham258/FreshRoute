@@ -1,4 +1,4 @@
-# Python-generated files
+# Python
 __pycache__/
 *.py[oc]
 build/
@@ -10,7 +10,29 @@ wheels/
 .venv
 .env
 
-AGENTS.md
-.github
-
+# Logs & runtime output
 logs/
+*.log
+pytest_output.txt
+
+# Test cache
+.pytest_cache/
+
+# Claude Code tool files
+CLAUDE.md
+AGENTS.md
+.claude/
+
+# Internal analysis / temp docs
+docs/
+response.md
+CODEBASE_ANALYSIS.md
+TECHNICAL_REPORT.md
+align_fe_be.md
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# OS
+.DS_Store

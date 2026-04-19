@@ -69,59 +69,81 @@ function MarkdownMessage({ text }) {
   );
 }
 
-function RecipeSuggestionCard({ suggestion }) {
-  const [expanded, setExpanded] = useState(false);
+function RecipeSuggestionCard({ suggestion, expanded, onToggle }) {
   return (
     <div
-      className="border border-indigo-100 rounded-lg p-2.5 mb-1.5 bg-white cursor-pointer hover:border-indigo-300 transition-colors"
-      onClick={() => setExpanded((v) => !v)}
+      className="border border-indigo-100 rounded-lg mb-1.5 bg-white cursor-pointer hover:border-indigo-300 transition-colors overflow-hidden"
+      onClick={onToggle}
     >
-      <div className="flex items-center justify-between gap-2">
-        <span className="font-semibold text-gray-800 text-sm">
-          {suggestion.name}
-        </span>
+      <div className="flex items-center justify-between gap-2 p-2.5">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="font-semibold text-gray-800 text-sm truncate">
+            {suggestion.name}
+          </span>
+          {suggestion.total_time_minutes && (
+            <span className="text-[10px] text-gray-400 shrink-0">
+              {suggestion.total_time_minutes} phút
+            </span>
+          )}
+        </div>
         <HiChevronDown
-          className={`text-gray-400 shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`}
+          className={`text-gray-400 shrink-0 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
         />
       </div>
-      {expanded &&
-        (suggestion.ingredients?.length > 0 ? (
-          <ul className="mt-2 space-y-1">
-            {suggestion.ingredients.map((ing, i) => (
-              <li key={i} className="flex items-center gap-1.5 text-xs">
-                <span
-                  className={ing.have ? "text-emerald-500" : "text-gray-300"}
-                >
-                  ●
-                </span>
-                <span
-                  className={
-                    ing.have ? "text-gray-700 font-medium" : "text-gray-500"
-                  }
-                >
-                  {ing.name}
-                </span>
-                {ing.optional && (
-                  <span className="text-gray-400">(tùy chọn)</span>
-                )}
-                {!ing.have && !ing.optional && (
-                  <span className="ml-auto text-indigo-500 font-semibold">
-                    cần mua
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-2 text-xs text-gray-400 italic">
-            Đang tải danh sách nguyên liệu...
-          </p>
-        ))}
+
+      {expanded && (
+        <div className="px-2.5 pb-3 border-t border-indigo-50 pt-2.5 space-y-3">
+          {suggestion.description && (
+            <p className="text-xs text-gray-600 italic">{suggestion.description}</p>
+          )}
+
+          {suggestion.ingredients?.length > 0 && (
+            <div>
+              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                Nguyên liệu
+              </p>
+              <ul className="space-y-1">
+                {suggestion.ingredients.map((ing, i) => (
+                  <li key={i} className="flex items-center gap-1.5 text-xs">
+                    <span className={ing.have ? "text-emerald-500" : "text-gray-300"}>●</span>
+                    <span className={ing.have ? "text-gray-700 font-medium" : "text-gray-500"}>
+                      {ing.name}
+                    </span>
+                    {ing.optional && (
+                      <span className="text-gray-400">(tùy chọn)</span>
+                    )}
+                    {!ing.have && !ing.optional && (
+                      <span className="ml-auto text-indigo-500 font-semibold">cần mua</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {suggestion.steps?.length > 0 && (
+            <div>
+              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                Cách làm
+              </p>
+              <ol className="space-y-1">
+                {suggestion.steps.map((s) => (
+                  <li key={s.step} className="text-xs text-gray-600 flex gap-2">
+                    <span className="text-indigo-400 font-bold shrink-0">{s.step}.</span>
+                    <span>{s.description}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
 function RecipeSuggestionsPanel({ suggestions }) {
+  const [expandedId, setExpandedId] = useState(null);
   if (!suggestions || suggestions.length === 0) return null;
   return (
     <div className="mt-3">
@@ -129,13 +151,18 @@ function RecipeSuggestionsPanel({ suggestions }) {
         Gợi ý món ăn
       </p>
       {suggestions.map((s) => (
-        <RecipeSuggestionCard key={s.recipe_id} suggestion={s} />
+        <RecipeSuggestionCard
+          key={s.recipe_id}
+          suggestion={s}
+          expanded={expandedId === s.recipe_id}
+          onToggle={() => setExpandedId(expandedId === s.recipe_id ? null : s.recipe_id)}
+        />
       ))}
     </div>
   );
 }
 
-function BotMessage({ text, shoppingList, recipeSuggestions, allergies }) {
+function BotMessage({ text, shoppingList, recipeSuggestions }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 10 }}
@@ -147,9 +174,9 @@ function BotMessage({ text, shoppingList, recipeSuggestions, allergies }) {
         <HiOutlineSparkles className="text-xl" />
       </div>
       <div className="flex-1 max-w-[85%] bg-white border border-gray-100 shadow-sm rounded-2xl rounded-tl-sm p-4 relative z-10 w-full overflow-hidden">
-        <MarkdownMessage text={text} />
+        {text && <MarkdownMessage text={text} />}
         <RecipeSuggestionsPanel suggestions={recipeSuggestions} />
-        <ShoppingListPanel items={shoppingList} allergies={allergies} />
+        <ShoppingListPanel items={shoppingList} />
       </div>
     </motion.div>
   );
@@ -202,39 +229,11 @@ function TypingIndicator() {
   );
 }
 
-function ShoppingListPanel({ items, allergies = [] }) {
+function ShoppingListPanel({ items }) {
   const [added, setAdded] = useState(false);
   const [selected, setSelected] = useState(
     () => new Set(items?.map((i) => i.ingredient_id) ?? []),
   );
-
-  useEffect(() => {
-    if (allergies.length === 0) return;
-    const timeoutId = setTimeout(() => {
-      setSelected((prev) => {
-        const next = new Set(prev);
-        items?.forEach((item) => {
-          const hasAllergen = allergies.some((a) =>
-            (item.name || "").toLowerCase().includes(a.toLowerCase()),
-          );
-
-          if (hasAllergen) {
-            next.delete(item.ingredient_id);
-          }
-        });
-        return next;
-      });
-    }, 0);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [allergies, items]);
-
-  const isAllergen = (item) =>
-    allergies.some((a) =>
-      (item.name || "").toLowerCase().includes(a.toLowerCase()),
-    );
 
   if (!items || items.length === 0) return null;
 
@@ -334,21 +333,6 @@ export default function AIChatPage() {
   const [inputStr, setInputStr] = useState("");
   const [isThinking, setIsThinking] = useState(false);
   const [error, setError] = useState("");
-  const [allergies, setAllergies] = useState([]);
-  const [allergyInput, setAllergyInput] = useState("");
-
-  const addAllergy = (val) => {
-    const trimmed = val.trim();
-    if (trimmed && !allergies.includes(trimmed)) {
-      setAllergies((prev) => [...prev, trimmed]);
-    }
-    setAllergyInput("");
-  };
-
-  const removeAllergy = (val) => {
-    setAllergies((prev) => prev.filter((a) => a !== val));
-  };
-
   const bottomRef = useRef(null);
   const threadIdRef = useRef("customer-chat");
 
@@ -373,7 +357,6 @@ export default function AIChatPage() {
       const response = await sendConsumerChat({
         message: text,
         threadId: threadIdRef.current,
-        allergies: allergies.length > 0 ? allergies : undefined,
       });
 
       threadIdRef.current = response.threadId || threadIdRef.current;
@@ -384,7 +367,7 @@ export default function AIChatPage() {
           id: Date.now() + 1,
           type: "bot",
           text:
-            response.reply ||
+            response.reply ??
             "Xin lỗi, tôi chưa có phản hồi phù hợp ở thời điểm này.",
           shoppingList: response.shoppingList || null,
           recipeSuggestions: response.recipeSuggestions || null,
@@ -461,7 +444,6 @@ export default function AIChatPage() {
                       text={msg.text}
                       shoppingList={msg.shoppingList}
                       recipeSuggestions={msg.recipeSuggestions}
-                      allergies={allergies}
                     />
                   ) : (
                     <UserMessage text={msg.text} />
@@ -477,36 +459,6 @@ export default function AIChatPage() {
 
       <footer className="bg-white border-t border-gray-200 px-4 py-4 pb-6 sm:pb-8 w-full shrink-0 shadow-[0_-4px_20px_-10px_rgba(0,0,0,0.05)] z-20">
         <div className="max-w-3xl mx-auto">
-          <div className="flex items-center gap-1.5 mb-3 flex-wrap min-h-[22px]">
-            <span className="text-[11px] text-gray-400 font-semibold shrink-0">
-              Dị ứng:
-            </span>
-            {allergies.map((a) => (
-              <span
-                key={a}
-                className="inline-flex items-center gap-1 bg-red-50 border border-red-200 text-red-600 text-[11px] font-semibold px-2 py-0.5 rounded-full"
-              >
-                {a}
-                <button
-                  onClick={() => removeAllergy(a)}
-                  className="text-red-400 hover:text-red-700 leading-none"
-                >
-                  ×
-                </button>
-              </span>
-            ))}
-            <input
-              value={allergyInput}
-              onChange={(e) => setAllergyInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && allergyInput.trim())
-                  addAllergy(allergyInput);
-              }}
-              placeholder="Thêm..."
-              className="text-[11px] text-gray-600 placeholder-gray-300 outline-none bg-transparent w-14 border-b border-gray-200 focus:border-red-300"
-            />
-          </div>
-
           <div className="flex gap-2.5 mb-4 overflow-x-auto pb-2 no-scrollbar px-1 -mx-1 snap-x">
             {CHIPS.map((chip) => (
               <button

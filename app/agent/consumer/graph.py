@@ -33,18 +33,28 @@ logger.setLevel(logging.DEBUG)
 memory = MemorySaver()
 
 
+def _current_turn_messages(messages: list) -> list:
+    """Return only messages from the current turn (after the last HumanMessage)."""
+    last_human = max(
+        (i for i, m in enumerate(messages) if isinstance(m, HumanMessage)),
+        default=0,
+    )
+    return messages[last_human:]
+
+
 def _extract_recipe_suggestions(messages: list) -> list | None:
-    """Return enriched recipe suggestions from the last find_recipes_for_consumer tool result."""
+    """Return enriched recipe suggestions from the current turn's find_recipes_for_consumer result."""
+    turn = _current_turn_messages(messages)
     call_ids = set()
-    for m in messages:
+    for m in turn:
         if isinstance(m, AIMessage) and getattr(m, "tool_calls", None):
             for tc in m.tool_calls:
                 if tc.get("name") == "find_recipes_for_consumer":
                     call_ids.add(tc.get("id"))
 
     if not call_ids:
-        # Also try scanning ToolMessages directly by name (fallback for serialized state)
-        for m in reversed(messages):
+        # Fallback: scan by ToolMessage name (serialized state)
+        for m in reversed(turn):
             if isinstance(m, ToolMessage) and getattr(m, "name", None) == "find_recipes_for_consumer":
                 try:
                     content = json.loads(m.content) if isinstance(m.content, str) else m.content
@@ -53,28 +63,26 @@ def _extract_recipe_suggestions(messages: list) -> list | None:
                         return _enrich_suggestions(content)
                 except Exception as exc:
                     logger.warning(f"[consumer][extract] Failed to parse ToolMessage by name: {exc}")
-        logger.info("[consumer][extract] No find_recipes_for_consumer tool calls found in messages")
         return None
 
     logger.info(f"[consumer][extract] Found find_recipes call_ids: {call_ids}")
-    for m in reversed(messages):
+    for m in reversed(turn):
         if isinstance(m, ToolMessage) and m.tool_call_id in call_ids:
             try:
                 content = json.loads(m.content) if isinstance(m.content, str) else m.content
                 if isinstance(content, list):
                     logger.info(f"[consumer][extract] Enriching {len(content)} raw suggestions")
                     return _enrich_suggestions(content)
-                else:
-                    logger.warning(f"[consumer][extract] ToolMessage content is not a list: {type(content)}")
             except Exception as exc:
                 logger.warning(f"[consumer][extract] Failed to parse ToolMessage content: {exc}")
-    logger.info("[consumer][extract] No matching ToolMessage found for call_ids")
     return None
 
 
 def _enrich_suggestions(raw: list) -> list:
     """Convert raw find_recipes_for_consumer output to per-ingredient display format."""
     from app.agent.tools import get_ingredient_display_name
+    from app.core.data.repository import DataRepository
+    recipe_lookup = DataRepository.get().recipe_lookup()
     result = []
     for r in raw:
         try:
@@ -87,10 +95,14 @@ def _enrich_suggestions(raw: list) -> list:
                 }
                 for ing in r.get("ingredients", [])
             ]
+            full = recipe_lookup.get(r["recipe_id"], {})
             result.append({
                 "recipe_id": r["recipe_id"],
                 "name": r["name"],
                 "score": r.get("score", 0),
+                "description": full.get("description", ""),
+                "total_time_minutes": full.get("total_time_minutes"),
+                "steps": full.get("steps", []),
                 "ingredients": ingredients,
             })
         except Exception as exc:
@@ -100,16 +112,17 @@ def _enrich_suggestions(raw: list) -> list:
 
 
 def _extract_shopping_list(messages: list) -> list | None:
-    """Return the to_buy list from the last get_remaining_ingredients tool result."""
+    """Return the to_buy list from the current turn's get_remaining_ingredients result."""
+    turn = _current_turn_messages(messages)
     call_ids = set()
-    for m in messages:
+    for m in turn:
         if isinstance(m, AIMessage) and getattr(m, "tool_calls", None):
             for tc in m.tool_calls:
                 if tc.get("name") == "get_remaining_ingredients":
                     call_ids.add(tc.get("id"))
     if not call_ids:
         return None
-    for m in reversed(messages):
+    for m in reversed(turn):
         if isinstance(m, ToolMessage) and m.tool_call_id in call_ids:
             try:
                 content = json.loads(m.content) if isinstance(m.content, str) else m.content
@@ -333,8 +346,13 @@ async def chat(
     # then fall back to last AI message with any content.
     messages = response["messages"]
     shopping_list = _extract_shopping_list(messages)
-    recipe_suggestions = _extract_recipe_suggestions(messages)
+    # Only show recipe suggestions in Discovery Mode; clear them once user confirmed a dish.
+    recipe_suggestions = None if shopping_list is not None else _extract_recipe_suggestions(messages)
     logger.info(f"[consumer][chat] shopping_list={shopping_list is not None}, recipe_suggestions={recipe_suggestions is not None} ({len(recipe_suggestions) if recipe_suggestions else 0} items)")
+
+    # Suppress LLM text when structured panels cover the full presentation.
+    if recipe_suggestions or shopping_list is not None:
+        return "", shopping_list, recipe_suggestions
 
     pure_text = [
         m for m in messages
