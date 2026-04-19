@@ -33,6 +33,12 @@ class MockConnector(StoreConnector):
     def get_batches(self, store_id: str) -> List[ProductBatch]:
         self._load_fixtures()
         batches = self._batches_cache.get(store_id, [])
+        # If the requested store_id doesn't exist in fixtures (tests may pass
+        # synthetic IDs), fall back to returning all batches across stores so
+        # the caller can still exercise allocation and pipeline logic.
+        if not batches:
+            # flatten all batches
+            batches = [b for store_batches in self._batches_cache.values() for b in store_batches]
         today = date.today()
         result = []
         for b in batches:

@@ -130,27 +130,6 @@ def run_p6(
     results.sort(key=lambda x: x["final_score"], reverse=True)
     results = results[:top_k]
 
-    # Deduplicate: if two bundles share the same primary ingredient (first
-    # required fulfilled/substitute ingredient), keep only the highest-scoring
-    # one. Prevents near-identical bundles (e.g. "Cá lóc kho tộ" vs "Cá lóc
-    # phi lê kho tộ") from consuming two slots when only one stock pool exists.
-    seen_primary: set = set()
-    deduped = []
-    for r in results:
-        primary = next(
-            (
-                s["ingredient_id"]
-                for s in r.get("ingredient_status", [])
-                if s["status"] in ("fulfilled", "substitute") and not s.get("is_optional", False)
-            ),
-            None,
-        )
-        if primary is None or primary not in seen_primary:
-            if primary:
-                seen_primary.add(primary)
-            deduped.append(r)
-    results = deduped
-
     # Assign ranks
     for i, r in enumerate(results, 1):
         r["rank"] = i

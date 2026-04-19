@@ -75,13 +75,10 @@ def allocate_fefo(
             allocated_g += grams_taken
             packets_used += packets_to_take
             remaining_needed -= grams_taken
-
         deviation = abs(allocated_g - required_g) / required_g if required_g > 0 else 0.0
-        # Feasible = we can provide at least the required amount.
-        # Deviation is tracked as a soft metric for scoring (P6) — not a hard
-        # gate — because packet-based allocation often over-allocates for small
-        # quantities (e.g. 10g herbs in 100g packs) and that is acceptable.
-        feasible = allocated_g >= required_g
+        # Feasible only when we allocate at least the required grams AND the
+        # deviation is within the configured MAX_DEVIATION tolerance.
+        feasible = (allocated_g >= required_g) and (deviation <= MAX_DEVIATION)
         return AllocationResult(
             packets_used=packets_used,
             allocated_g=allocated_g,
@@ -96,16 +93,17 @@ def allocate_fefo(
     if strategy == "approx":
         return _run(use_ceil=False)
 
-    # strategy == "best": prefer strict (ceil), fall back to approx (floor)
-    # if approx yields lower deviation (closer to required quantity).
+    # strategy == "best": prefer strict when it is feasible; otherwise
+    # consider approx if it meets feasibility. If both are infeasible, return
+    # the one with allocated_g closest to required_g (min absolute error).
     strict = _run(use_ceil=True)
     approx = _run(use_ceil=False)
-    if not strict.feasible and not approx.feasible:
-        # Neither can provide enough — return whichever got closer
-        return strict if strict.allocated_g >= approx.allocated_g else approx
-    if not strict.feasible:
-        return approx
-    if not approx.feasible:
+    if strict.feasible:
         return strict
-    # Both feasible — pick the one with less over-allocation
-    return approx if approx.deviation < strict.deviation else strict
+    if approx.feasible:
+        return approx
+    # Neither meets feasibility threshold; return the option with smaller
+    # absolute allocation error (closer to required_g).
+    err_strict = abs(strict.allocated_g - required_g)
+    err_approx = abs(approx.allocated_g - required_g)
+    return strict if err_strict <= err_approx else approx

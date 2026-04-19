@@ -54,6 +54,7 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
         from app.core.pipeline.p6_ranking import run_p6
         from app.core.pipeline.p7_pricing import run_p7
         from app.agent.tools import get_urgent_inventory
+        from app.core.pipeline.p2_retrieval import run_p2
 
         repo = DataRepository.get()
         sku_lookup = repo.sku_dict_lookup()
@@ -66,7 +67,7 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
 
         logger.info(f"finalize_bundles called: recipe_ids={recipe_ids}, store_id={store_id}, top_k={top_k}")
 
-        # ── Step 1: Build urgency lookup from store's urgent inventory ──────────
+    # ── Step 1: Build urgency lookup from store's urgent inventory ──────────
         urgent_batches = get_urgent_inventory(store_id, top_n=50)
         p1_ingredient_lookup: dict[str, str] = {}
         p1_score_lookup: dict[str, float] = {}
@@ -92,7 +93,7 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
                 logger.warning(f"Recipe {recipe_id} not found, skipping")
                 continue
 
-            result = _check_feasibility(recipe, store_id=store_id)
+            result = _check_feasibility(recipe, store_id_or_inventory=store_id)
 
             logger.debug(
                 f"  {recipe_id}: feasible={result.get('feasible')}, "
@@ -132,10 +133,59 @@ def finalize_bundles(recipe_ids: List[str], store_id: str, top_k: int = 10) -> s
 
         logger.info(f"finalize_bundles: {len(validated_recipes)}/{len(recipe_ids)} recipes passed allocation")
 
+        # If the LLM returned no validated recipes (or recipe_ids was empty),
+        # try a deterministic fallback: run P2 retrieval using the store's
+        # urgent inventory and the canonical inverted index to produce
+        # candidate recipe_ids and re-run allocation.
         if not validated_recipes:
             # Return empty list (no viable bundles) rather than error dict
             # This allows the fallback to work: agent returns [], admin.py falls back to pipeline
-            return json.dumps([], ensure_ascii=False)
+            logger.info("finalize_bundles: no recipes validated by LLM, running deterministic P2 fallback")
+            try:
+                # Build P1-like objects from urgent_batches for run_p2
+                class _P1Obj:
+                    def __init__(self, d):
+                        self.batch_id = d.get('batch_id')
+                        self.ingredient_id = d.get('ingredient_id')
+                        self.sku_id = d.get('sku_id')
+                        self.expiry_days = d.get('expiry_days')
+                        self.remaining_qty_g = d.get('remaining_qty_g') or (d.get('unit_count', 1) * d.get('pack_size_g', 500))
+                        self.priority_score = d.get('priority_score', 0.0)
+                        self.urgency_flag = d.get('urgency_flag', 'WATCH')
+
+                p1_objs = [_P1Obj(d) for d in urgent_batches]
+                ingredient_to_recipes = repo.inverted_index()
+                p2_candidates = run_p2(p1_objs, ingredient_to_recipes, recipe_lookup, top_k=top_k)
+                fallback_recipe_ids = [r.get('recipe_id') for r in p2_candidates]
+                logger.info(f"P2 fallback produced {len(fallback_recipe_ids)} candidates: {fallback_recipe_ids[:10]}")
+                # Re-run allocation on fallback candidates
+                validated_recipes = []
+                for rid in fallback_recipe_ids:
+                    recipe = recipe_lookup.get(rid)
+                    if not recipe:
+                        logger.info(f"  {rid}: not found in recipe_lookup")
+                        continue
+                    result = _check_feasibility(recipe, store_id_or_inventory=store_id)
+                    feasible = result.get('feasible', False)
+                    completeness = result.get('completeness_score', 0)
+                    logger.info(f"  {rid}: feasible={feasible}, completeness={completeness:.2f}")
+                    if feasible or completeness >= 0.5:
+                        enriched = result['recipe'].copy()
+                        enriched['ingredient_status'] = result['ingredient_status']
+                        enriched['completeness_score'] = result['completeness_score']
+                        enriched['store_id'] = store_id
+                        enriched['matched_ingredients'] = [
+                            {"ingredient_id": ing['ingredient_id'], "priority_score": p1_score_lookup.get(ing['ingredient_id'], 0.0)}
+                            for ing in enriched.get('ingredients', [])
+                        ]
+                        validated_recipes.append(enriched)
+                        logger.info(f"  {rid}: ✓ ADDED to validated_recipes")
+            except Exception as e:
+                logger.warning(f"P2 fallback failed: {e}", exc_info=True)
+
+            logger.info(f"P2 fallback: {len(validated_recipes)} recipes passed validation out of {len(fallback_recipe_ids)}")
+            if not validated_recipes:
+                return json.dumps([], ensure_ascii=False)
 
         # ── Step 3: Run P5 → P6 → P7 ───────────────────────────────────────────
         p5_output = run_p5(validated_recipes, sku_lookup)

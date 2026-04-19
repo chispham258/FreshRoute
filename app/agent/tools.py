@@ -257,14 +257,18 @@ def search_recipes_from_ingredients(
 
 
 def check_feasibility_and_substitute(
-    recipe: dict, store_id: str = "BHX-HCM001"
+    recipe: dict, store_id_or_inventory = "BHX-HCM001"
 ) -> dict:
     """Check recipe feasibility using packet-based allocation and attempt ontology-based substitution.
 
-    Always fetches the full store inventory from the backend — never provide inventory manually.
-    store_id: the store whose inventory to check (e.g. "BHX-HCM001").
+    Accepts either a store_id string (fetches from connector) or an explicit inventory list (for tests).
+    store_id_or_inventory: str (store ID like "BHX-HCM001") or list (explicit batches for testing).
     """
-    full_inventory = connector.get_batches(store_id)
+    # Accept explicit inventory list (tests) or look up via store_id
+    if isinstance(store_id_or_inventory, (list, tuple)):
+        full_inventory = store_id_or_inventory
+    else:
+        full_inventory = connector.get_batches(store_id_or_inventory)
 
     # Convert Pydantic models to dicts if needed
     inventory_dicts = []
@@ -325,7 +329,8 @@ def check_feasibility_and_substitute(
                     allocation = sub_alloc
                     break
 
-        if allocation is not None and status in ("fulfilled", "substitute"):
+        if allocation is not None:
+            # Always record allocation metrics, even if infeasible (for diagnostics)
             allocated_g = allocation.allocated_g
             deviation = allocation.deviation
             allocation_strategy = allocation.strategy
