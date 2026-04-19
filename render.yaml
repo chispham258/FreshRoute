@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: freshroute-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        sync: false
+      - key: TEMPERATURE
+        value: "0.1"
+      - key: DEFAULT_CONNECTOR
+        value: mock
+
+  - type: web
+    name: freshroute-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false
