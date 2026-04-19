@@ -251,6 +251,8 @@ async def get_admin_inventory(
     """
     Get inventory items nearing expiration.
 
+    Returns only items whose earliest expiry is within daysThreshold.
+
     Uses P1 priority scores (composite of expiry decay, supply/demand, sell-through)
     to determine urgency. Reads from a shared cache populated when /combos runs;
     falls back to running P1 directly if the cache is cold.
@@ -305,9 +307,16 @@ async def get_admin_inventory(
                 agg["urgency_rank"] = rank
                 agg["urgency_flag"] = item.urgency_flag
 
+        # Apply server-side cutoff: only include near-expiry items
+        filtered_skus = [
+            (sku_id, agg)
+            for sku_id, agg in sku_agg.items()
+            if agg["min_days_left"] <= daysThreshold
+        ]
+
         # Sort by urgency rank then expiry days, then build response
         sorted_skus = sorted(
-            sku_agg.items(),
+            filtered_skus,
             key=lambda kv: (kv[1]["urgency_rank"], kv[1]["min_days_left"]),
         )
 
