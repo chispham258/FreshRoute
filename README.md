@@ -45,6 +45,12 @@ docker-compose up
 
 # Tests
 python -m pytest tests/ -v
+
+# Scripts (optional — data generation, seeding)
+python -m scripts.generate_mock_data        # Generate test inventory + bundles
+python -m scripts.build_inverted_index      # Rebuild recipe search index
+python -m scripts.build_mock_user_inventory # Create mock user pantry
+python -m scripts.seed_db                   # Seed PostgreSQL (if using postgres connector)
 ```
 
 Swagger: `http://localhost:8000/docs` · App: `http://localhost:3000`
