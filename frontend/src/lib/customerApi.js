@@ -148,7 +148,7 @@ function mapCustomerCombo(combo) {
 }
 
 export async function fetchCustomerCombos({ storeId, limit = 10 }) {
-  const payload = await requestJson("/consumer/api/customer/combos", {
+  const payload = await requestJson("/api/customer/combos", {
     query: { storeId, limit },
   });
   return Array.isArray(payload) ? payload.map(mapCustomerCombo) : [];
