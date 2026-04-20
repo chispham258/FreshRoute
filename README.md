@@ -35,7 +35,7 @@ Both agents are custom LangGraph `StateGraph`s with explicit routing and a `_rec
 # Backend
 uv sync
 cp .env.example .env   # set OPENAI_API_KEY=<fpt-key>
-uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8001
 
 # Frontend
 cd frontend && npm install && npm run dev
@@ -53,7 +53,7 @@ python -m scripts.build_mock_user_inventory # Create mock user pantry
 python -m scripts.seed_db                   # Seed PostgreSQL (if using postgres connector)
 ```
 
-Swagger: `http://localhost:8000/docs` · App: `http://localhost:3000`
+Swagger: `http://localhost:8001/docs` · App: `http://localhost:3000`
 
 ---
 
@@ -71,9 +71,9 @@ POST /api/admin/combos/{id}/reject
 ### Consumer
 
 ```
-POST /consumer/chat      # { message, thread_id, allergies? } → { reply, shopping_list?, recipe_suggestions? }
-POST /consumer/suggest   # { ingredients: [...], top_k: 3 }
-GET  /consumer/api/customer/combos?storeId=BHX-HCM001
+POST /api/consumer/chat      # { message, thread_id } → { reply, shopping_list?, recipe_suggestions? }
+POST /api/consumer/suggest   # { ingredients: [...], top_k: 3 }
+GET  /api/customer/combos?storeId=BHX-HCM001
 ```
 
 ### Direct Pipeline (no LLM)

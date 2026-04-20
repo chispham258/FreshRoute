@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 from app.agent.consumer.graph import chat, suggest
 
 router = APIRouter(prefix="/consumer", tags=["consumer"])
+customer_router = APIRouter(tags=["consumer"])
 
 
 # ---------------------------------------------------------------------------
@@ -171,7 +172,7 @@ class CustomerComboResponse(BaseModel):
     aiReasoning: Optional[str] = None
 
 
-@router.get("/api/customer/combos", response_model=List[CustomerComboResponse])
+@customer_router.get("/api/customer/combos", response_model=List[CustomerComboResponse])
 async def get_customer_combos(
     storeId: str = Query(..., description="Store ID e.g., BHX-HCM001"),
     limit: int = Query(10, ge=1, le=20, description="Max combos to return"),
